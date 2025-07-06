@@ -2,6 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertCallbackRequestSchema, insertQuoteRequestSchema } from "@shared/schema";
+import { generateAIResponse } from "./ai-chat";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -81,6 +82,35 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ 
         success: false, 
         message: "Failed to fetch quote requests" 
+      });
+    }
+  });
+
+  // AI Chat endpoint
+  app.post("/api/chat", async (req, res) => {
+    try {
+      const { message } = req.body;
+      
+      if (!message || typeof message !== 'string') {
+        return res.status(400).json({ 
+          success: false, 
+          message: "Invalid message format" 
+        });
+      }
+
+      // For now, we'll use enhanced rule-based responses
+      // You can later integrate with OpenAI, Claude, or other AI APIs
+      const response = await generateAIResponse(message);
+      
+      res.json({ 
+        success: true, 
+        response: response 
+      });
+    } catch (error) {
+      console.error('AI Chat error:', error);
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to process chat message" 
       });
     }
   });
