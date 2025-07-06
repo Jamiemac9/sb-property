@@ -17,9 +17,9 @@ export default function Home() {
       <TrustBar />
       <Services />
       <BeforeAfterCarousel />
+      <Location />
       <HowItWorks />
       <About />
-      <Location />
       <Footer />
       <Chatbot />
     </div>
