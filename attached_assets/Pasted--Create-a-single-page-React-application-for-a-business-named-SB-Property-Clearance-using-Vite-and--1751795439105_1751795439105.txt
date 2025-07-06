@@ -1,0 +1,73 @@
+"Create a single-page React application for a business named 'SB Property Clearance' using Vite and Tailwind CSS. The design must be modern, professional, and trustworthy, with a green and white colour scheme.
+
+1. Header Component:
+
+Create a clean, sticky header.
+
+On the left, display the logo text 'SB Property Clearance' in a bold, sans-serif font.
+
+On the right, create navigation links: 'Services', 'How It Works', 'About Us', and 'Contact'.
+
+Next to the links, add a prominent, solid green button with white text that says 'Get a FREE Quote'. The button should have a subtle hover effect, like slightly brightening.
+
+2. Hero Section Component:
+
+Use a high-resolution, professional background image showing a clean, empty room or a tidy garden after clearance.
+
+Overlay a semi-transparent dark panel to ensure text is readable.
+
+The main heading (h1) should be: 'Fast, Reliable & Responsible Property Clearance'.
+
+The subheading (p) should be: 'Whether you're clearing a house, office, or garden, SB Property Clearance offers an efficient and eco-friendly solution. We do the heavy lifting, so you don't have to.'
+
+Below the text, add two buttons: a primary green 'Get a FREE Quote' button (linking to the form) and a secondary, outlined 'See Our Services' button (linking to the services section).
+
+3. 'Who We Help' Trust Bar:
+
+Immediately below the hero section, create a simple banner.
+
+The title should be 'Trusted by Homeowners, Estate Agents, and Businesses Across the UK'.
+
+Include logos of partners or trust symbols (you can use placeholders for now).
+
+4. Services Section Component:
+
+The section title should be 'Our Core Clearance Services'.
+
+Create a responsive 3-column grid of service cards. Each card must have a subtle box shadow and a slight zoom effect on hover.
+
+Card 1: Icon (a house icon), Title: 'Full House Clearance', Description: 'We handle everything from furniture and carpets to personal effects, leaving the property clean and tidy.'
+
+Card 2: Icon (an office building icon), Title: 'Office & Commercial Clearance', Description: 'Efficiently clear office furniture, IT equipment, and commercial waste with minimal disruption to your business.'
+
+Card 3: Icon (a leaf icon), Title: 'Garden & Green Waste', Description: 'We remove all types of garden refuse, including soil, branches, sheds, and paving slabs.'
+
+Card 4: Icon (a construction helmet icon), Title: 'Builder's & DIY Waste', Description: 'Disposing of construction waste? We can take rubble, plasterboard, wood, and more.'
+
+Card 5: Icon (a sofa icon), Title: 'Single Item & Bulky Waste', Description: 'Need to get rid of a mattress, sofa, or fridge? We offer a fast and affordable collection service.'
+
+Card 6: Icon (a recycling icon), Title: 'WEEE & Electricals', Description: 'Safe and compliant disposal of all Waste Electrical and Electronic Equipment (WEEE).'
+
+5. 'How It Works' Section Component:
+
+Title: 'Our Simple 3-Step Process'.
+
+Create a horizontal, numbered list with icons.
+
+Step 1: Title: 'Get Your Quote'. Description: 'Fill out our simple form or give us a call. Tell us what you need cleared, and we’ll provide a free, no-obligation quote.'
+
+Step 2: Title: 'We Collect'. Description: 'Our professional, uniformed team will arrive on the scheduled date, often with next-day availability.'
+
+Step 3: Title: 'We Recycle Responsibly'. Description: 'We divert over 95% of waste from landfill by using licensed recycling facilities. We provide a Waste Transfer Note for your peace of mind.'
+
+6. Footer Component:
+
+Create a comprehensive, multi-column footer with a dark green background.
+
+Column 1: 'SB Property Clearance' logo and a short mission statement.
+
+Column 2: 'Quick Links' (Home, Services, About Us).
+
+Column 3: 'Contact Us' (Address, Phone Number, Email).
+
+Column 4: A simple 'Request a Callback' form with fields for Name and Phone Number."
