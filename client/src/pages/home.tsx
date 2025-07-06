@@ -1,9 +1,10 @@
 import Header from "@/components/header";
 import Hero from "@/components/hero";
+import TrustBar from "@/components/trust-bar";
 import Services from "@/components/services";
+import BeforeAfterCarousel from "@/components/before-after-carousel";
 import HowItWorks from "@/components/how-it-works";
 import About from "@/components/about";
-import TrustBar from "@/components/trust-bar";
 import Location from "@/components/location";
 import Footer from "@/components/footer";
 import Chatbot from "@/components/chatbot";
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <TrustBar />
       <Services />
+      <BeforeAfterCarousel />
       <HowItWorks />
       <About />
       <Location />

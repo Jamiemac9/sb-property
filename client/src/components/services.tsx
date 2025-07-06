@@ -1,4 +1,3 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Home, Building, Leaf, HardHat, Sofa, Recycle, Scissors, Paintbrush2 } from "lucide-react";
@@ -23,39 +22,39 @@ export default function Services() {
     {
       icon: Leaf,
       title: "Garden Clearance",
-      description: "Complete garden and outdoor space clearance including green waste and garden structures.",
-      features: ["Garden waste removal", "Shed dismantling", "Fence removal", "Patio clearance"],
-      color: "from-green-500 to-green-600"
-    },
-    {
-      icon: Recycle,
-      title: "Rubbish Removal",
-      description: "General waste and rubbish removal service for any type of unwanted items.",
-      features: ["General waste removal", "Bulk item collection", "Construction waste", "Hazardous waste disposal"],
-      color: "from-orange-500 to-orange-600"
-    },
-    {
-      icon: Scissors,
-      title: "Gardening & Landscaping",
-      description: "Professional gardening and landscaping services to transform your outdoor space.",
-      features: ["Lawn mowing & maintenance", "Tree & hedge trimming", "Garden design & planting", "Patio & pathway installation"],
+      description: "Complete garden and outdoor space clearance including green waste disposal.",
+      features: ["Garden waste removal", "Shed demolition", "Patio clearing", "Green waste recycling"],
       color: "from-emerald-500 to-emerald-600"
     },
     {
-      icon: Paintbrush2,
-      title: "End of Tenancy Cleans",
-      description: "Comprehensive deep cleaning service for rental properties to ensure deposit return.",
-      features: ["Deep cleaning all rooms", "Carpet & upholstery cleaning", "Kitchen & bathroom sanitization", "Move-in/move-out cleaning"],
+      icon: HardHat,
+      title: "Construction Waste",
+      description: "Safe and compliant construction and renovation waste removal services.",
+      features: ["Rubble & debris removal", "Skip hire alternative", "Hazardous material disposal", "Site clearance"],
+      color: "from-slate-500 to-slate-600"
+    },
+    {
+      icon: Sofa,
+      title: "Furniture Removal",
+      description: "Professional furniture and appliance removal with donation options available.",
+      features: ["Large furniture removal", "Appliance disposal", "Charity donations", "Eco-friendly disposal"],
       color: "from-indigo-500 to-indigo-600"
+    },
+    {
+      icon: Recycle,
+      title: "Waste Management",
+      description: "General waste and rubbish removal service for any type of unwanted items.",
+      features: ["General waste removal", "Bulk item collection", "Construction waste", "Hazardous waste disposal"],
+      color: "from-orange-500 to-orange-600"
     }
   ];
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="services" className="py-20 bg-gradient-to-br from-brand-gray-lighter via-white to-brand-blue-lighter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-brand-gray max-w-3xl mx-auto">
             Comprehensive property clearance solutions tailored to your needs
           </p>
         </div>
