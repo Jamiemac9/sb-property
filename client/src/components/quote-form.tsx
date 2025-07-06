@@ -105,7 +105,7 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  // Real UK address lookup using multiple APIs
+  // UK address lookup using getAddress.io API (free tier)
   const lookupPostcode = async () => {
     if (!postcodeSearch.trim()) return;
     
@@ -113,92 +113,50 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     try {
       const cleanPostcode = postcodeSearch.replace(/\s/g, '').toUpperCase();
       
-      // Try multiple address lookup services
-      let foundAddresses = [];
+      // Use getAddress.io free API for real UK addresses
+      const response = await fetch(
+        `https://api.getAddress.io/find/${cleanPostcode}?api-key=demo&format=json`
+      );
       
-      // Method 1: Try OpenStreetMap Nominatim API for real addresses
-      try {
-        const nominatimResponse = await fetch(
-          `https://nominatim.openstreetmap.org/search?format=json&countrycodes=gb&postalcode=${cleanPostcode}&addressdetails=1&limit=50`
-        );
+      if (response.ok) {
+        const data = await response.json();
         
-        if (nominatimResponse.ok) {
-          const nominatimData = await nominatimResponse.json();
+        if (data.addresses && data.addresses.length > 0) {
+          const formattedAddresses = data.addresses.map(addr => `${addr}, ${cleanPostcode}`);
+          setAddresses(formattedAddresses);
           
-          if (nominatimData && nominatimData.length > 0) {
-            foundAddresses = nominatimData
-              .filter(item => item.display_name && item.address)
-              .map(item => {
-                const addr = item.address;
-                let formattedAddress = '';
-                
-                // Build proper UK address format
-                if (addr.house_number && addr.road) {
-                  formattedAddress = `${addr.house_number} ${addr.road}`;
-                } else if (addr.road) {
-                  formattedAddress = addr.road;
-                } else if (addr.residential) {
-                  formattedAddress = addr.residential;
-                } else {
-                  formattedAddress = item.display_name.split(',')[0];
-                }
-                
-                // Add locality/town
-                if (addr.suburb) formattedAddress += `, ${addr.suburb}`;
-                if (addr.town) formattedAddress += `, ${addr.town}`;
-                if (addr.city) formattedAddress += `, ${addr.city}`;
-                if (addr.county) formattedAddress += `, ${addr.county}`;
-                
-                formattedAddress += `, ${cleanPostcode}`;
-                
-                return formattedAddress;
-              })
-              .filter(addr => addr.length > 0)
-              .slice(0, 30);
+          toast({
+            title: "Addresses Found",
+            description: `Found ${formattedAddresses.length} addresses for ${cleanPostcode}`,
+          });
+        } else {
+          // Fallback to manual entry with validated postcode
+          const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${cleanPostcode}`);
+          
+          if (postcodeResponse.ok) {
+            const postcodeData = await postcodeResponse.json();
+            if (postcodeData.result) {
+              toast({
+                title: "Postcode Validated",
+                description: `${cleanPostcode} is valid. Please enter your full address manually.`,
+              });
+              
+              const baseAddress = `${postcodeData.result.admin_district}, ${postcodeData.result.admin_county}, ${cleanPostcode}`;
+              form.setValue('address', baseAddress);
+              setAddresses([]);
+              return;
+            }
           }
+          
+          throw new Error('No addresses found');
         }
-      } catch (nominatimError) {
-        console.log('Nominatim lookup failed, continuing with fallback...');
+      } else {
+        throw new Error('Address lookup failed');
       }
-      
-      // Method 2: If no real addresses found, validate postcode and show manual entry
-      if (foundAddresses.length === 0) {
-        const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${cleanPostcode}`);
-        
-        if (postcodeResponse.ok) {
-          const postcodeData = await postcodeResponse.json();
-          if (postcodeData.result) {
-            // Show a message that manual entry is needed
-            toast({
-              title: "Postcode Validated",
-              description: `${cleanPostcode} is a valid postcode. Please enter your full address manually below.`,
-            });
-            
-            // Set the postcode in the address field to help user
-            const baseAddress = `${postcodeData.result.admin_district}, ${postcodeData.result.admin_county}, ${cleanPostcode}`;
-            form.setValue('address', baseAddress);
-            
-            setAddresses([]); // Clear addresses to show manual entry
-            return;
-          }
-        }
-        
-        throw new Error('Invalid postcode');
-      }
-      
-      // Remove duplicates and sort
-      const uniqueAddresses = [...new Set(foundAddresses)].sort();
-      setAddresses(uniqueAddresses);
-      
-      toast({
-        title: "Real Addresses Found",
-        description: `Found ${uniqueAddresses.length} actual addresses for ${cleanPostcode}`,
-      });
-      
     } catch (error) {
       toast({
-        title: "Postcode Not Found",
-        description: "Please check your postcode and enter your full address manually.",
+        title: "Lookup Failed",
+        description: "Please enter your full address manually.",
         variant: "destructive",
       });
     } finally {
@@ -208,7 +166,7 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
 
   // WhatsApp integration function
   const sendToWhatsApp = (quoteData: QuoteFormData) => {
-    const phoneNumber = "447123456789"; // Replace with your WhatsApp business number
+    const phoneNumber = "447753226214"; // SB Property Clearance WhatsApp business number
     
     const message = `🏠 *New Quote Request*
     
