@@ -54,23 +54,11 @@ export default function Header() {
               How It Works
             </button>
             <button 
-              onClick={() => scrollToSection("about")}
-              className="text-gray-700 hover:text-brand-green font-medium transition-colors"
-            >
-              About Us
-            </button>
-            <button 
               onClick={() => scrollToSection("contact")}
               className="text-gray-700 hover:text-brand-green font-medium transition-colors"
             >
               Contact
             </button>
-            <a
-              href="/quotes"
-              className="text-gray-700 hover:text-brand-green font-medium transition-colors"
-            >
-              Free Quotes
-            </a>
           </nav>
 
           {/* CTA Button and Mobile Menu */}
@@ -110,23 +98,11 @@ export default function Header() {
                 How It Works
               </button>
               <button 
-                onClick={() => scrollToSection("about")}
-                className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
-              >
-                About Us
-              </button>
-              <button 
                 onClick={() => scrollToSection("contact")}
                 className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
               >
                 Contact
               </button>
-              <a
-                href="/quotes"
-                className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
-              >
-                Free Quotes
-              </a>
             </nav>
           </div>
         )}
