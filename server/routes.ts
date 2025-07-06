@@ -1,0 +1,50 @@
+import type { Express } from "express";
+import { createServer, type Server } from "http";
+import { storage } from "./storage";
+import { insertCallbackRequestSchema } from "@shared/schema";
+import { z } from "zod";
+
+export async function registerRoutes(app: Express): Promise<Server> {
+  // Callback request endpoint
+  app.post("/api/callback", async (req, res) => {
+    try {
+      const validatedData = insertCallbackRequestSchema.parse(req.body);
+      const callbackRequest = await storage.createCallbackRequest(validatedData);
+      
+      res.status(201).json({ 
+        success: true, 
+        message: "Callback request submitted successfully",
+        id: callbackRequest.id 
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Invalid request data",
+          errors: error.errors 
+        });
+      } else {
+        res.status(500).json({ 
+          success: false, 
+          message: "Internal server error" 
+        });
+      }
+    }
+  });
+
+  // Get all callback requests (for admin purposes)
+  app.get("/api/callback", async (req, res) => {
+    try {
+      const requests = await storage.getCallbackRequests();
+      res.json(requests);
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch callback requests" 
+      });
+    }
+  });
+
+  const httpServer = createServer(app);
+  return httpServer;
+}
