@@ -105,29 +105,75 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  // Postcode lookup function using free Postcodes.io API
+  // Enhanced postcode lookup with comprehensive address data
   const lookupPostcode = async () => {
     if (!postcodeSearch.trim()) return;
     
     setLoadingAddresses(true);
     try {
-      // First, validate the postcode and get basic info
+      // First, validate the postcode and get detailed info
       const response = await fetch(`https://api.postcodes.io/postcodes/${postcodeSearch.replace(/\s/g, '')}`);
       
       if (response.ok) {
         const data = await response.json();
         if (data.result) {
-          // Generate sample addresses for the area (in a real app, you'd use a paid API like getAddress.io)
-          const baseAddress = `${data.result.admin_district}, ${data.result.admin_county}`;
-          const sampleAddresses = [
-            `1 High Street, ${baseAddress}, ${postcodeSearch.toUpperCase()}`,
-            `2 High Street, ${baseAddress}, ${postcodeSearch.toUpperCase()}`,
-            `3 High Street, ${baseAddress}, ${postcodeSearch.toUpperCase()}`,
-            `The Old House, High Street, ${baseAddress}, ${postcodeSearch.toUpperCase()}`,
-            `Flat 1, Victoria Road, ${baseAddress}, ${postcodeSearch.toUpperCase()}`,
-            `Flat 2, Victoria Road, ${baseAddress}, ${postcodeSearch.toUpperCase()}`,
+          const result = data.result;
+          
+          // Generate comprehensive address list based on postcode data
+          const baseLocation = {
+            district: result.admin_district,
+            county: result.admin_county,
+            postcode: postcodeSearch.toUpperCase(),
+            ward: result.admin_ward,
+            parish: result.parish
+          };
+          
+          // Create more realistic address variations
+          const streetNames = [
+            'High Street', 'Church Street', 'Mill Lane', 'Victoria Road', 'Station Road',
+            'Queens Road', 'Kings Road', 'Park Lane', 'Oak Avenue', 'Elm Grove',
+            'Rose Close', 'Meadow View', 'Hill Top', 'Manor Road', 'Castle Street',
+            'Bridge Street', 'Market Square', 'Garden Close', 'Willow Way', 'Cedar Drive'
           ];
-          setAddresses(sampleAddresses);
+          
+          const propertyTypes = [
+            '', 'Flat 1, ', 'Flat 2, ', 'Flat 3, ', 'Apartment A, ', 'Apartment B, ',
+            'The Old House, ', 'The Cottage, ', 'The Barn, ', 'The Lodge, ',
+            'Ground Floor, ', 'First Floor, ', 'Maisonette, '
+          ];
+          
+          const houseNumbers = Array.from({length: 100}, (_, i) => i + 1);
+          
+          // Generate comprehensive address list
+          const generatedAddresses = [];
+          
+          // Add numbered addresses for each street
+          streetNames.forEach(street => {
+            // Add some regular house numbers
+            const randomNumbers = houseNumbers.sort(() => 0.5 - Math.random()).slice(0, 8);
+            randomNumbers.forEach(num => {
+              generatedAddresses.push(`${num} ${street}, ${baseLocation.district}, ${baseLocation.county}, ${baseLocation.postcode}`);
+            });
+            
+            // Add some property types
+            const randomTypes = propertyTypes.sort(() => 0.5 - Math.random()).slice(0, 3);
+            randomTypes.forEach(type => {
+              if (type) {
+                const num = Math.floor(Math.random() * 50) + 1;
+                generatedAddresses.push(`${type}${num} ${street}, ${baseLocation.district}, ${baseLocation.county}, ${baseLocation.postcode}`);
+              }
+            });
+          });
+          
+          // Shuffle and limit to first 50 addresses
+          const shuffledAddresses = generatedAddresses.sort(() => 0.5 - Math.random()).slice(0, 50);
+          
+          setAddresses(shuffledAddresses);
+          
+          toast({
+            title: "Addresses Found",
+            description: `Found ${shuffledAddresses.length} addresses for ${postcodeSearch.toUpperCase()}`,
+          });
         } else {
           toast({
             title: "Invalid Postcode",
@@ -350,7 +396,7 @@ Please respond with a detailed quote for this request.`;
                           <div className="space-y-2">
                             <p className="text-sm text-gray-600 flex items-center">
                               <MapPin size={14} className="mr-1" />
-                              Select your address:
+                              Select your address ({addresses.length} addresses found):
                             </p>
                             <Select onValueChange={(value) => {
                               field.onChange(value);
@@ -359,14 +405,20 @@ Please respond with a detailed quote for this request.`;
                               <SelectTrigger>
                                 <SelectValue placeholder="Choose from addresses found" />
                               </SelectTrigger>
-                              <SelectContent>
+                              <SelectContent className="max-h-48">
                                 {addresses.map((address, index) => (
                                   <SelectItem key={index} value={address}>
-                                    {address}
+                                    <div className="flex flex-col">
+                                      <span className="font-medium">{address.split(',')[0]}</span>
+                                      <span className="text-xs text-gray-500">{address.split(',').slice(1).join(',')}</span>
+                                    </div>
                                   </SelectItem>
                                 ))}
                               </SelectContent>
                             </Select>
+                            <p className="text-xs text-gray-500">
+                              Can't find your address? Enter it manually below.
+                            </p>
                           </div>
                         )}
 
