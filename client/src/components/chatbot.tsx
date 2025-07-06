@@ -1,17 +1,22 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { MessageCircle, Send, Phone, Clock, User, Bot } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { MessageCircle, Phone, Mail, Clock, MapPin, Send, Bot, User, Calculator, FileText, Truck, Recycle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface Message {
   id: string;
-  type: 'user' | 'bot';
+  type: 'bot' | 'user';
   content: string;
   timestamp: Date;
+  isQuickReply?: boolean;
 }
 
 interface ChatbotProps {
@@ -24,145 +29,242 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     {
       id: '1',
       type: 'bot',
-      content: "Hello! I'm here to help with your property clearance needs. How can I assist you today?",
+      content: "Hello! I'm here to help with your property clearance needs. What can I assist you with today?",
       timestamp: new Date()
     }
   ]);
   const [currentMessage, setCurrentMessage] = useState("");
-  const [customerName, setCustomerName] = useState("");
-  const [customerPhone, setCustomerPhone] = useState("");
-  const [isCollectingInfo, setIsCollectingInfo] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const [showQuoteForm, setShowQuoteForm] = useState(false);
+  const [quoteFormData, setQuoteFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    propertyType: "",
+    serviceType: "",
+    timeframe: "",
+    accessDetails: "",
+    additionalInfo: ""
+  });
   const { toast } = useToast();
 
+  const businessPhone = "07946495782";
+  const whatsappNumber = "447946495782";
+  const businessEmail = "sbpropertyclearance@gmail.com";
+
   const quickResponses = [
-    "Get a free quote",
-    "House clearance services", 
-    "Business hours",
-    "Emergency clearance",
-    "Pricing information",
-    "Coverage area"
+    { text: "Get a free quote", action: "quote" },
+    { text: "House clearance pricing", action: "pricing" },
+    { text: "Business hours", action: "hours" },
+    { text: "Emergency clearance", action: "emergency" },
+    { text: "Coverage area", action: "coverage" },
+    { text: "Call us now", action: "call" },
+    { text: "WhatsApp chat", action: "whatsapp" },
+    { text: "Email us", action: "email" }
   ];
 
-  const botResponses: Record<string, string> = {
-    "hello": "Hello! Welcome to SB Property Clearance. How can I help you today?",
-    "quote": "I'd be happy to help you get a quote! Let me gather some basic information first.",
-    "house clearance": "We provide full house clearance services including furniture removal, waste disposal, and property cleaning. Would you like a quote?",
-    "business hours": "We're open Monday to Saturday, 8 AM to 6 PM. Sunday appointments available on request. Need immediate assistance?",
-    "emergency": "We offer same-day emergency clearance services. Let me connect you directly with our team via WhatsApp for urgent requests.",
-    "pricing": "Our pricing depends on property size and items to clear. We offer free, no-obligation quotes. Shall I help you request one?",
-    "coverage": "We cover Stafford and surrounding areas within 25 miles. Where is your property located?",
-    "default": "I understand you need help with property clearance. Let me connect you with our expert team who can provide detailed assistance."
+  const propertyTypes = [
+    { value: "house", label: "House" },
+    { value: "flat", label: "Flat/Apartment" },
+    { value: "bungalow", label: "Bungalow" },
+    { value: "office", label: "Office" },
+    { value: "shop", label: "Shop/Retail" },
+    { value: "warehouse", label: "Warehouse" },
+    { value: "garden", label: "Garden/Outdoor" },
+    { value: "other", label: "Other" }
+  ];
+
+  const serviceTypes = [
+    { value: "full-house-clearance", label: "Full House Clearance" },
+    { value: "office-clearance", label: "Office & Commercial Clearance" },
+    { value: "garden-waste", label: "Garden & Green Waste" },
+    { value: "builders-waste", label: "Builder's & DIY Waste" },
+    { value: "single-item", label: "Single Item & Bulky Waste" },
+    { value: "weee-electrical", label: "WEEE & Electricals" },
+    { value: "partial-clearance", label: "Partial Property Clearance" },
+    { value: "end-of-tenancy", label: "End of Tenancy Clean" },
+    { value: "other", label: "Other" }
+  ];
+
+  const timeframes = [
+    { value: "asap", label: "As soon as possible" },
+    { value: "this-week", label: "This week" },
+    { value: "next-week", label: "Next week" },
+    { value: "within-month", label: "Within a month" },
+    { value: "flexible", label: "I'm flexible" }
+  ];
+
+  const addMessage = (content: string, type: 'bot' | 'user', isQuickReply?: boolean) => {
+    const newMessage: Message = {
+      id: Date.now().toString(),
+      type,
+      content,
+      timestamp: new Date(),
+      isQuickReply
+    };
+    setMessages(prev => [...prev, newMessage]);
   };
 
-  const generateBotResponse = (userMessage: string): string => {
-    const message = userMessage.toLowerCase();
-    
-    if (message.includes('quote') || message.includes('price') || message.includes('cost')) {
-      return botResponses.quote;
-    } else if (message.includes('house') || message.includes('clearance') || message.includes('removal')) {
-      return botResponses["house clearance"];
-    } else if (message.includes('hour') || message.includes('open') || message.includes('time')) {
-      return botResponses["business hours"];
-    } else if (message.includes('emergency') || message.includes('urgent') || message.includes('asap')) {
-      return botResponses.emergency;
-    } else if (message.includes('area') || message.includes('cover') || message.includes('location')) {
-      return botResponses.coverage;
-    } else if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
-      return botResponses.hello;
-    } else {
-      return botResponses.default;
-    }
+  const simulateTyping = () => {
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+    }, 1000);
   };
 
-  const sendToWhatsApp = (conversationSummary: string) => {
-    const phoneNumber = "447753226214";
+  const handleQuickResponse = (action: string, text: string) => {
+    addMessage(text, 'user', true);
+    simulateTyping();
     
-    const message = `🤖 *New Chat Inquiry from Website*
-
-*Customer Details:*
-Name: ${customerName || 'Not provided'}
-Phone: ${customerPhone || 'Not provided'}
-
-*Conversation Summary:*
-${conversationSummary}
-
-*Next Steps:*
-Please respond to this customer inquiry and provide personalized assistance.
-
-*Generated:* ${new Date().toLocaleString('en-GB')}`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    
-    window.open(whatsappUrl, '_blank');
-    
-    toast({
-      title: "Connecting to WhatsApp",
-      description: "Opening WhatsApp to connect you with our team...",
-    });
+    setTimeout(() => {
+      switch (action) {
+        case "quote":
+          setShowQuoteForm(true);
+          addMessage("Great! I'll help you get a free quote. Please fill out the form below with your details, and I'll send it directly to our team via WhatsApp.", 'bot');
+          break;
+        case "pricing":
+          addMessage("Our pricing depends on several factors including property size, amount of items, and location. Here's a rough guide:\n\n• Single room: £150-£300\n• Full house: £400-£1,200\n• Commercial spaces: £200-£800\n\nFor an accurate quote, please use our quote form - it's completely free and no obligation!", 'bot');
+          break;
+        case "hours":
+          addMessage("Our business hours are:\n\n📅 Monday-Saturday: 8 AM - 6 PM\n📅 Sunday: By appointment only\n\nWe offer emergency clearance services 24/7 for urgent situations.", 'bot');
+          break;
+        case "emergency":
+          addMessage("We provide 24/7 emergency clearance services for urgent situations like:\n\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n\nCall us immediately at 07946 495782 for emergency service.", 'bot');
+          break;
+        case "coverage":
+          addMessage("We serve Stafford and surrounding areas within a 25-mile radius, including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n\nNot sure if we cover your area? Just ask!", 'bot');
+          break;
+        case "call":
+          handleCallDirect();
+          break;
+        case "whatsapp":
+          handleWhatsAppDirect();
+          break;
+        case "email":
+          handleEmailDirect();
+          break;
+        default:
+          addMessage("I can help you with property clearance services. What would you like to know more about?", 'bot');
+      }
+    }, 1000);
   };
 
   const handleSendMessage = () => {
     if (!currentMessage.trim()) return;
-
-    // Add user message
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      type: 'user',
-      content: currentMessage,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-
-    // Generate bot response
-    const botResponse = generateBotResponse(currentMessage);
     
+    addMessage(currentMessage, 'user');
+    setCurrentMessage("");
+    simulateTyping();
+    
+    // Simple AI-like responses
     setTimeout(() => {
-      const botMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        type: 'bot',
-        content: botResponse,
-        timestamp: new Date()
-      };
-      
-      setMessages(prev => [...prev, botMessage]);
-
-      // After 3 messages, suggest WhatsApp connection
-      if (messages.length >= 4) {
-        setTimeout(() => {
-          const connectMessage: Message = {
-            id: (Date.now() + 2).toString(),
-            type: 'bot',
-            content: "For more detailed assistance, I can connect you directly with our property clearance experts via WhatsApp. Would you like me to do that?",
-            timestamp: new Date()
-          };
-          setMessages(prev => [...prev, connectMessage]);
-          setIsCollectingInfo(true);
-        }, 1500);
+      const lowerMessage = currentMessage.toLowerCase();
+      if (lowerMessage.includes('price') || lowerMessage.includes('cost') || lowerMessage.includes('quote')) {
+        addMessage("I'd be happy to help you get a quote! The best way is to fill out our quote form which includes all the details we need. Would you like me to open it for you?", 'bot');
+      } else if (lowerMessage.includes('contact') || lowerMessage.includes('call') || lowerMessage.includes('phone')) {
+        addMessage("You can reach us at:\n\n📞 Phone: 07946 495782\n💬 WhatsApp: Same number\n📧 Email: sbpropertyclearance@gmail.com\n\nWe're available Mon-Sat 8 AM - 6 PM, Sunday by appointment.", 'bot');
+      } else if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent')) {
+        addMessage("For emergency clearance services, please call us immediately at 07946 495782. We offer 24/7 emergency response for urgent situations.", 'bot');
+      } else {
+        addMessage("Thanks for your message! I can help you with property clearance services, quotes, pricing, and contact information. What would you like to know more about?", 'bot');
       }
     }, 1000);
-
-    setCurrentMessage("");
   };
 
-  const handleQuickResponse = (response: string) => {
-    setCurrentMessage(response);
-    handleSendMessage();
+  const handleCallDirect = () => {
+    window.location.href = `tel:${businessPhone}`;
+    toast({
+      title: "Calling SB Property Clearance",
+      description: "Initiating call to our team...",
+    });
   };
 
-  const handleConnectToWhatsApp = () => {
-    const conversationSummary = messages
-      .filter(m => m.type === 'user')
-      .map(m => `• ${m.content}`)
-      .join('\n');
+  const handleWhatsAppDirect = () => {
+    const message = "Hello! I found your website and would like to discuss property clearance services.";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
     
-    sendToWhatsApp(conversationSummary);
+    toast({
+      title: "Opening WhatsApp",
+      description: "Connecting you directly with our team...",
+    });
+  };
+
+  const handleEmailDirect = () => {
+    const subject = "Property Clearance Inquiry";
+    const body = "Hello,\n\nI found your website and would like to discuss property clearance services.\n\nBest regards";
+    const mailtoUrl = `mailto:${businessEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
+    
+    toast({
+      title: "Opening Email",
+      description: "Your email client will open with our details...",
+    });
+  };
+
+  const handleQuoteFormSubmit = () => {
+    if (!quoteFormData.name || !quoteFormData.phone || !quoteFormData.address || !quoteFormData.propertyType || !quoteFormData.serviceType) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields (marked with *).",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Send via WhatsApp with comprehensive form details
+    const message = `🏠 *Website Quote Request*
+
+*Contact Details:*
+Name: ${quoteFormData.name}
+Email: ${quoteFormData.email || 'Not provided'}
+Phone: ${quoteFormData.phone}
+Address: ${quoteFormData.address}
+
+*Service Details:*
+Property Type: ${propertyTypes.find(p => p.value === quoteFormData.propertyType)?.label || quoteFormData.propertyType}
+Service Needed: ${serviceTypes.find(s => s.value === quoteFormData.serviceType)?.label || quoteFormData.serviceType}
+Timeframe: ${timeframes.find(t => t.value === quoteFormData.timeframe)?.label || quoteFormData.timeframe || 'Not specified'}
+
+*Additional Information:*
+Access Details: ${quoteFormData.accessDetails || 'None provided'}
+Additional Info: ${quoteFormData.additionalInfo || 'None provided'}
+
+*Submitted via:* Website Chat
+*Time:* ${new Date().toLocaleString('en-GB')}
+
+Please provide a detailed quote for this customer.`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    window.open(whatsappUrl, '_blank');
+
+    toast({
+      title: "Quote Request Sent!",
+      description: "Your request has been sent via WhatsApp to our team.",
+    });
+
+    // Reset form and add confirmation message
+    setQuoteFormData({
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      propertyType: "",
+      serviceType: "",
+      timeframe: "",
+      accessDetails: "",
+      additionalInfo: ""
+    });
+    setShowQuoteForm(false);
+    addMessage("Perfect! Your quote request has been sent to our team via WhatsApp. We'll get back to you within 24 hours with a detailed quote.", 'bot');
   };
 
   const defaultTrigger = (
     <Button 
-      className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-brand-green text-white shadow-lg hover:bg-brand-green-light z-50"
+      className="fixed bottom-6 right-6 bg-brand-green text-white shadow-lg hover:bg-brand-green-light z-50 rounded-full w-16 h-16"
       size="sm"
     >
       <MessageCircle size={24} />
@@ -174,105 +276,246 @@ Please respond to this customer inquiry and provide personalized assistance.
       <DialogTrigger asChild>
         {trigger || defaultTrigger}
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md h-[600px] flex flex-col">
+      <DialogContent className="sm:max-w-2xl max-h-[90vh] flex flex-col">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <MessageCircle className="h-5 w-5 text-brand-green" />
-            SB Property Clearance Chat
+            Chat with SB Property Clearance
           </DialogTitle>
         </DialogHeader>
         
-        <div className="flex-1 flex flex-col">
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto space-y-4 p-4 bg-gray-50 rounded-lg">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[80%] p-3 rounded-lg ${
-                    message.type === 'user'
-                      ? 'bg-brand-green text-white'
-                      : 'bg-white text-gray-800 border'
-                  }`}
-                >
-                  <div className="flex items-start gap-2">
-                    {message.type === 'bot' && <Bot size={16} className="mt-1 text-brand-green" />}
-                    {message.type === 'user' && <User size={16} className="mt-1" />}
-                    <div>
-                      <p className="text-sm">{message.content}</p>
-                      <p className={`text-xs mt-1 ${message.type === 'user' ? 'text-green-100' : 'text-gray-500'}`}>
-                        {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-                      </p>
+        <div className="flex-1 flex flex-col min-h-0">
+          {!showQuoteForm ? (
+            <>
+              {/* Chat Messages */}
+              <ScrollArea className="flex-1 pr-4 mb-4">
+                <div className="space-y-4">
+                  {messages.map((message) => (
+                    <div 
+                      key={message.id}
+                      className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div className={`max-w-[80%] rounded-lg p-3 ${
+                        message.type === 'user' 
+                          ? 'bg-brand-green text-white' 
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        <div className="flex items-start gap-2">
+                          {message.type === 'bot' && <Bot size={16} className="mt-1 text-brand-green" />}
+                          {message.type === 'user' && <User size={16} className="mt-1" />}
+                          <div className="whitespace-pre-wrap text-sm">{message.content}</div>
+                        </div>
+                      </div>
                     </div>
+                  ))}
+                  
+                  {isTyping && (
+                    <div className="flex justify-start">
+                      <div className="bg-gray-100 rounded-lg p-3 max-w-[80%]">
+                        <div className="flex items-center gap-2">
+                          <Bot size={16} className="text-brand-green" />
+                          <div className="flex gap-1">
+                            <div className="w-2 h-2 bg-brand-green rounded-full animate-bounce"></div>
+                            <div className="w-2 h-2 bg-brand-green rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-2 h-2 bg-brand-green rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </ScrollArea>
+
+              {/* Quick Response Buttons */}
+              <div className="mb-4">
+                <div className="flex flex-wrap gap-2">
+                  {quickResponses.map((response, index) => (
+                    <Badge
+                      key={index}
+                      variant="outline"
+                      className="cursor-pointer hover:bg-brand-green hover:text-white transition-colors"
+                      onClick={() => handleQuickResponse(response.action, response.text)}
+                    >
+                      {response.text}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Message Input */}
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Type your message..."
+                  value={currentMessage}
+                  onChange={(e) => setCurrentMessage(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+                />
+                <Button 
+                  onClick={handleSendMessage}
+                  disabled={!currentMessage.trim()}
+                  className="bg-brand-green hover:bg-brand-green-light"
+                >
+                  <Send size={16} />
+                </Button>
+              </div>
+
+              {/* Quick Contact Options */}
+              <div className="mt-4 pt-4 border-t">
+                <div className="flex justify-between items-center text-sm text-gray-600">
+                  <div className="flex items-center gap-2">
+                    <Clock size={14} />
+                    <span>Mon-Sat: 8 AM - 6 PM</span>
+                  </div>
+                  <div className="flex gap-2">
+                    <Button size="sm" variant="outline" onClick={handleCallDirect}>
+                      <Phone size={14} className="mr-1" />
+                      Call
+                    </Button>
+                    <Button size="sm" variant="outline" onClick={handleWhatsAppDirect}>
+                      <MessageCircle size={14} className="mr-1" />
+                      WhatsApp
+                    </Button>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Quick Responses */}
-          <div className="py-3">
-            <div className="flex flex-wrap gap-2">
-              {quickResponses.map((response) => (
-                <Button
-                  key={response}
-                  variant="outline"
-                  size="sm"
-                  onClick={() => handleQuickResponse(response)}
-                  className="text-xs"
-                >
-                  {response}
-                </Button>
-              ))}
+            </>
+          ) : (
+            /* Quote Form */
+            <div className="flex-1 overflow-y-auto">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Calculator size={20} className="text-brand-green" />
+                    Get Your FREE Quote
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium">Full Name *</label>
+                      <Input
+                        placeholder="John Smith"
+                        value={quoteFormData.name}
+                        onChange={(e) => setQuoteFormData(prev => ({ ...prev, name: e.target.value }))}
+                      />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">Phone Number *</label>
+                      <Input
+                        placeholder="07123 456789"
+                        value={quoteFormData.phone}
+                        onChange={(e) => setQuoteFormData(prev => ({ ...prev, phone: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">Email Address</label>
+                    <Input
+                      placeholder="john@example.com"
+                      type="email"
+                      value={quoteFormData.email}
+                      onChange={(e) => setQuoteFormData(prev => ({ ...prev, email: e.target.value }))}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">Property Address *</label>
+                    <Input
+                      placeholder="123 Main Street, Stafford, ST17 4AH"
+                      value={quoteFormData.address}
+                      onChange={(e) => setQuoteFormData(prev => ({ ...prev, address: e.target.value }))}
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium">Property Type *</label>
+                      <Select onValueChange={(value) => setQuoteFormData(prev => ({ ...prev, propertyType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select property type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {propertyTypes.map((type) => (
+                            <SelectItem key={type.value} value={type.value}>
+                              {type.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium">Service Needed *</label>
+                      <Select onValueChange={(value) => setQuoteFormData(prev => ({ ...prev, serviceType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select service type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {serviceTypes.map((service) => (
+                            <SelectItem key={service.value} value={service.value}>
+                              {service.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">When do you need this done?</label>
+                    <Select onValueChange={(value) => setQuoteFormData(prev => ({ ...prev, timeframe: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select timeframe" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {timeframes.map((time) => (
+                          <SelectItem key={time.value} value={time.value}>
+                            {time.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">Access Details</label>
+                    <Textarea
+                      placeholder="e.g., Parking available, narrow stairs, ground floor access..."
+                      value={quoteFormData.accessDetails}
+                      onChange={(e) => setQuoteFormData(prev => ({ ...prev, accessDetails: e.target.value }))}
+                      rows={2}
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="text-sm font-medium">Additional Information</label>
+                    <Textarea
+                      placeholder="Any other details about the clearance..."
+                      value={quoteFormData.additionalInfo}
+                      onChange={(e) => setQuoteFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
+                      rows={3}
+                    />
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setShowQuoteForm(false)}
+                      className="flex-1"
+                    >
+                      Back to Chat
+                    </Button>
+                    <Button 
+                      onClick={handleQuoteFormSubmit}
+                      className="flex-1 bg-brand-green hover:bg-brand-green-light"
+                    >
+                      Send Quote Request
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
-          </div>
-
-          {/* Customer Info Collection */}
-          {isCollectingInfo && (
-            <Card className="mb-4">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm">Connect via WhatsApp</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <Input
-                  placeholder="Your name (optional)"
-                  value={customerName}
-                  onChange={(e) => setCustomerName(e.target.value)}
-                />
-                <Input
-                  placeholder="Your phone number (optional)"
-                  value={customerPhone}
-                  onChange={(e) => setCustomerPhone(e.target.value)}
-                />
-                <Button 
-                  onClick={handleConnectToWhatsApp}
-                  className="w-full bg-brand-green text-white hover:bg-brand-green-light"
-                >
-                  <Phone size={16} className="mr-2" />
-                  Connect via WhatsApp
-                </Button>
-              </CardContent>
-            </Card>
           )}
-
-          {/* Message Input */}
-          <div className="flex gap-2">
-            <Input
-              value={currentMessage}
-              onChange={(e) => setCurrentMessage(e.target.value)}
-              placeholder="Type your message..."
-              onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-            />
-            <Button 
-              onClick={handleSendMessage}
-              disabled={!currentMessage.trim()}
-              className="bg-brand-green text-white hover:bg-brand-green-light"
-            >
-              <Send size={16} />
-            </Button>
-          </div>
         </div>
       </DialogContent>
     </Dialog>

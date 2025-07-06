@@ -7,7 +7,6 @@ import TrustBar from "@/components/trust-bar";
 import Location from "@/components/location";
 import Footer from "@/components/footer";
 import Chatbot from "@/components/chatbot";
-import ContactWidget from "@/components/contact-widget";
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
       <Location />
       <Footer />
       <Chatbot />
-      <ContactWidget />
     </div>
   );
 }
