@@ -1,4 +1,6 @@
 import { FileText, Truck, Recycle } from "lucide-react";
+import QuoteForm from "@/components/quote-form";
+import { Button } from "@/components/ui/button";
 
 export default function HowItWorks() {
   const steps = [
@@ -36,7 +38,7 @@ export default function HowItWorks() {
           {steps.map((step, index) => (
             <div key={index} className="text-center">
               <div className="relative mb-6">
-                <div className="bg-brand-green text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                <div className="bg-brand-green text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg">
                   {step.number}
                 </div>
                 {index < steps.length - 1 && (
@@ -52,6 +54,22 @@ export default function HowItWorks() {
               <p className="text-gray-600 leading-relaxed">{step.description}</p>
             </div>
           ))}
+        </div>
+        
+        <div className="text-center mt-16">
+          <div className="bg-gradient-to-r from-brand-green to-brand-green-light p-8 rounded-2xl shadow-xl">
+            <h3 className="text-2xl font-bold text-white mb-4">Ready to Get Started?</h3>
+            <p className="text-brand-green-lighter mb-6 text-lg">
+              Get your free, no-obligation quote today and see how simple property clearance can be.
+            </p>
+            <QuoteForm 
+              trigger={
+                <Button className="bg-white text-brand-green hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-all duration-200 hover:shadow-xl">
+                  Get Your FREE Quote Now
+                </Button>
+              }
+            />
+          </div>
         </div>
       </div>
     </section>

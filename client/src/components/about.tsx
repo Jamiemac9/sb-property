@@ -1,7 +1,7 @@
 
 export default function About() {
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-20 bg-gradient-to-r from-brand-green-lighter to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">About SB Property Clearance</h2>
@@ -20,20 +20,20 @@ export default function About() {
               Our team is fully licensed and insured, ensuring that your property clearance is handled with the utmost professionalism and care. We pride ourselves on our commitment to recycling and responsible waste disposal.
             </p>
             <div className="grid grid-cols-2 gap-4">
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-brand-green mb-2">500+</div>
-                <div className="text-gray-600">Properties Cleared</div>
+              <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-brand-green/20">
+                <div className="text-3xl font-bold text-brand-green mb-2">500+</div>
+                <div className="text-gray-600 font-medium">Properties Cleared</div>
               </div>
-              <div className="text-center p-4 bg-gray-50 rounded-lg">
-                <div className="text-2xl font-bold text-brand-green mb-2">95%</div>
-                <div className="text-gray-600">Recycled Materials</div>
+              <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-blue-200">
+                <div className="text-3xl font-bold text-blue-600 mb-2">95%</div>
+                <div className="text-gray-600 font-medium">Recycled Materials</div>
               </div>
             </div>
           </div>
           
           <div className="space-y-6">
-            <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
+            <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-md">
+              <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-brand-green to-brand-green-light rounded-full flex items-center justify-center shadow-md">
                 <span className="text-white font-semibold">✓</span>
               </div>
               <div>
@@ -42,8 +42,8 @@ export default function About() {
               </div>
             </div>
             
-            <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
+            <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-md">
+              <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-md">
                 <span className="text-white font-semibold">✓</span>
               </div>
               <div>
@@ -52,8 +52,8 @@ export default function About() {
               </div>
             </div>
             
-            <div className="flex items-start space-x-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-brand-green rounded-full flex items-center justify-center">
+            <div className="flex items-start space-x-4 p-4 bg-white rounded-xl shadow-md">
+              <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-md">
                 <span className="text-white font-semibold">✓</span>
               </div>
               <div>
