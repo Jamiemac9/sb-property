@@ -65,6 +65,12 @@ export default function Header() {
             >
               Contact
             </button>
+            <a
+              href="/quotes"
+              className="text-gray-700 hover:text-brand-green font-medium transition-colors"
+            >
+              Free Quotes
+            </a>
           </nav>
 
           {/* CTA Button and Mobile Menu */}
@@ -115,6 +121,12 @@ export default function Header() {
               >
                 Contact
               </button>
+              <a
+                href="/quotes"
+                className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
+              >
+                Free Quotes
+              </a>
             </nav>
           </div>
         )}

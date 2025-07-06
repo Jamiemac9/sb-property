@@ -31,7 +31,7 @@ export default function Footer() {
               </button>
             </div>
           </div>
-          
+
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
@@ -68,9 +68,12 @@ export default function Footer() {
                   Contact
                 </button>
               </li>
+              <li>
+                <a href="/quotes" className="text-gray-300 hover:text-brand-green-light transition-colors font-semibold">Free Quotes</a>
+              </li>
             </ul>
           </div>
-          
+
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
@@ -89,10 +92,10 @@ export default function Footer() {
               </div>
             </div>
           </div>
-          
-          
+
+
         </div>
-        
+
         <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
           <p>&copy; 2024 SB Property Clearance. All rights reserved.</p>
         </div>
