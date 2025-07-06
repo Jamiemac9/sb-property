@@ -31,6 +31,7 @@ This is a modern React single-page application for SB Property Clearance, a UK-b
 - **TrustBar**: Trust indicators and partner logos
 - **Services**: Grid layout showcasing core services
 - **HowItWorks**: 3-step process explanation
+- **Location**: Google Maps integration with business location and customer reviews
 - **Footer**: Contact form and company information
 
 ### Backend Components
@@ -56,6 +57,7 @@ This is a modern React single-page application for SB Property Clearance, a UK-b
 - **Icons**: Lucide React icons
 - **Date Handling**: date-fns library
 - **Carousel**: Embla Carousel for interactive components
+- **Maps**: Google Maps API with React Google Maps library
 
 ### Backend Dependencies
 - **Database**: Neon Database (serverless PostgreSQL)
@@ -94,3 +96,4 @@ Preferred communication style: Simple, everyday language.
 
 Changelog:
 - July 06, 2025. Initial setup
+- July 06, 2025. Added Google Maps integration with location section and customer reviews display

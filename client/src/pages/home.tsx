@@ -3,8 +3,8 @@ import Hero from "@/components/hero";
 import TrustBar from "@/components/trust-bar";
 import Services from "@/components/services";
 import HowItWorks from "@/components/how-it-works";
+import Location from "@/components/location";
 import Footer from "@/components/footer";
-import About from "@/components/about";
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
       <TrustBar />
       <Services />
       <HowItWorks />
-      <About />
+      <Location />
       <Footer />
     </div>
   );

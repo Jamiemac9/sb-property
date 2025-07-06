@@ -45,10 +45,10 @@ export default function Header() {
               How It Works
             </button>
             <button 
-              onClick={() => scrollToSection("about")}
+              onClick={() => scrollToSection("location")}
               className="text-gray-700 hover:text-brand-green font-medium transition-colors"
             >
-              About Us
+              Location
             </button>
             <button 
               onClick={() => scrollToSection("contact")}
@@ -94,10 +94,10 @@ export default function Header() {
                 How It Works
               </button>
               <button 
-                onClick={() => scrollToSection("about")}
+                onClick={() => scrollToSection("location")}
                 className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
               >
-                About Us
+                Location
               </button>
               <button 
                 onClick={() => scrollToSection("contact")}
