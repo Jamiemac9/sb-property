@@ -56,7 +56,7 @@ export default function TrustBar() {
                 <div className="p-4">
                   <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
                     <img 
-                      src="./checkatrade-logo.png" 
+                      src="/checkatrade-logo.png" 
                       alt="Checkatrade - Where reputation matters" 
                       className="max-h-16 max-w-full object-contain"
                       onError={(e) => {
@@ -78,7 +78,7 @@ export default function TrustBar() {
                 <div className="p-4">
                   <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
                     <img 
-                      src="./environment-agency-logo.png" 
+                      src="/environment-agency-logo.png" 
                       alt="Environment Agency" 
                       className="max-h-16 max-w-full object-contain"
                       onError={(e) => {
