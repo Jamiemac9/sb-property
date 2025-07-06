@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import QuoteForm from "./quote-form";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,8 +21,8 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <img 
-              src="./logo.png" 
-              alt="SB Property Clearance" 
+              src="/logo.png" 
+              alt="SB Property Clearance Logo" 
               className="h-12 w-auto max-w-[200px] object-contain"
               onLoad={() => console.log('Logo loaded successfully')}
               onError={(e) => {
@@ -30,8 +31,8 @@ export default function Header() {
                 const parent = e.currentTarget.parentElement;
                 if (parent && !parent.querySelector('.logo-fallback')) {
                   const fallbackDiv = document.createElement('div');
-                  fallbackDiv.className = 'logo-fallback';
-                  fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green">SB Property Clearance</span>';
+                  fallbackDiv.className = 'logo-fallback text-xl font-bold text-brand-green';
+                  fallbackDiv.textContent = 'SB Property Clearance';
                   parent.appendChild(fallbackDiv);
                 }
               }}
@@ -68,12 +69,13 @@ export default function Header() {
           
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <Button 
-              onClick={() => scrollToSection("contact")}
-              className="bg-brand-green text-white hover:bg-brand-green-light transition-colors shadow-sm"
-            >
-              Get a FREE Quote
-            </Button>
+            <QuoteForm 
+              trigger={
+                <Button className="bg-brand-green text-white hover:bg-brand-green-light transition-colors shadow-sm">
+                  Get a FREE Quote
+                </Button>
+              }
+            />
             
             {/* Mobile menu button */}
             <button 
