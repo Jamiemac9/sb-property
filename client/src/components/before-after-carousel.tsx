@@ -26,34 +26,34 @@ export default function BeforeAfterCarousel() {
   const projects: BeforeAfterImage[] = [
     {
       id: "bedroom-clearance",
-      title: "Bedroom Clearance",
+      title: "Bedroom Property Clearance",
       beforeImage: "/bedroom-before.jpg",
-      afterImage: "/bedroom-before.jpg", // Using same for now, you can add after images
+      afterImage: "/bedroom-before.jpg",
       description: "Complete bedroom clearance and deep clean",
       category: "Property Clearance"
     },
     {
-      id: "garden-transformation-1",
-      title: "Garden Transformation",
+      id: "garden-clearance-east",
+      title: "East Devon Garden Clearance",
       beforeImage: "/garden-before-1.jpg",
       afterImage: "/garden-before-1.jpg",
-      description: "Overgrown garden cleared and landscaped",
+      description: "Professional garden clearance in East Devon",
       category: "Garden Clearance"
     },
     {
-      id: "garden-transformation-2",
-      title: "Large Garden Project",
+      id: "garden-clearance-west",
+      title: "West Devon Garden Project",
       beforeImage: "/garden-before-2.jpg",
       afterImage: "/garden-before-2.jpg",
-      description: "Extensive garden clearance and restoration",
+      description: "Large scale garden clearance and restoration",
       category: "Garden Clearance"
     },
     {
-      id: "garden-transformation-3",
-      title: "Garden Renovation",
+      id: "garden-landscaping",
+      title: "Garden Landscaping & Clearance",
       beforeImage: "/garden-before-3.jpg",
       afterImage: "/garden-before-3.jpg",
-      description: "Complete garden makeover and maintenance",
+      description: "Complete garden transformation and landscaping",
       category: "Landscaping"
     }
   ];
