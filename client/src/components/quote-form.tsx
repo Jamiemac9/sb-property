@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { useToast } from "@/hooks/use-toast";
 import { insertQuoteRequestSchema } from "@shared/schema";
 import { z } from "zod";
-import { Upload, FileImage, X, Calculator, Search, MapPin } from "lucide-react";
+import { Upload, FileImage, X, Calculator } from "lucide-react";
 
 // Extend schema for frontend validation
 const quoteFormSchema = insertQuoteRequestSchema.extend({
@@ -30,9 +30,7 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-  const [postcodeSearch, setPostcodeSearch] = useState("");
-  const [addresses, setAddresses] = useState<string[]>([]);
-  const [loadingAddresses, setLoadingAddresses] = useState(false);
+  
   const { toast } = useToast();
 
   const form = useForm<QuoteFormData>({
@@ -106,53 +104,7 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  // UK address lookup using backend endpoint
-  const lookupPostcode = async () => {
-    if (!postcodeSearch.trim()) return;
-    
-    setLoadingAddresses(true);
-    try {
-      const cleanPostcode = postcodeSearch.replace(/\s/g, '').toUpperCase();
-      
-      const response = await fetch(`/api/address-lookup/${cleanPostcode}`);
-      
-      if (response.ok) {
-        const data = await response.json();
-        
-        if (data.success && data.addresses.length > 0) {
-          setAddresses(data.addresses);
-          
-          if (data.source === 'getAddress') {
-            toast({
-              title: "Addresses Found",
-              description: `Found ${data.addresses.length} addresses for ${cleanPostcode}`,
-            });
-          } else if (data.validated) {
-            toast({
-              title: "Postcode Validated",
-              description: `${cleanPostcode} is valid. Please enter your full address manually.`,
-            });
-            
-            form.setValue('address', data.addresses[0]);
-            setAddresses([]);
-            return;
-          }
-        } else {
-          throw new Error('No addresses found');
-        }
-      } else {
-        throw new Error('Address lookup failed');
-      }
-    } catch (error) {
-      toast({
-        title: "Lookup Failed",
-        description: "Please enter your full address manually.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoadingAddresses(false);
-    }
-  };
+  
 
   // WhatsApp integration function
   const sendToWhatsApp = (quoteData: QuoteFormData, imageUrls: string[] = []) => {
@@ -276,8 +228,6 @@ Please respond with a detailed quote for this request.`;
         // Reset form and close dialog
         form.reset();
         setUploadedFiles([]);
-        setAddresses([]);
-        setPostcodeSearch("");
         setIsOpen(false);
       } else {
         throw new Error("Failed to submit quote request");
@@ -370,80 +320,12 @@ Please respond with a detailed quote for this request.`;
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Property Address *</FormLabel>
-                      <div className="space-y-3">
-                        {/* Postcode Lookup */}
-                        <div className="flex gap-2">
-                          <Input
-                            placeholder="Enter postcode (e.g., ST17 4AH)"
-                            value={postcodeSearch}
-                            onChange={(e) => setPostcodeSearch(e.target.value.toUpperCase())}
-                            className="flex-1"
-                          />
-                          <Button
-                            type="button"
-                            onClick={lookupPostcode}
-                            disabled={loadingAddresses || !postcodeSearch.trim()}
-                            variant="outline"
-                            size="sm"
-                          >
-                            {loadingAddresses ? (
-                              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-brand-green"></div>
-                            ) : (
-                              <Search size={16} />
-                            )}
-                          </Button>
-                        </div>
-
-                        {/* Address Dropdown */}
-                        {addresses.length > 0 && (
-                          <div className="space-y-2">
-                            <p className="text-sm text-brand-green font-medium flex items-center">
-                              <MapPin size={14} className="mr-1" />
-                              Real addresses found ({addresses.length}):
-                            </p>
-                            <Select onValueChange={(value) => {
-                              field.onChange(value);
-                              form.setValue('address', value);
-                            }}>
-                              <SelectTrigger>
-                                <SelectValue placeholder="Choose your actual address" />
-                              </SelectTrigger>
-                              <SelectContent className="max-h-60">
-                                {addresses.map((address, index) => (
-                                  <SelectItem key={index} value={address}>
-                                    <div className="flex flex-col text-left">
-                                      <span className="font-medium">{address.split(',')[0]}</span>
-                                      <span className="text-xs text-gray-500">{address.split(',').slice(1).join(',')}</span>
-                                    </div>
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
-                            <p className="text-xs text-gray-500">
-                              These are real addresses from OpenStreetMap. If your address isn't listed, please enter it manually below.
-                            </p>
-                          </div>
-                        )}
-
-                        {/* Manual Address Input */}
-                        <div className="space-y-2">
-                          <p className="text-sm text-gray-600">Or enter your full address manually:</p>
-                          <FormControl>
-                            <Input 
-                              placeholder="123 Main Street, Stafford, ST17 4AH" 
-                              {...field}
-                              value={field.value || ''}
-                              onChange={(e) => {
-                                field.onChange(e.target.value);
-                                // Clear addresses when user starts typing manually
-                                if (e.target.value && addresses.length > 0) {
-                                  setAddresses([]);
-                                }
-                              }}
-                            />
-                          </FormControl>
-                        </div>
-                      </div>
+                      <FormControl>
+                        <Input 
+                          placeholder="Enter your full address (e.g., 123 Main Street, Stafford, ST17 4AH)" 
+                          {...field}
+                        />
+                      </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
