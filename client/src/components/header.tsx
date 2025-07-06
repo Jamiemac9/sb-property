@@ -23,8 +23,13 @@ export default function Header() {
               src="/logo.png" 
               alt="SB Property Clearance" 
               className="h-12 w-auto max-w-[200px] object-contain"
+              onLoad={() => console.log('Logo loaded successfully')}
               onError={(e) => {
-                console.error('Logo failed to load');
+                console.error('Logo failed to load from /logo.png');
+                // Try fallback to show company name instead
+                const fallbackDiv = document.createElement('div');
+                fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green">SB Property Clearance</span>';
+                e.currentTarget.parentNode?.appendChild(fallbackDiv);
                 e.currentTarget.style.display = 'none';
               }}
             />
@@ -45,10 +50,10 @@ export default function Header() {
               How It Works
             </button>
             <button 
-              onClick={() => scrollToSection("location")}
+              onClick={() => scrollToSection("about")}
               className="text-gray-700 hover:text-brand-green font-medium transition-colors"
             >
-              Location
+              About Us
             </button>
             <button 
               onClick={() => scrollToSection("contact")}
@@ -94,10 +99,10 @@ export default function Header() {
                 How It Works
               </button>
               <button 
-                onClick={() => scrollToSection("location")}
+                onClick={() => scrollToSection("about")}
                 className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
               >
-                Location
+                About Us
               </button>
               <button 
                 onClick={() => scrollToSection("contact")}
