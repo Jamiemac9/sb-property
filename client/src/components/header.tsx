@@ -22,7 +22,11 @@ export default function Header() {
             <img 
               src="/logo.png" 
               alt="SB Property Clearance" 
-              className="h-10 w-auto"
+              className="h-12 w-auto max-w-[200px] object-contain"
+              onError={(e) => {
+                console.error('Logo failed to load');
+                e.currentTarget.style.display = 'none';
+              }}
             />
           </div>
           
