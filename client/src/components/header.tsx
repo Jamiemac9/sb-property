@@ -19,7 +19,11 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <h1 className="text-xl font-bold text-gray-900">SB Property Clearance</h1>
+            <img 
+              src="/logo.png" 
+              alt="SB Property Clearance" 
+              className="h-10 w-auto"
+            />
           </div>
           
           {/* Desktop Navigation */}
