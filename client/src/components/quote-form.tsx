@@ -105,7 +105,7 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  // UK address lookup using getAddress.io API (free tier)
+  // UK address lookup using backend endpoint
   const lookupPostcode = async () => {
     if (!postcodeSearch.trim()) return;
     
@@ -113,41 +113,30 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     try {
       const cleanPostcode = postcodeSearch.replace(/\s/g, '').toUpperCase();
       
-      // Use getAddress.io free API for real UK addresses
-      const response = await fetch(
-        `https://api.getAddress.io/find/${cleanPostcode}?api-key=demo&format=json`
-      );
+      const response = await fetch(`/api/address-lookup/${cleanPostcode}`);
       
       if (response.ok) {
         const data = await response.json();
         
-        if (data.addresses && data.addresses.length > 0) {
-          const formattedAddresses = data.addresses.map(addr => `${addr}, ${cleanPostcode}`);
-          setAddresses(formattedAddresses);
+        if (data.success && data.addresses.length > 0) {
+          setAddresses(data.addresses);
           
-          toast({
-            title: "Addresses Found",
-            description: `Found ${formattedAddresses.length} addresses for ${cleanPostcode}`,
-          });
-        } else {
-          // Fallback to manual entry with validated postcode
-          const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${cleanPostcode}`);
-          
-          if (postcodeResponse.ok) {
-            const postcodeData = await postcodeResponse.json();
-            if (postcodeData.result) {
-              toast({
-                title: "Postcode Validated",
-                description: `${cleanPostcode} is valid. Please enter your full address manually.`,
-              });
-              
-              const baseAddress = `${postcodeData.result.admin_district}, ${postcodeData.result.admin_county}, ${cleanPostcode}`;
-              form.setValue('address', baseAddress);
-              setAddresses([]);
-              return;
-            }
+          if (data.source === 'getAddress') {
+            toast({
+              title: "Addresses Found",
+              description: `Found ${data.addresses.length} addresses for ${cleanPostcode}`,
+            });
+          } else if (data.validated) {
+            toast({
+              title: "Postcode Validated",
+              description: `${cleanPostcode} is valid. Please enter your full address manually.`,
+            });
+            
+            form.setValue('address', data.addresses[0]);
+            setAddresses([]);
+            return;
           }
-          
+        } else {
           throw new Error('No addresses found');
         }
       } else {
