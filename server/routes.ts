@@ -26,9 +26,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Initialize Object Storage client
   let objectStorage: Client | null = null;
   try {
-    objectStorage = new Client();
+    // Only initialize if we have the proper environment setup for Object Storage
+    if (process.env.REPLIT_DEPLOYMENT || process.env.REPLIT_STORAGE_BUCKET) {
+      objectStorage = new Client();
+    } else {
+      console.log("Object Storage not configured in development environment, using base64 fallback");
+    }
   } catch (error) {
-    console.warn("Object Storage not available, falling back to base64 encoding");
+    console.warn("Object Storage not available, falling back to base64 encoding:", error instanceof Error ? error.message : 'Unknown error');
   }
 
   // Image upload endpoint
@@ -111,7 +116,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         if (response.ok) {
           const data = await response.json();
           if (data.addresses && data.addresses.length > 0) {
-            const formattedAddresses = data.addresses.map(addr => `${addr}, ${cleanPostcode}`);
+            const formattedAddresses = data.addresses.map((addr: string) => `${addr}, ${cleanPostcode}`);
             return res.json({ 
               success: true, 
               addresses: formattedAddresses,
