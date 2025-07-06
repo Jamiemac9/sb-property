@@ -1,7 +1,3 @@
-The code is updated to make the "Ready to see similar results" section more relevant to each specific project shown in the carousel by adding state to track the selected project and updating the content accordingly.
-```
-
-```replit_final_file
 import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
