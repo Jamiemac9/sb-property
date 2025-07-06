@@ -14,11 +14,11 @@ export default function Home() {
     <div className="min-h-screen bg-white">
       <Header />
       <Hero />
+      <HowItWorks />
       <TrustBar />
       <Services />
       <BeforeAfterCarousel />
       <Location />
-      <HowItWorks />
       <About />
       <Footer />
       <Chatbot />

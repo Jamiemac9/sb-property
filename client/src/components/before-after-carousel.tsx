@@ -105,7 +105,6 @@ export default function BeforeAfterCarousel() {
         <div className="relative">
           <Carousel 
             className="w-full"
-            onSlideChange={(index) => setCurrentSlide(index)}
           >
             <CarouselContent className="-ml-4">
               {projects.map((project) => {
