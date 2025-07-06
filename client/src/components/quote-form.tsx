@@ -105,93 +105,100 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     setUploadedFiles(prev => prev.filter((_, i) => i !== index));
   };
 
-  // Enhanced postcode lookup with comprehensive address data
+  // Real UK address lookup using multiple APIs
   const lookupPostcode = async () => {
     if (!postcodeSearch.trim()) return;
     
     setLoadingAddresses(true);
     try {
-      // First, validate the postcode and get detailed info
-      const response = await fetch(`https://api.postcodes.io/postcodes/${postcodeSearch.replace(/\s/g, '')}`);
+      const cleanPostcode = postcodeSearch.replace(/\s/g, '').toUpperCase();
       
-      if (response.ok) {
-        const data = await response.json();
-        if (data.result) {
-          const result = data.result;
+      // Try multiple address lookup services
+      let foundAddresses = [];
+      
+      // Method 1: Try OpenStreetMap Nominatim API for real addresses
+      try {
+        const nominatimResponse = await fetch(
+          `https://nominatim.openstreetmap.org/search?format=json&countrycodes=gb&postalcode=${cleanPostcode}&addressdetails=1&limit=50`
+        );
+        
+        if (nominatimResponse.ok) {
+          const nominatimData = await nominatimResponse.json();
           
-          // Generate comprehensive address list based on postcode data
-          const baseLocation = {
-            district: result.admin_district,
-            county: result.admin_county,
-            postcode: postcodeSearch.toUpperCase(),
-            ward: result.admin_ward,
-            parish: result.parish
-          };
-          
-          // Create more realistic address variations
-          const streetNames = [
-            'High Street', 'Church Street', 'Mill Lane', 'Victoria Road', 'Station Road',
-            'Queens Road', 'Kings Road', 'Park Lane', 'Oak Avenue', 'Elm Grove',
-            'Rose Close', 'Meadow View', 'Hill Top', 'Manor Road', 'Castle Street',
-            'Bridge Street', 'Market Square', 'Garden Close', 'Willow Way', 'Cedar Drive'
-          ];
-          
-          const propertyTypes = [
-            '', 'Flat 1, ', 'Flat 2, ', 'Flat 3, ', 'Apartment A, ', 'Apartment B, ',
-            'The Old House, ', 'The Cottage, ', 'The Barn, ', 'The Lodge, ',
-            'Ground Floor, ', 'First Floor, ', 'Maisonette, '
-          ];
-          
-          const houseNumbers = Array.from({length: 100}, (_, i) => i + 1);
-          
-          // Generate comprehensive address list
-          const generatedAddresses = [];
-          
-          // Add numbered addresses for each street
-          streetNames.forEach(street => {
-            // Add some regular house numbers
-            const randomNumbers = houseNumbers.sort(() => 0.5 - Math.random()).slice(0, 8);
-            randomNumbers.forEach(num => {
-              generatedAddresses.push(`${num} ${street}, ${baseLocation.district}, ${baseLocation.county}, ${baseLocation.postcode}`);
+          if (nominatimData && nominatimData.length > 0) {
+            foundAddresses = nominatimData
+              .filter(item => item.display_name && item.address)
+              .map(item => {
+                const addr = item.address;
+                let formattedAddress = '';
+                
+                // Build proper UK address format
+                if (addr.house_number && addr.road) {
+                  formattedAddress = `${addr.house_number} ${addr.road}`;
+                } else if (addr.road) {
+                  formattedAddress = addr.road;
+                } else if (addr.residential) {
+                  formattedAddress = addr.residential;
+                } else {
+                  formattedAddress = item.display_name.split(',')[0];
+                }
+                
+                // Add locality/town
+                if (addr.suburb) formattedAddress += `, ${addr.suburb}`;
+                if (addr.town) formattedAddress += `, ${addr.town}`;
+                if (addr.city) formattedAddress += `, ${addr.city}`;
+                if (addr.county) formattedAddress += `, ${addr.county}`;
+                
+                formattedAddress += `, ${cleanPostcode}`;
+                
+                return formattedAddress;
+              })
+              .filter(addr => addr.length > 0)
+              .slice(0, 30);
+          }
+        }
+      } catch (nominatimError) {
+        console.log('Nominatim lookup failed, continuing with fallback...');
+      }
+      
+      // Method 2: If no real addresses found, validate postcode and show manual entry
+      if (foundAddresses.length === 0) {
+        const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${cleanPostcode}`);
+        
+        if (postcodeResponse.ok) {
+          const postcodeData = await postcodeResponse.json();
+          if (postcodeData.result) {
+            // Show a message that manual entry is needed
+            toast({
+              title: "Postcode Validated",
+              description: `${cleanPostcode} is a valid postcode. Please enter your full address manually below.`,
             });
             
-            // Add some property types
-            const randomTypes = propertyTypes.sort(() => 0.5 - Math.random()).slice(0, 3);
-            randomTypes.forEach(type => {
-              if (type) {
-                const num = Math.floor(Math.random() * 50) + 1;
-                generatedAddresses.push(`${type}${num} ${street}, ${baseLocation.district}, ${baseLocation.county}, ${baseLocation.postcode}`);
-              }
-            });
-          });
-          
-          // Shuffle and limit to first 50 addresses
-          const shuffledAddresses = generatedAddresses.sort(() => 0.5 - Math.random()).slice(0, 50);
-          
-          setAddresses(shuffledAddresses);
-          
-          toast({
-            title: "Addresses Found",
-            description: `Found ${shuffledAddresses.length} addresses for ${postcodeSearch.toUpperCase()}`,
-          });
-        } else {
-          toast({
-            title: "Invalid Postcode",
-            description: "Please enter a valid UK postcode.",
-            variant: "destructive",
-          });
+            // Set the postcode in the address field to help user
+            const baseAddress = `${postcodeData.result.admin_district}, ${postcodeData.result.admin_county}, ${cleanPostcode}`;
+            form.setValue('address', baseAddress);
+            
+            setAddresses([]); // Clear addresses to show manual entry
+            return;
+          }
         }
-      } else {
-        toast({
-          title: "Postcode Not Found",
-          description: "Please check your postcode and try again.",
-          variant: "destructive",
-        });
+        
+        throw new Error('Invalid postcode');
       }
+      
+      // Remove duplicates and sort
+      const uniqueAddresses = [...new Set(foundAddresses)].sort();
+      setAddresses(uniqueAddresses);
+      
+      toast({
+        title: "Real Addresses Found",
+        description: `Found ${uniqueAddresses.length} actual addresses for ${cleanPostcode}`,
+      });
+      
     } catch (error) {
       toast({
-        title: "Lookup Failed",
-        description: "Unable to lookup addresses. Please enter your full address manually.",
+        title: "Postcode Not Found",
+        description: "Please check your postcode and enter your full address manually.",
         variant: "destructive",
       });
     } finally {
@@ -394,21 +401,21 @@ Please respond with a detailed quote for this request.`;
                         {/* Address Dropdown */}
                         {addresses.length > 0 && (
                           <div className="space-y-2">
-                            <p className="text-sm text-gray-600 flex items-center">
+                            <p className="text-sm text-brand-green font-medium flex items-center">
                               <MapPin size={14} className="mr-1" />
-                              Select your address ({addresses.length} addresses found):
+                              Real addresses found ({addresses.length}):
                             </p>
                             <Select onValueChange={(value) => {
                               field.onChange(value);
                               form.setValue('address', value);
                             }}>
                               <SelectTrigger>
-                                <SelectValue placeholder="Choose from addresses found" />
+                                <SelectValue placeholder="Choose your actual address" />
                               </SelectTrigger>
-                              <SelectContent className="max-h-48">
+                              <SelectContent className="max-h-60">
                                 {addresses.map((address, index) => (
                                   <SelectItem key={index} value={address}>
-                                    <div className="flex flex-col">
+                                    <div className="flex flex-col text-left">
                                       <span className="font-medium">{address.split(',')[0]}</span>
                                       <span className="text-xs text-gray-500">{address.split(',').slice(1).join(',')}</span>
                                     </div>
@@ -417,7 +424,7 @@ Please respond with a detailed quote for this request.`;
                               </SelectContent>
                             </Select>
                             <p className="text-xs text-gray-500">
-                              Can't find your address? Enter it manually below.
+                              These are real addresses from OpenStreetMap. If your address isn't listed, please enter it manually below.
                             </p>
                           </div>
                         )}
