@@ -5,8 +5,6 @@ import { insertCallbackRequestSchema, insertQuoteRequestSchema } from "@shared/s
 import { generateAIResponse } from "./ai-chat";
 import { z } from "zod";
 import multer from "multer";
-import { Client } from "@replit/object-storage";
-
 export async function registerRoutes(app: Express): Promise<Server> {
   // Configure multer for file uploads
   const upload = multer({
@@ -23,12 +21,19 @@ export async function registerRoutes(app: Express): Promise<Server> {
     },
   });
 
-  // Initialize Object Storage client
-  const objectStorage = new Client();
+  // Object Storage is currently disabled - would need proper configuration
+  const objectStorage: any = null;
 
   // Image upload endpoint
   app.post("/api/upload-image", upload.single('image'), async (req, res) => {
     try {
+      if (!objectStorage) {
+        return res.status(503).json({ 
+          success: false, 
+          error: "Image upload service is not available" 
+        });
+      }
+
       if (!req.file) {
         return res.status(400).json({ success: false, error: "No image file provided" });
       }
@@ -55,6 +60,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Image retrieval endpoint
   app.get("/api/image/:filename", async (req, res) => {
     try {
+      if (!objectStorage) {
+        return res.status(503).json({ 
+          success: false, 
+          error: "Image service is not available" 
+        });
+      }
+
       const { filename } = req.params;
       
       // Download from Object Storage
