@@ -4,8 +4,73 @@ import { storage } from "./storage";
 import { insertCallbackRequestSchema, insertQuoteRequestSchema } from "@shared/schema";
 import { generateAIResponse } from "./ai-chat";
 import { z } from "zod";
+import multer from "multer";
+import { Client } from "@replit/object-storage";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Configure multer for file uploads
+  const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+      fileSize: 5 * 1024 * 1024, // 5MB limit
+    },
+    fileFilter: (req, file, cb) => {
+      if (file.mimetype.startsWith('image/')) {
+        cb(null, true);
+      } else {
+        cb(new Error('Only image files are allowed'));
+      }
+    },
+  });
+
+  // Initialize Object Storage client
+  const objectStorage = new Client();
+
+  // Image upload endpoint
+  app.post("/api/upload-image", upload.single('image'), async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ success: false, error: "No image file provided" });
+      }
+
+      const filename = req.body.filename || `image_${Date.now()}_${req.file.originalname}`;
+      
+      // Upload to Object Storage
+      await objectStorage.uploadFromBytes(filename, req.file.buffer);
+      
+      // Generate a public URL (this is a placeholder - you'll need to implement proper URL generation)
+      const publicUrl = `${req.protocol}://${req.get('host')}/api/image/${filename}`;
+      
+      res.json({ 
+        success: true, 
+        url: publicUrl,
+        filename: filename 
+      });
+    } catch (error) {
+      console.error("Image upload error:", error);
+      res.status(500).json({ success: false, error: "Image upload failed" });
+    }
+  });
+
+  // Image retrieval endpoint
+  app.get("/api/image/:filename", async (req, res) => {
+    try {
+      const { filename } = req.params;
+      
+      // Download from Object Storage
+      const imageBuffer = await objectStorage.downloadAsBytes(filename);
+      
+      // Set appropriate headers
+      res.setHeader('Content-Type', 'image/jpeg'); // You might want to store and retrieve the original mime type
+      res.setHeader('Cache-Control', 'public, max-age=31536000'); // Cache for 1 year
+      
+      res.send(imageBuffer);
+    } catch (error) {
+      console.error("Image retrieval error:", error);
+      res.status(404).json({ success: false, error: "Image not found" });
+    }
+  });
+
   // Address lookup endpoint
   app.get("/api/address-lookup/:postcode", async (req, res) => {
     try {

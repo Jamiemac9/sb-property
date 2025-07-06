@@ -154,8 +154,15 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
   };
 
   // WhatsApp integration function
-  const sendToWhatsApp = (quoteData: QuoteFormData) => {
+  const sendToWhatsApp = (quoteData: QuoteFormData, imageUrls: string[] = []) => {
     const phoneNumber = "447753226214"; // SB Property Clearance WhatsApp business number
+    
+    let imageSection = '';
+    if (imageUrls.length > 0) {
+      imageSection = `\n*Images:* ${imageUrls.length} file(s) uploaded\n📸 Image links:\n${imageUrls.map((url, index) => `${index + 1}. ${url}`).join('\n')}\n`;
+    } else if (uploadedFiles.length > 0) {
+      imageSection = `\n*Images:* ${uploadedFiles.length} file(s) uploaded (processing...)`;
+    }
     
     const message = `🏠 *New Quote Request*
     
@@ -172,9 +179,7 @@ Timeframe: ${quoteData.timeframe || 'Not specified'}
 
 *Additional Info:*
 Access Details: ${quoteData.accessDetails || 'None provided'}
-Additional Information: ${quoteData.additionalInfo || 'None provided'}
-
-*Images:* ${uploadedFiles.length} file(s) uploaded
+Additional Information: ${quoteData.additionalInfo || 'None provided'}${imageSection}
 
 Please respond with a detailed quote for this request.`;
 
@@ -184,27 +189,51 @@ Please respond with a detailed quote for this request.`;
     window.open(whatsappUrl, '_blank');
   };
 
-  const convertFilesToBase64 = async (files: File[]): Promise<string[]> => {
-    const promises = files.map(file => {
-      return new Promise<string>((resolve) => {
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result as string);
-        reader.readAsDataURL(file);
+  const uploadImagesToStorage = async (files: File[]): Promise<string[]> => {
+    const uploadPromises = files.map(async (file, index) => {
+      const formData = new FormData();
+      formData.append('image', file);
+      formData.append('filename', `quote_${Date.now()}_${index}_${file.name}`);
+      
+      const response = await fetch('/api/upload-image', {
+        method: 'POST',
+        body: formData,
       });
+      
+      if (response.ok) {
+        const result = await response.json();
+        return result.url;
+      } else {
+        throw new Error(`Failed to upload ${file.name}`);
+      }
     });
-    return Promise.all(promises);
+    
+    return Promise.all(uploadPromises);
   };
 
   const onSubmit = async (data: QuoteFormData) => {
     setIsSubmitting(true);
 
     try {
-      // Convert uploaded files to base64 strings
-      const imageData = await convertFilesToBase64(uploadedFiles);
+      let imageUrls: string[] = [];
+      
+      // Upload images to Object Storage if any
+      if (uploadedFiles.length > 0) {
+        try {
+          imageUrls = await uploadImagesToStorage(uploadedFiles);
+        } catch (error) {
+          console.error('Image upload failed:', error);
+          toast({
+            title: "Image Upload Warning",
+            description: "Some images couldn't be uploaded, but your quote request will still be sent.",
+            variant: "destructive",
+          });
+        }
+      }
       
       const submitData = {
         ...data,
-        images: imageData,
+        images: imageUrls, // Store URLs instead of base64 data
       };
 
       // Send to backend for record keeping
@@ -221,8 +250,8 @@ Please respond with a detailed quote for this request.`;
           description: "Opening WhatsApp to send your request directly to our team...",
         });
         
-        // Send to WhatsApp
-        sendToWhatsApp(data);
+        // Send to WhatsApp with image URLs
+        sendToWhatsApp(data, imageUrls);
         
         // Reset form and close dialog
         form.reset();

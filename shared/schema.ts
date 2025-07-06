@@ -40,17 +40,17 @@ export const insertCallbackRequestSchema = createInsertSchema(callbackRequests).
   phone: true,
 });
 
-export const insertQuoteRequestSchema = createInsertSchema(quoteRequests).pick({
-  name: true,
-  email: true,
-  phone: true,
-  address: true,
-  propertyType: true,
-  serviceType: true,
-  accessDetails: true,
-  timeframe: true,
-  additionalInfo: true,
-  images: true,
+export const insertQuoteRequestSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email format"),
+  phone: z.string().min(1, "Phone number is required"),
+  address: z.string().min(1, "Address is required"),
+  propertyType: z.string().min(1, "Property type is required"),
+  serviceType: z.string().min(1, "Service type is required"),
+  timeframe: z.string().optional(),
+  accessDetails: z.string().optional(),
+  additionalInfo: z.string().optional(),
+  images: z.array(z.string().url()).optional().default([]), // Now expects URLs instead of base64
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
