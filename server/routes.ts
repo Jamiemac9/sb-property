@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertCallbackRequestSchema } from "@shared/schema";
+import { insertCallbackRequestSchema, insertQuoteRequestSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -41,6 +41,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ 
         success: false, 
         message: "Failed to fetch callback requests" 
+      });
+    }
+  });
+
+  // Quote request endpoint
+  app.post("/api/quote", async (req, res) => {
+    try {
+      const validatedData = insertQuoteRequestSchema.parse(req.body);
+      const quoteRequest = await storage.createQuoteRequest(validatedData);
+      
+      res.status(201).json({ 
+        success: true, 
+        message: "Quote request submitted successfully",
+        id: quoteRequest.id 
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Invalid request data",
+          errors: error.errors 
+        });
+      } else {
+        res.status(500).json({ 
+          success: false, 
+          message: "Internal server error" 
+        });
+      }
+    }
+  });
+
+  // Get all quote requests (for admin purposes)
+  app.get("/api/quote", async (req, res) => {
+    try {
+      const requests = await storage.getQuoteRequests();
+      res.json(requests);
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        message: "Failed to fetch quote requests" 
       });
     }
   });

@@ -9,18 +9,18 @@ const containerStyle = {
   height: '400px'
 };
 
-// SB Property Clearance location (example coordinates for London area)
+// SB Property Clearance location (Stafford, UK)
 const center = {
-  lat: 51.5074,
-  lng: -0.1278
+  lat: 52.8077,
+  lng: -2.1158
 };
 
 const businessLocation = {
-  lat: 51.5074,
-  lng: -0.1278,
+  lat: 52.8077,
+  lng: -2.1158,
   title: "SB Property Clearance",
-  address: "123 Business Street, London, UK",
-  phone: "0800 123 4567",
+  address: "102 Wolverhampton Road, Stafford ST17 4AH, UK",
+  phone: "07123 456789",
   hours: "Mon-Fri: 8AM-6PM, Sat: 9AM-4PM"
 };
 

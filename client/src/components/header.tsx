@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import QuoteForm from "@/components/quote-form";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -65,12 +66,13 @@ export default function Header() {
           
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <Button 
-              onClick={() => scrollToSection("contact")}
-              className="bg-brand-green text-white hover:bg-brand-green-light transition-colors shadow-sm"
-            >
-              Get a FREE Quote
-            </Button>
+            <QuoteForm 
+              trigger={
+                <Button className="bg-brand-green text-white hover:bg-brand-green-light transition-colors shadow-sm">
+                  Get a FREE Quote
+                </Button>
+              }
+            />
             
             {/* Mobile menu button */}
             <button 

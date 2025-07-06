@@ -15,6 +15,21 @@ export const callbackRequests = pgTable("callback_requests", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const quoteRequests = pgTable("quote_requests", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  address: text("address").notNull(),
+  propertyType: text("property_type").notNull(),
+  serviceType: text("service_type").notNull(),
+  accessDetails: text("access_details"),
+  timeframe: text("timeframe"),
+  additionalInfo: text("additional_info"),
+  images: text("images").array(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -25,7 +40,22 @@ export const insertCallbackRequestSchema = createInsertSchema(callbackRequests).
   phone: true,
 });
 
+export const insertQuoteRequestSchema = createInsertSchema(quoteRequests).pick({
+  name: true,
+  email: true,
+  phone: true,
+  address: true,
+  propertyType: true,
+  serviceType: true,
+  accessDetails: true,
+  timeframe: true,
+  additionalInfo: true,
+  images: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertCallbackRequest = z.infer<typeof insertCallbackRequestSchema>;
 export type CallbackRequest = typeof callbackRequests.$inferSelect;
+export type InsertQuoteRequest = z.infer<typeof insertQuoteRequestSchema>;
+export type QuoteRequest = typeof quoteRequests.$inferSelect;

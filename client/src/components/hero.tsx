@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import QuoteForm from "@/components/quote-form";
 
 export default function Hero() {
   const scrollToSection = (id: string) => {
@@ -26,12 +27,13 @@ export default function Hero() {
           Whether you're clearing a house, office, or garden, SB Property Clearance offers an efficient and eco-friendly solution. We do the heavy lifting, so you don't have to.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            onClick={() => scrollToSection("contact")}
-            className="bg-brand-green text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-brand-green-light transition-colors shadow-lg"
-          >
-            Get a FREE Quote
-          </Button>
+          <QuoteForm 
+            trigger={
+              <Button className="bg-brand-green text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-brand-green-light transition-colors shadow-lg">
+                Get a FREE Quote
+              </Button>
+            }
+          />
           <Button 
             onClick={() => scrollToSection("services")}
             variant="outline"
