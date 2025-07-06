@@ -1,4 +1,5 @@
 import { Shield, Award, Recycle, Star } from "lucide-react";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 
 export default function TrustBar() {
   const trustItems = [
@@ -42,6 +43,39 @@ export default function TrustBar() {
               </div>
             ))}
           </div>
+        </div>
+        
+        {/* Partner Logos Carousel */}
+        <div className="mt-12">
+          <h3 className="text-lg font-medium text-gray-700 text-center mb-6">
+            Accredited Partners
+          </h3>
+          <Carousel className="w-full max-w-4xl mx-auto">
+            <CarouselContent className="-ml-1">
+              <CarouselItem className="pl-1 md:basis-1/2">
+                <div className="p-4">
+                  <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
+                    <img 
+                      src="/checkatrade-logo.png" 
+                      alt="Checkatrade - Where reputation matters" 
+                      className="max-h-16 max-w-full object-contain"
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+              <CarouselItem className="pl-1 md:basis-1/2">
+                <div className="p-4">
+                  <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
+                    <img 
+                      src="/environment-agency-logo.png" 
+                      alt="Environment Agency" 
+                      className="max-h-16 max-w-full object-contain"
+                    />
+                  </div>
+                </div>
+              </CarouselItem>
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
     </section>
