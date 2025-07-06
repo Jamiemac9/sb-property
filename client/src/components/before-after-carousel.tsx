@@ -1,5 +1,8 @@
+The code is updated to make the "Ready to see similar results" section more relevant to each specific project shown in the carousel by adding state to track the selected project and updating the content accordingly.
+```
 
-import { useState } from "react";
+```replit_final_file
+import { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -23,6 +26,8 @@ interface BeforeAfterImage {
 }
 
 export default function BeforeAfterCarousel() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<BeforeAfterImage | null>(null);
   const [activeSlides, setActiveSlides] = useState<{ [key: string]: 'before' | 'after' }>({});
 
   const projects: BeforeAfterImage[] = [
@@ -60,6 +65,18 @@ export default function BeforeAfterCarousel() {
     }
   ];
 
+  // Update selected project when slide changes
+  useEffect(() => {
+    setSelectedProject(projects[currentSlide] || projects[0]);
+  }, [currentSlide]);
+
+  // Initialize with first project
+  useEffect(() => {
+    if (projects.length > 0 && !selectedProject) {
+      setSelectedProject(projects[0]);
+    }
+  }, []);
+
   const toggleImage = (projectId: string) => {
     setActiveSlides(prev => ({
       ...prev,
@@ -90,18 +107,15 @@ export default function BeforeAfterCarousel() {
         </div>
 
         <div className="relative">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: true,
-            }}
+          <Carousel 
             className="w-full"
+            onSlideChange={(index) => setCurrentSlide(index)}
           >
             <CarouselContent className="-ml-4">
               {projects.map((project) => {
                 const isAfter = activeSlides[project.id] === 'after';
                 const currentImage = isAfter ? project.afterImage : project.beforeImage;
-                
+
                 return (
                   <CarouselItem key={project.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                     <Card className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white/80 glass border-0">
@@ -114,7 +128,7 @@ export default function BeforeAfterCarousel() {
                           >
                             {/* Overlay gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                            
+
                             {/* Before/After badge */}
                             <div className="absolute top-4 left-4">
                               <Badge 
@@ -123,14 +137,14 @@ export default function BeforeAfterCarousel() {
                                 {isAfter ? 'AFTER' : 'BEFORE'}
                               </Badge>
                             </div>
-                            
+
                             {/* Category badge */}
                             <div className="absolute top-4 right-4">
                               <Badge className={`${getCategoryColor(project.category)} font-medium px-3 py-1 shadow-lg`}>
                                 {project.category}
                               </Badge>
                             </div>
-                            
+
                             {/* Click indicator */}
                             <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               <div className="bg-white/90 rounded-full p-3 shadow-xl">
@@ -143,7 +157,7 @@ export default function BeforeAfterCarousel() {
                             </div>
                           </div>
                         </div>
-                        
+
                         <div className="p-6">
                           <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">
                             {project.title}
@@ -151,7 +165,7 @@ export default function BeforeAfterCarousel() {
                           <p className="text-brand-gray leading-relaxed mb-4">
                             {project.description}
                           </p>
-                          
+
                           {/* Progress indicator */}
                           <div className="flex items-center justify-between mb-4">
                             <div className="flex space-x-2">
@@ -162,7 +176,7 @@ export default function BeforeAfterCarousel() {
                               Click to toggle
                             </span>
                           </div>
-                          
+
                           <QuoteForm 
                             trigger={
                               <Button className="w-full bg-brand-green hover:bg-brand-green-light text-white font-semibold py-2 px-4 rounded-lg transition-colors">
@@ -177,23 +191,24 @@ export default function BeforeAfterCarousel() {
                 );
               })}
             </CarouselContent>
-            
+
             <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-brand-green/20 hover:border-brand-green text-brand-green shadow-xl" />
             <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-brand-green/20 hover:border-brand-green text-brand-green shadow-xl" />
           </Carousel>
         </div>
-        
+
         <div className="text-center mt-12">
           <p className="text-brand-gray mb-6">
             Ready to see similar results for your property?
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
-            <Badge className="bg-brand-blue text-white px-4 py-2 text-sm">Property Clearance</Badge>
-            <Badge className="bg-brand-green text-white px-4 py-2 text-sm">Garden Clearance</Badge>
-            <Badge className="bg-brand-orange text-white px-4 py-2 text-sm">Landscaping</Badge>
-            <Badge className="bg-brand-purple text-white px-4 py-2 text-sm">Deep Cleaning</Badge>
+            {selectedProject && (
+              <>
+                <Badge className="bg-brand-blue text-white px-4 py-2 text-sm">{selectedProject.category}</Badge>
+              </>
+            )}
           </div>
-          
+
           <QuoteForm 
             trigger={
               <Button className="bg-brand-green hover:bg-brand-green-light text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-all duration-200 hover:shadow-xl">
