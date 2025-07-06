@@ -56,9 +56,20 @@ export default function TrustBar() {
                 <div className="p-4">
                   <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
                     <img 
-                      src="/checkatrade-logo.png" 
+                      src="./checkatrade-logo.png" 
                       alt="Checkatrade - Where reputation matters" 
                       className="max-h-16 max-w-full object-contain"
+                      onError={(e) => {
+                        console.error('Checkatrade logo failed to load');
+                        e.currentTarget.style.display = 'none';
+                        const parent = e.currentTarget.parentElement;
+                        if (parent && !parent.querySelector('.logo-fallback')) {
+                          const fallback = document.createElement('div');
+                          fallback.className = 'logo-fallback text-sm font-medium text-gray-600';
+                          fallback.textContent = 'Checkatrade Approved';
+                          parent.appendChild(fallback);
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -67,9 +78,20 @@ export default function TrustBar() {
                 <div className="p-4">
                   <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
                     <img 
-                      src="/environment-agency-logo.png" 
+                      src="./environment-agency-logo.png" 
                       alt="Environment Agency" 
                       className="max-h-16 max-w-full object-contain"
+                      onError={(e) => {
+                        console.error('Environment Agency logo failed to load');
+                        e.currentTarget.style.display = 'none';
+                        const parent = e.currentTarget.parentElement;
+                        if (parent && !parent.querySelector('.logo-fallback')) {
+                          const fallback = document.createElement('div');
+                          fallback.className = 'logo-fallback text-sm font-medium text-gray-600';
+                          fallback.textContent = 'Environment Agency Licensed';
+                          parent.appendChild(fallback);
+                        }
+                      }}
                     />
                   </div>
                 </div>

@@ -22,7 +22,7 @@ export default function Header() {
           <div className="flex-shrink-0">
             <img 
               src="/logo.png" 
-              alt="SB Property Clearance Logo" 
+              alt="SB Property Clearance" 
               className="h-12 w-auto max-w-[200px] object-contain"
               onLoad={() => console.log('Logo loaded successfully')}
               onError={(e) => {
@@ -31,14 +31,14 @@ export default function Header() {
                 const parent = e.currentTarget.parentElement;
                 if (parent && !parent.querySelector('.logo-fallback')) {
                   const fallbackDiv = document.createElement('div');
-                  fallbackDiv.className = 'logo-fallback text-xl font-bold text-brand-green';
-                  fallbackDiv.textContent = 'SB Property Clearance';
+                  fallbackDiv.className = 'logo-fallback';
+                  fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green">SB Property Clearance</span>';
                   parent.appendChild(fallbackDiv);
                 }
               }}
             />
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <button 
@@ -66,7 +66,7 @@ export default function Header() {
               Contact
             </button>
           </nav>
-          
+
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center space-x-4">
             <QuoteForm 
@@ -76,7 +76,7 @@ export default function Header() {
                 </Button>
               }
             />
-            
+
             {/* Mobile menu button */}
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -86,7 +86,7 @@ export default function Header() {
             </button>
           </div>
         </div>
-        
+
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
