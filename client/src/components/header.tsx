@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import QuoteForm from "@/components/quote-form";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,17 +20,20 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <img 
-              src="/logo.png" 
+              src="./logo.png" 
               alt="SB Property Clearance" 
               className="h-12 w-auto max-w-[200px] object-contain"
               onLoad={() => console.log('Logo loaded successfully')}
               onError={(e) => {
-                console.error('Logo failed to load from /logo.png');
-                // Try fallback to show company name instead
-                const fallbackDiv = document.createElement('div');
-                fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green">SB Property Clearance</span>';
-                e.currentTarget.parentNode?.appendChild(fallbackDiv);
+                console.error('Logo failed to load, showing fallback');
                 e.currentTarget.style.display = 'none';
+                const parent = e.currentTarget.parentElement;
+                if (parent && !parent.querySelector('.logo-fallback')) {
+                  const fallbackDiv = document.createElement('div');
+                  fallbackDiv.className = 'logo-fallback';
+                  fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green">SB Property Clearance</span>';
+                  parent.appendChild(fallbackDiv);
+                }
               }}
             />
           </div>
@@ -66,13 +68,12 @@ export default function Header() {
           
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center space-x-4">
-            <QuoteForm 
-              trigger={
-                <Button className="bg-brand-green text-white hover:bg-brand-green-light transition-colors shadow-sm">
-                  Get a FREE Quote
-                </Button>
-              }
-            />
+            <Button 
+              onClick={() => scrollToSection("contact")}
+              className="bg-brand-green text-white hover:bg-brand-green-light transition-colors shadow-sm"
+            >
+              Get a FREE Quote
+            </Button>
             
             {/* Mobile menu button */}
             <button 
