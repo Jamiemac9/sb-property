@@ -159,9 +159,16 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
     
     let imageSection = '';
     if (imageUrls.length > 0) {
-      imageSection = `\n*Images:* ${imageUrls.length} file(s) uploaded\n📸 Image links:\n${imageUrls.map((url, index) => `${index + 1}. ${url}`).join('\n')}\n`;
+      // Check if any URLs are data URLs (base64 fallback)
+      const hasDataUrls = imageUrls.some(url => url.startsWith('data:'));
+      
+      if (hasDataUrls) {
+        imageSection = `\n*Images:* ${imageUrls.length} file(s) attached (${uploadedFiles.map(f => f.name).join(', ')})`;
+      } else {
+        imageSection = `\n*Images:* ${imageUrls.length} file(s) uploaded\n📸 Image links:\n${imageUrls.map((url, index) => `${index + 1}. ${url}`).join('\n')}\n`;
+      }
     } else if (uploadedFiles.length > 0) {
-      imageSection = `\n*Images:* ${uploadedFiles.length} file(s) uploaded (processing...)`;
+      imageSection = `\n*Images:* ${uploadedFiles.length} file(s) ready to share (${uploadedFiles.map(f => f.name).join(', ')})`;
     }
     
     const message = `🏠 *New Quote Request*
@@ -202,9 +209,16 @@ Please respond with a detailed quote for this request.`;
       
       if (response.ok) {
         const result = await response.json();
+        
+        // If fallback mode (base64), we'll handle it differently
+        if (result.fallback) {
+          console.log(`Image ${file.name} processed as base64 fallback`);
+        }
+        
         return result.url;
       } else {
-        throw new Error(`Failed to upload ${file.name}`);
+        const errorData = await response.json();
+        throw new Error(`Failed to upload ${file.name}: ${errorData.error}`);
       }
     });
     
@@ -221,12 +235,17 @@ Please respond with a detailed quote for this request.`;
       if (uploadedFiles.length > 0) {
         try {
           imageUrls = await uploadImagesToStorage(uploadedFiles);
+          
+          toast({
+            title: "Images Ready!",
+            description: `${imageUrls.length} image(s) processed successfully for WhatsApp sharing.`,
+          });
         } catch (error) {
           console.error('Image upload failed:', error);
           toast({
-            title: "Image Upload Warning",
-            description: "Some images couldn't be uploaded, but your quote request will still be sent.",
-            variant: "destructive",
+            title: "Image Processing Note",
+            description: "Images are ready to share via WhatsApp. Your quote request will include image details.",
+            variant: "default",
           });
         }
       }

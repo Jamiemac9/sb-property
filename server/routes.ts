@@ -5,6 +5,8 @@ import { insertCallbackRequestSchema, insertQuoteRequestSchema } from "@shared/s
 import { generateAIResponse } from "./ai-chat";
 import { z } from "zod";
 import multer from "multer";
+import { Client } from "@replit/object-storage";
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Configure multer for file uploads
   const upload = multer({
@@ -21,36 +23,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
     },
   });
 
-  // Object Storage is currently disabled - would need proper configuration
-  const objectStorage: any = null;
+  // Initialize Object Storage client
+  let objectStorage: Client | null = null;
+  try {
+    objectStorage = new Client();
+  } catch (error) {
+    console.warn("Object Storage not available, falling back to base64 encoding");
+  }
 
   // Image upload endpoint
   app.post("/api/upload-image", upload.single('image'), async (req, res) => {
     try {
-      if (!objectStorage) {
-        return res.status(503).json({ 
-          success: false, 
-          error: "Image upload service is not available" 
-        });
-      }
-
       if (!req.file) {
         return res.status(400).json({ success: false, error: "No image file provided" });
       }
 
       const filename = req.body.filename || `image_${Date.now()}_${req.file.originalname}`;
       
-      // Upload to Object Storage
-      await objectStorage.uploadFromBytes(filename, req.file.buffer);
-      
-      // Generate a public URL (this is a placeholder - you'll need to implement proper URL generation)
-      const publicUrl = `${req.protocol}://${req.get('host')}/api/image/${filename}`;
-      
-      res.json({ 
-        success: true, 
-        url: publicUrl,
-        filename: filename 
-      });
+      if (objectStorage) {
+        // Upload to Object Storage
+        await objectStorage.uploadFromBytes(filename, req.file.buffer);
+        
+        // Generate a public URL
+        const publicUrl = `${req.protocol}://${req.get('host')}/api/image/${filename}`;
+        
+        res.json({ 
+          success: true, 
+          url: publicUrl,
+          filename: filename 
+        });
+      } else {
+        // Fallback: convert to base64 for direct WhatsApp sharing
+        const base64 = req.file.buffer.toString('base64');
+        const dataUrl = `data:${req.file.mimetype};base64,${base64}`;
+        
+        res.json({ 
+          success: true, 
+          url: dataUrl,
+          filename: filename,
+          fallback: true
+        });
+      }
     } catch (error) {
       console.error("Image upload error:", error);
       res.status(500).json({ success: false, error: "Image upload failed" });
@@ -61,7 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/image/:filename", async (req, res) => {
     try {
       if (!objectStorage) {
-        return res.status(503).json({ 
+        return res.status(404).json({ 
           success: false, 
           error: "Image service is not available" 
         });
