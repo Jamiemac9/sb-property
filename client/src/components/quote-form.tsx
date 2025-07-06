@@ -352,7 +352,10 @@ Please respond with a detailed quote for this request.`;
                               <MapPin size={14} className="mr-1" />
                               Select your address:
                             </p>
-                            <Select onValueChange={field.onChange}>
+                            <Select onValueChange={(value) => {
+                              field.onChange(value);
+                              form.setValue('address', value);
+                            }}>
                               <SelectTrigger>
                                 <SelectValue placeholder="Choose from addresses found" />
                               </SelectTrigger>
@@ -373,7 +376,15 @@ Please respond with a detailed quote for this request.`;
                           <FormControl>
                             <Input 
                               placeholder="123 Main Street, Stafford, ST17 4AH" 
-                              {...field} 
+                              {...field}
+                              value={field.value || ''}
+                              onChange={(e) => {
+                                field.onChange(e.target.value);
+                                // Clear addresses when user starts typing manually
+                                if (e.target.value && addresses.length > 0) {
+                                  setAddresses([]);
+                                }
+                              }}
                             />
                           </FormControl>
                         </div>
