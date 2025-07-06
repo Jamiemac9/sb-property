@@ -77,15 +77,15 @@ export default function Footer() {
             <div className="space-y-3 text-gray-300">
               <div className="flex items-center">
                 <MapPin className="text-brand-green-light mr-3" size={20} />
-                <span>123 Business Street, London, UK</span>
+                <span>Stafford, Staffordshire, UK</span>
               </div>
               <div className="flex items-center">
                 <Phone className="text-brand-green-light mr-3" size={20} />
-                <span>0800 123 4567</span>
+                <span>07946 495782</span>
               </div>
               <div className="flex items-center">
                 <Mail className="text-brand-green-light mr-3" size={20} />
-                <span>info@sbpropertyclearance.co.uk</span>
+                <span>sbpropertyclearance@gmail.com</span>
               </div>
             </div>
           </div>
