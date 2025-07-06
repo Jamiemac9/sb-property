@@ -50,54 +50,22 @@ export default function TrustBar() {
           <h3 className="text-lg font-medium text-gray-700 text-center mb-6">
             Accredited Partners
           </h3>
-          <Carousel className="w-full max-w-4xl mx-auto">
-            <CarouselContent className="-ml-1">
-              <CarouselItem className="pl-1 md:basis-1/2">
-                <div className="p-4">
-                  <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
-                    <img 
-                      src="/checkatrade-logo.png" 
-                      alt="Checkatrade - Where reputation matters" 
-                      className="max-h-16 max-w-full object-contain"
-                      onError={(e) => {
-                        console.error('Checkatrade logo failed to load');
-                        e.currentTarget.style.display = 'none';
-                        const parent = e.currentTarget.parentElement;
-                        if (parent && !parent.querySelector('.logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'logo-fallback text-sm font-medium text-gray-600';
-                          fallback.textContent = 'Checkatrade Approved';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-              </CarouselItem>
-              <CarouselItem className="pl-1 md:basis-1/2">
-                <div className="p-4">
-                  <div className="flex items-center justify-center h-20 bg-white rounded-lg shadow-sm border">
-                    <img 
-                      src="/environment-agency-logo.png" 
-                      alt="Environment Agency" 
-                      className="max-h-16 max-w-full object-contain"
-                      onError={(e) => {
-                        console.error('Environment Agency logo failed to load');
-                        e.currentTarget.style.display = 'none';
-                        const parent = e.currentTarget.parentElement;
-                        if (parent && !parent.querySelector('.logo-fallback')) {
-                          const fallback = document.createElement('div');
-                          fallback.className = 'logo-fallback text-sm font-medium text-gray-600';
-                          fallback.textContent = 'Environment Agency Licensed';
-                          parent.appendChild(fallback);
-                        }
-                      }}
-                    />
-                  </div>
-                </div>
-              </CarouselItem>
-            </CarouselContent>
-          </Carousel>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <div className="flex items-center justify-center h-24 bg-white rounded-lg shadow-md border hover:shadow-lg transition-shadow">
+              <img 
+                src="/checkatrade-logo.png" 
+                alt="Checkatrade - Where reputation matters" 
+                className="max-h-20 max-w-full object-contain px-4"
+              />
+            </div>
+            <div className="flex items-center justify-center h-24 bg-white rounded-lg shadow-md border hover:shadow-lg transition-shadow">
+              <img 
+                src="/environment-agency-logo.png" 
+                alt="Environment Agency Licensed" 
+                className="max-h-20 max-w-full object-contain px-4"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

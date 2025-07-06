@@ -9,7 +9,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import QuoteForm from "@/components/quote-form";
 
 interface BeforeAfterImage {
   id: string;
@@ -151,7 +153,7 @@ export default function BeforeAfterCarousel() {
                           </p>
                           
                           {/* Progress indicator */}
-                          <div className="flex items-center justify-between">
+                          <div className="flex items-center justify-between mb-4">
                             <div className="flex space-x-2">
                               <div className={`w-3 h-3 rounded-full transition-all duration-300 ${!isAfter ? 'bg-brand-orange scale-125' : 'bg-gray-300'}`}></div>
                               <div className={`w-3 h-3 rounded-full transition-all duration-300 ${isAfter ? 'bg-brand-green scale-125' : 'bg-gray-300'}`}></div>
@@ -160,6 +162,14 @@ export default function BeforeAfterCarousel() {
                               Click to toggle
                             </span>
                           </div>
+                          
+                          <QuoteForm 
+                            trigger={
+                              <Button className="w-full bg-brand-green hover:bg-brand-green-light text-white font-semibold py-2 px-4 rounded-lg transition-colors">
+                                Get Quote for Similar Work
+                              </Button>
+                            }
+                          />
                         </div>
                       </CardContent>
                     </Card>
@@ -177,12 +187,20 @@ export default function BeforeAfterCarousel() {
           <p className="text-brand-gray mb-6">
             Ready to see similar results for your property?
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
             <Badge className="bg-brand-blue text-white px-4 py-2 text-sm">Property Clearance</Badge>
             <Badge className="bg-brand-green text-white px-4 py-2 text-sm">Garden Clearance</Badge>
             <Badge className="bg-brand-orange text-white px-4 py-2 text-sm">Landscaping</Badge>
             <Badge className="bg-brand-purple text-white px-4 py-2 text-sm">Deep Cleaning</Badge>
           </div>
+          
+          <QuoteForm 
+            trigger={
+              <Button className="bg-brand-green hover:bg-brand-green-light text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-all duration-200 hover:shadow-xl">
+                Get Your FREE Quote Today
+              </Button>
+            }
+          />
         </div>
       </div>
     </section>
