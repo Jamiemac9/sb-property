@@ -63,14 +63,15 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
   ];
 
   const serviceTypes = [
-    { value: "full-house-clearance", label: "Full House Clearance" },
-    { value: "office-clearance", label: "Office & Commercial Clearance" },
-    { value: "garden-waste", label: "Garden & Green Waste" },
-    { value: "builders-waste", label: "Builder's & DIY Waste" },
-    { value: "single-item", label: "Single Item & Bulky Waste" },
-    { value: "weee-electrical", label: "WEEE & Electricals" },
-    { value: "partial-clearance", label: "Partial Property Clearance" },
-    { value: "end-of-tenancy", label: "End of Tenancy Clean" },
+    { value: "full-house-clearance", label: "House/Flat Clearance" },
+    { value: "waste-removal", label: "Waste Removal" },
+    { value: "commercial-work", label: "Commercial Work" },
+    { value: "gardening-landscaping", label: "Gardening & Landscaping" },
+    { value: "skip-bags", label: "Skip Bags" },
+    { value: "driveway-patio-cleaning", label: "Driveway & Patio Cleaning" },
+    { value: "home-removals", label: "Home Removals" },
+    { value: "gutter-cleaning", label: "Gutter Cleaning" },
+    { value: "end-of-tenancy", label: "End of Tenancy Cleans" },
     { value: "other", label: "Other (please specify in additional info)" },
   ];
 

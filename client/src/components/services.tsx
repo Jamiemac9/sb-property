@@ -1,51 +1,73 @@
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Home, Building, Leaf, HardHat, Sofa, Recycle, Scissors, Paintbrush2 } from "lucide-react";
+import { Home, Building, Leaf, HardHat, Sofa, Recycle, Truck, Car, Droplets, Scissors, PaintBucket } from "lucide-react";
 import QuoteForm from "@/components/quote-form";
 
 export default function Services() {
   const services = [
     {
       icon: Home,
-      title: "Full House Clearance",
-      description: "Complete property clearance from top to bottom, including furniture, appliances, and personal items.",
-      features: ["Full property clearance", "Furniture removal", "Appliance disposal", "Personal item sorting"],
+      title: "House/Flat Clearance",
+      description: "Full & part property clearances with free quotes, same day & next day service available.",
+      features: ["Full property clearance", "Partial clearance", "Same/next day service", "Free quotes"],
       color: "from-blue-500 to-blue-600"
     },
     {
+      icon: Recycle,
+      title: "Waste Removal",
+      description: "Expert waste removal for small items at home or complete residential waste removal services.",
+      features: ["Single item removal", "Residential waste removal", "Junk removal", "Fixed pricing"],
+      color: "from-emerald-500 to-emerald-600"
+    },
+    {
       icon: Building,
-      title: "Office Clearance",
-      description: "Professional office and commercial property clearance with secure document disposal.",
-      features: ["Office furniture removal", "IT equipment disposal", "Confidential document shredding", "Commercial waste management"],
+      title: "Commercial Work",
+      description: "Professional waste management services for businesses, one-off jobs or regular collections.",
+      features: ["One-off collections", "Regular waste management", "Office clearance", "Cost-effective solutions"],
       color: "from-purple-500 to-purple-600"
     },
     {
       icon: Leaf,
-      title: "Garden Clearance",
-      description: "Complete garden and outdoor space clearance including green waste disposal.",
-      features: ["Garden waste removal", "Shed demolition", "Patio clearing", "Green waste recycling"],
-      color: "from-emerald-500 to-emerald-600"
+      title: "Gardening & Landscaping",
+      description: "Keep your home's outside looking just as clean and tidy as the inside with our garden services.",
+      features: ["Garden clearance", "Landscaping services", "Green waste removal", "Garden maintenance"],
+      color: "from-green-500 to-green-600"
     },
     {
       icon: HardHat,
-      title: "Construction Waste",
-      description: "Safe and compliant construction and renovation waste removal services.",
-      features: ["Rubble & debris removal", "Skip hire alternative", "Hazardous material disposal", "Site clearance"],
+      title: "Skip Bags",
+      description: "Fast and flexible skip bag service - you fill it, we'll take it away with fixed pricing.",
+      features: ["Flexible collection", "Fixed price guarantee", "Bulky & light waste", "Easy booking"],
+      color: "from-orange-500 to-orange-600"
+    },
+    {
+      icon: Car,
+      title: "Driveway & Patio Cleaning",
+      description: "Professional cleaning specialists with 10+ years experience in restoring outdoor surfaces.",
+      features: ["Jet washing", "Patio restoration", "Driveway cleaning", "10+ years experience"],
       color: "from-slate-500 to-slate-600"
     },
     {
-      icon: Sofa,
-      title: "Furniture Removal",
-      description: "Professional furniture and appliance removal with donation options available.",
-      features: ["Large furniture removal", "Appliance disposal", "Charity donations", "Eco-friendly disposal"],
+      icon: Truck,
+      title: "Home Removals",
+      description: "Affordable house removals service within 50-mile radius, domestic and commercial customers.",
+      features: ["Local & long distance", "Domestic & commercial", "Professional service", "50-mile radius coverage"],
       color: "from-indigo-500 to-indigo-600"
     },
     {
-      icon: Recycle,
-      title: "Waste Management",
-      description: "General waste and rubbish removal service for any type of unwanted items.",
-      features: ["General waste removal", "Bulk item collection", "Construction waste", "Hazardous waste disposal"],
-      color: "from-orange-500 to-orange-600"
+      icon: Droplets,
+      title: "Gutter Cleaning",
+      description: "Affordable and effective gutter cleaning, removing obstructions for free-flowing rainwater.",
+      features: ["Debris removal", "Obstruction clearing", "Affordable pricing", "Professional equipment"],
+      color: "from-cyan-500 to-cyan-600"
+    },
+    {
+      icon: PaintBucket,
+      title: "End of Tenancy Cleans",
+      description: "Professional end of tenancy cleaning to ensure your property is ready for the next tenant.",
+      features: ["Deep cleaning", "Move-out preparation", "Professional results", "Deposit protection"],
+      color: "from-pink-500 to-pink-600"
     }
   ];
 
@@ -55,7 +77,7 @@ export default function Services() {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
           <p className="text-xl text-brand-gray max-w-3xl mx-auto">
-            Comprehensive property clearance solutions tailored to your needs
+            Comprehensive property clearance and maintenance solutions tailored to your needs
           </p>
         </div>
 
