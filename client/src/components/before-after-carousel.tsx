@@ -25,14 +25,6 @@ export default function BeforeAfterCarousel() {
 
   const projects: BeforeAfterImage[] = [
     {
-      id: "bedroom-clearance",
-      title: "Bedroom Property Clearance",
-      beforeImage: "/bedroom-before.jpg",
-      afterImage: "/bedroom-before.jpg",
-      description: "Complete bedroom clearance and deep clean",
-      category: "Property Clearance"
-    },
-    {
       id: "garden-clearance-east",
       title: "East Devon Garden Clearance",
       beforeImage: "/garden-before-1.jpg",
