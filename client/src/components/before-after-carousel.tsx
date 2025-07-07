@@ -101,17 +101,9 @@ export default function BeforeAfterCarousel() {
                           <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-brand-green transition-colors">
                             {project.title}
                           </h3>
-                          <p className="text-brand-gray leading-relaxed mb-4">
+                          <p className="text-brand-gray leading-relaxed">
                             {project.description}
                           </p>
-
-                          <QuoteForm 
-                            trigger={
-                              <Button className="w-full bg-brand-green hover:bg-brand-green-light text-white font-semibold py-2 px-4 rounded-lg transition-colors">
-                                Get Quote for Similar Work
-                              </Button>
-                            }
-                          />
                         </div>
                       </CardContent>
                     </Card>
