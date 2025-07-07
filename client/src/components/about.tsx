@@ -1,4 +1,6 @@
 
+import { Check } from "lucide-react";
+
 export default function About() {
   return (
     <section id="about" className="py-20 bg-gradient-to-r from-brand-green-lighter to-blue-50">
@@ -20,43 +22,63 @@ export default function About() {
             <h4 className="text-xl font-semibold text-gray-900 mb-4">10 Reasons to Choose Our Skip Hire Alternative Service</h4>
             <div className="grid grid-cols-1 gap-3 mb-6">
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">We charge for what we take, fill a skip or not you would pay the full amount</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">We do all of the heavy lifting and loading, saving you time and money</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">No parking permits required – some councils charge up to £100</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">No restrictions on the type of waste we can take away</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">No skips left outside your property</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">No skip hire permits required</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">We recycle 95% of all the waste we collect</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">Our vehicles can load much more than a skip</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">You only pay for YOUR waste – Not your neighbours!</p>
               </div>
               <div className="flex items-start space-x-3">
-                <span className="text-brand-green font-bold">☑</span>
+                <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">
+                  <Check className="h-3 w-3 text-white" />
+                </div>
                 <p className="text-gray-600 text-sm">Rubbish Removal service without the hassle of hiring a skip</p>
               </div>
             </div>
