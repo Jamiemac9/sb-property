@@ -4,9 +4,9 @@ export default function About() {
     <section id="about" className="py-20 bg-gradient-to-r from-brand-green-lighter to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">About SB Property Clearance</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">About SB Property Clearance - Staffordshire's Leading Clearance Specialists</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Professional, reliable, and environmentally responsible property clearance services
+            Professional, reliable, and environmentally responsible property clearance services across Staffordshire and the Midlands
           </p>
         </div>
         
@@ -14,10 +14,10 @@ export default function About() {
           <div>
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Our Story</h3>
             <p className="text-gray-600 leading-relaxed mb-6">
-              With years of experience in property clearance, SB Property Clearance has built a reputation for reliable, efficient, and environmentally conscious services. We understand that clearing a property can be overwhelming, which is why we're here to make the process as smooth and stress-free as possible.
+              With years of experience in property clearance across Staffordshire and the Midlands, SB Property Clearance has built a reputation for reliable, efficient, and environmentally conscious services. From Stafford to Cannock, Lichfield to Stone, we understand that clearing a property can be overwhelming, which is why we're here to make the process as smooth and stress-free as possible.
             </p>
             <p className="text-gray-600 leading-relaxed mb-6">
-              Our team is fully licensed and insured, ensuring that your property clearance is handled with the utmost professionalism and care. We pride ourselves on our commitment to recycling and responsible waste disposal.
+              Our Staffordshire-based team is fully licensed and insured, ensuring that your property clearance in the Midlands is handled with the utmost professionalism and care. We pride ourselves on our commitment to recycling and responsible waste disposal throughout the region.
             </p>
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-brand-green/20">

@@ -97,7 +97,12 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-          <p>&copy; 2024 SB Property Clearance. All rights reserved.</p>
+          <p className="text-gray-400 text-sm">
+              © 2024 SB Property Clearance. Serving Staffordshire & the Midlands. All rights reserved.
+            </p>
+            <p className="text-gray-400 text-xs mt-2">
+              Property clearance services in Stafford, Cannock, Lichfield, Stone, Rugeley, Eccleshall, Penkridge, Uttoxeter, Newport and surrounding Midlands areas.
+            </p>
         </div>
       </div>
     </footer>

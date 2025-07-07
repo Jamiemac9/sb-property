@@ -8,16 +8,16 @@ export default function Services() {
   const services = [
     {
       icon: Home,
-      title: "House/Flat Clearance",
-      description: "Full & part property clearances with free quotes, same day & next day service available.",
-      features: ["Full property clearance", "Partial clearance", "Same/next day service", "Free quotes"],
+      title: "House/Flat Clearance Staffordshire",
+      description: "Full & part property clearances across Staffordshire and Midlands with free quotes, same day & next day service available.",
+      features: ["Full property clearance Midlands", "Partial clearance Stafford area", "Same/next day service", "Free quotes Staffordshire"],
       color: "from-blue-500 to-blue-600"
     },
     {
       icon: Recycle,
-      title: "Waste Removal",
-      description: "Expert waste removal for small items at home or complete residential waste removal services.",
-      features: ["Single item removal", "Residential waste removal", "Junk removal", "Fixed pricing"],
+      title: "Waste Removal Midlands",
+      description: "Expert waste removal across Staffordshire for small items at home or complete residential waste removal services.",
+      features: ["Single item removal Stafford", "Residential waste removal", "Junk removal Cannock area", "Fixed pricing Midlands"],
       color: "from-emerald-500 to-emerald-600"
     },
     {
@@ -29,9 +29,9 @@ export default function Services() {
     },
     {
       icon: Leaf,
-      title: "Gardening & Landscaping",
-      description: "Keep your home's outside looking just as clean and tidy as the inside with our garden services.",
-      features: ["Garden clearance", "Landscaping services", "Green waste removal", "Garden maintenance"],
+      title: "Garden Clearance Staffordshire",
+      description: "Keep your Staffordshire home's outside looking just as clean and tidy as the inside with our Midlands garden services.",
+      features: ["Garden clearance Lichfield", "Landscaping services Midlands", "Green waste removal Stone", "Garden maintenance Stafford"],
       color: "from-green-500 to-green-600"
     },
     {
@@ -75,9 +75,9 @@ export default function Services() {
     <section id="services" className="py-20 bg-gradient-to-br from-brand-gray-lighter via-white to-brand-blue-lighter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services Across Staffordshire & The Midlands</h2>
           <p className="text-xl text-brand-gray max-w-3xl mx-auto">
-            Comprehensive property clearance and maintenance solutions tailored to your needs
+            Comprehensive property clearance and maintenance solutions across Stafford, Cannock, Lichfield, Stone, Rugeley and surrounding Midlands areas
           </p>
         </div>
 

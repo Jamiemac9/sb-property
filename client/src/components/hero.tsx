@@ -21,10 +21,10 @@ export default function Hero() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
           Fast, Reliable & Responsible<br />
-          <span className="text-brand-green-light">Property Clearance</span>
+          <span className="text-brand-green-light">Property Clearance in Staffordshire</span>
         </h1>
         <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed">
-          Whether you're clearing a house, office, or garden, SB Property Clearance offers an efficient and eco-friendly solution. We do the heavy lifting, so you don't have to.
+          Professional house clearance, office clearance, and garden clearance across Staffordshire and the Midlands. Serving Stafford, Cannock, Lichfield, Stone, Rugeley and surrounding areas. We do the heavy lifting, so you don't have to.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <QuoteForm 
