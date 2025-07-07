@@ -118,17 +118,6 @@ export default function BeforeAfterCarousel() {
         </div>
 
         <div className="text-center mt-12">
-          <p className="text-brand-gray mb-6">
-            Ready to see similar results for your property?
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 mb-8">
-            {selectedProject && (
-              <>
-                <Badge className="bg-brand-blue text-white px-4 py-2 text-sm">{selectedProject.category}</Badge>
-              </>
-            )}
-          </div>
-
           <QuoteForm 
             trigger={
               <Button className="bg-brand-green hover:bg-brand-green-light text-white px-8 py-4 rounded-lg font-semibold text-lg shadow-lg transition-all duration-200 hover:shadow-xl">
