@@ -26,7 +26,7 @@ export default function BeforeAfterCarousel() {
   const projects: BeforeAfterImage[] = [
     {
       id: "garden-clearance-west",
-      title: "West Devon Garden Project",
+      title: "Garden Project",
       beforeImage: "/garden-before-2.jpg",
       afterImage: "/garden-before-2.jpg",
       description: "Large scale garden clearance and restoration",
@@ -74,10 +74,10 @@ export default function BeforeAfterCarousel() {
           <Carousel 
             className="w-full"
           >
-            <CarouselContent className="-ml-4">
+            <CarouselContent className="-ml-2 md:-ml-4">
               {projects.map((project) => {
                 return (
-                  <CarouselItem key={project.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                  <CarouselItem key={project.id} className="pl-2 md:pl-4 basis-4/5 sm:basis-3/5 md:basis-1/2 lg:basis-1/3">
                     <Card className="group transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white/80 glass border-0">
                       <CardContent className="p-0">
                         <div className="relative overflow-hidden rounded-t-xl">
@@ -112,8 +112,8 @@ export default function BeforeAfterCarousel() {
               })}
             </CarouselContent>
 
-            <CarouselPrevious className="absolute -left-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-brand-green/20 hover:border-brand-green text-brand-green shadow-xl" />
-            <CarouselNext className="absolute -right-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-brand-green/20 hover:border-brand-green text-brand-green shadow-xl" />
+            <CarouselPrevious className="absolute -left-6 md:-left-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-brand-green/20 hover:border-brand-green text-brand-green shadow-xl h-8 w-8 md:h-10 md:w-10" />
+            <CarouselNext className="absolute -right-6 md:-right-12 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white border-brand-green/20 hover:border-brand-green text-brand-green shadow-xl h-8 w-8 md:h-10 md:w-10" />
           </Carousel>
         </div>
 

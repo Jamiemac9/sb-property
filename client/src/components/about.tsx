@@ -37,7 +37,7 @@ export default function About() {
                 <span className="text-white font-semibold">✓</span>
               </div>
               <div>
-                <h4 className="text-lg font-semibold text-gray-900 mb-2">Fully Licensed & Insured</h4>
+                <h4 className="text-lg font-semibold text-gray-900 mb-2">Fully Licensed & Insured ✓</h4>
                 <p className="text-gray-600">Complete peace of mind with our comprehensive insurance coverage and proper licensing.</p>
               </div>
             </div>
