@@ -4,7 +4,7 @@ export default function About() {
     <section id="about" className="py-20 bg-gradient-to-r from-brand-green-lighter to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">About SB Property Clearance - Staffordshire's Leading Clearance Specialists</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">About SB Property Clearance - The Midlands Leading Waste Management and Recycling Specialists</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Professional, reliable, and environmentally responsible property clearance services across Staffordshire and the Midlands
           </p>
@@ -14,11 +14,52 @@ export default function About() {
           <div>
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Our Story</h3>
             <p className="text-gray-600 leading-relaxed mb-6">
-              With years of experience in property clearance across Staffordshire and the Midlands, SB Property Clearance has built a reputation for reliable, efficient, and environmentally conscious services. From Stafford to Cannock, Lichfield to Stone, we understand that clearing a property can be overwhelming, which is why we're here to make the process as smooth and stress-free as possible.
+              SB Property Clearance are highly experienced, with over 10 years of being a fully licensed, professional rubbish removal company who offers professional rubbish clearances to domestic and commercial customers in The Midlands, Staffordshire and surrounding areas.
             </p>
-            <p className="text-gray-600 leading-relaxed mb-6">
-              Our Staffordshire-based team is fully licensed and insured, ensuring that your property clearance in the Midlands is handled with the utmost professionalism and care. We pride ourselves on our commitment to recycling and responsible waste disposal throughout the region.
-            </p>
+            
+            <h4 className="text-xl font-semibold text-gray-900 mb-4">10 Reasons to Choose Our Skip Hire Alternative Service</h4>
+            <div className="grid grid-cols-1 gap-3 mb-6">
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">We charge for what we take, fill a skip or not you would pay the full amount</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">We do all of the heavy lifting and loading, saving you time and money</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">No parking permits required – some councils charge up to £100</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">No restrictions on the type of waste we can take away</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">No skips left outside your property</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">No skip hire permits required</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">We recycle 95% of all the waste we collect</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">Our vehicles can load much more than a skip</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">You only pay for YOUR waste – Not your neighbours!</p>
+              </div>
+              <div className="flex items-start space-x-3">
+                <span className="text-brand-green font-bold">☑</span>
+                <p className="text-gray-600 text-sm">Rubbish Removal service without the hassle of hiring a skip</p>
+              </div>
+            </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-brand-green/20">
                 <div className="text-3xl font-bold text-brand-green mb-2">500+</div>
