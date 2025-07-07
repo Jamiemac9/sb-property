@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import QuoteForm from "@/components/quote-form";
 
 interface BeforeAfterImage {
@@ -22,9 +21,7 @@ interface BeforeAfterImage {
 }
 
 export default function BeforeAfterCarousel() {
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [selectedProject, setSelectedProject] = useState<BeforeAfterImage | null>(null);
-  const [activeSlides, setActiveSlides] = useState<{ [key: string]: 'before' | 'after' }>({});
 
   const projects: BeforeAfterImage[] = [
     {
@@ -61,24 +58,12 @@ export default function BeforeAfterCarousel() {
     }
   ];
 
-  // Update selected project when slide changes
-  useEffect(() => {
-    setSelectedProject(projects[currentSlide] || projects[0]);
-  }, [currentSlide]);
-
   // Initialize with first project
   useEffect(() => {
     if (projects.length > 0 && !selectedProject) {
       setSelectedProject(projects[0]);
     }
   }, []);
-
-  const toggleImage = (projectId: string) => {
-    setActiveSlides(prev => ({
-      ...prev,
-      [projectId]: prev[projectId] === 'after' ? 'before' : 'after'
-    }));
-  };
 
   const getCategoryColor = (category: string) => {
     switch (category) {
@@ -94,11 +79,10 @@ export default function BeforeAfterCarousel() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            See Our Work in Action
+            No Job Too Big or Small
           </h2>
           <p className="text-xl text-brand-gray max-w-3xl mx-auto">
-            Witness the incredible transformations we've achieved for our clients. 
-            Click on any image to see the amazing before and after results.
+            From single item removal to complete property clearances, we handle projects of all sizes with the same professional care and attention to detail.
           </p>
         </div>
 
@@ -108,47 +92,23 @@ export default function BeforeAfterCarousel() {
           >
             <CarouselContent className="-ml-4">
               {projects.map((project) => {
-                const isAfter = activeSlides[project.id] === 'after';
-                const currentImage = isAfter ? project.afterImage : project.beforeImage;
-
                 return (
                   <CarouselItem key={project.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                    <Card className="group cursor-pointer transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white/80 glass border-0">
+                    <Card className="group transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white/80 glass border-0">
                       <CardContent className="p-0">
                         <div className="relative overflow-hidden rounded-t-xl">
                           <div 
                             className="relative h-64 bg-cover bg-center transition-all duration-700 ease-in-out transform group-hover:scale-105"
-                            style={{ backgroundImage: `url('${currentImage}')` }}
-                            onClick={() => toggleImage(project.id)}
+                            style={{ backgroundImage: `url('${project.beforeImage}')` }}
                           >
                             {/* Overlay gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-
-                            {/* Before/After badge */}
-                            <div className="absolute top-4 left-4">
-                              <Badge 
-                                className={`${isAfter ? 'bg-brand-green' : 'bg-brand-orange'} text-white font-semibold px-3 py-1 shadow-lg`}
-                              >
-                                {isAfter ? 'AFTER' : 'BEFORE'}
-                              </Badge>
-                            </div>
 
                             {/* Category badge */}
                             <div className="absolute top-4 right-4">
                               <Badge className={`${getCategoryColor(project.category)} font-medium px-3 py-1 shadow-lg`}>
                                 {project.category}
                               </Badge>
-                            </div>
-
-                            {/* Click indicator */}
-                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                              <div className="bg-white/90 rounded-full p-3 shadow-xl">
-                                {isAfter ? (
-                                  <ChevronLeft className="w-8 h-8 text-brand-orange" />
-                                ) : (
-                                  <ChevronRight className="w-8 h-8 text-brand-green" />
-                                )}
-                              </div>
                             </div>
                           </div>
                         </div>
@@ -160,17 +120,6 @@ export default function BeforeAfterCarousel() {
                           <p className="text-brand-gray leading-relaxed mb-4">
                             {project.description}
                           </p>
-
-                          {/* Progress indicator */}
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex space-x-2">
-                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${!isAfter ? 'bg-brand-orange scale-125' : 'bg-gray-300'}`}></div>
-                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${isAfter ? 'bg-brand-green scale-125' : 'bg-gray-300'}`}></div>
-                            </div>
-                            <span className="text-sm text-brand-gray font-medium">
-                              Click to toggle
-                            </span>
-                          </div>
 
                           <QuoteForm 
                             trigger={
