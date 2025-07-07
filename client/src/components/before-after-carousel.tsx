@@ -25,14 +25,6 @@ export default function BeforeAfterCarousel() {
 
   const projects: BeforeAfterImage[] = [
     {
-      id: "garden-clearance-east",
-      title: "East Devon Garden Clearance",
-      beforeImage: "/garden-before-1.jpg",
-      afterImage: "/garden-before-1.jpg",
-      description: "Professional garden clearance in East Devon",
-      category: "Garden Clearance"
-    },
-    {
       id: "garden-clearance-west",
       title: "West Devon Garden Project",
       beforeImage: "/garden-before-2.jpg",
