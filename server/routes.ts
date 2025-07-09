@@ -8,13 +8,29 @@ import multer from "multer";
 
 // Import Object Storage with production-safe error handling
 let Client: any = null;
-try {
-  const objectStorageModule = await import("@replit/object-storage");
-  Client = objectStorageModule.Client;
-} catch (error) {
-  console.warn("Object Storage module not available in this environment, using fallback mode");
-  Client = null;
-}
+let objectStorageAvailable = false;
+
+// Completely isolate Object Storage import to prevent crashes
+const initializeObjectStorageModule = async () => {
+  try {
+    // Only attempt import if we're in a Replit environment
+    if (process.env.REPLIT_DEPLOYMENT || process.env.REPLIT_STORAGE_BUCKET || process.env.NODE_ENV === 'development') {
+      const objectStorageModule = await import("@replit/object-storage");
+      Client = objectStorageModule.Client;
+      objectStorageAvailable = true;
+      console.log("Object Storage module loaded successfully");
+    } else {
+      console.log("Object Storage module not needed in this environment");
+    }
+  } catch (error) {
+    console.warn("Object Storage module not available, using fallback mode:", error instanceof Error ? error.message : 'Unknown error');
+    Client = null;
+    objectStorageAvailable = false;
+  }
+};
+
+// Initialize module asynchronously and non-blocking
+setTimeout(initializeObjectStorageModule, 100);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Production-safe route registration with comprehensive error handling
@@ -92,9 +108,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
   };
   
   // Initialize Object Storage asynchronously without blocking server startup
-  if (Client) {
-    setTimeout(initializeObjectStorage, 1000); // Delay initialization to ensure server is ready
-  }
+  setTimeout(async () => {
+    if (objectStorageAvailable && Client) {
+      await initializeObjectStorage();
+    }
+  }, 2000); // Delay initialization to ensure server is ready
 
   // Health check endpoint for deployment monitoring
   app.get("/api/health", (req, res) => {

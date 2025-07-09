@@ -1,5 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
+import { registerProductionSafeRoutes } from "./production-safe-routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 // Add process error handlers to prevent uncaught exceptions
@@ -8,6 +9,7 @@ process.on('uncaughtException', (error) => {
   // In production, log the error but don't exit immediately
   if (process.env.NODE_ENV === 'production') {
     console.error('Application will continue running in production...');
+    // Don't exit in production to keep server running
   } else {
     process.exit(1);
   }
@@ -18,9 +20,19 @@ process.on('unhandledRejection', (reason, promise) => {
   // In production, log the error but don't exit immediately
   if (process.env.NODE_ENV === 'production') {
     console.error('Application will continue running in production...');
+    // Don't exit in production to keep server running
   } else {
     process.exit(1);
   }
+});
+
+// Add additional production safety nets
+process.on('SIGPIPE', () => {
+  console.log('SIGPIPE received - ignoring');
+});
+
+process.on('SIGHUP', () => {
+  console.log('SIGHUP received - ignoring');
 });
 
 const app = express();
@@ -63,8 +75,16 @@ app.use((req, res, next) => {
   
   try {
     console.log('Starting server initialization...');
-    server = await registerRoutes(app);
-    console.log('Routes registered successfully');
+    
+    // Try standard routes first, fallback to production-safe if needed
+    try {
+      server = await registerRoutes(app);
+      console.log('Routes registered successfully');
+    } catch (routeError) {
+      console.warn('Standard routes failed, using production-safe routes:', routeError);
+      server = await registerProductionSafeRoutes(app);
+      console.log('Production-safe routes registered successfully');
+    }
     
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
@@ -154,9 +174,39 @@ app.use((req, res, next) => {
   } catch (error) {
     console.error('Failed to start server:', error);
     if (process.env.NODE_ENV === 'production') {
-      // In production, try to continue or exit gracefully
-      console.error('Server initialization failed in production environment');
-      process.exit(1);
+      // In production, create a minimal emergency server
+      console.error('Server initialization failed in production environment, starting emergency server...');
+      
+      try {
+        const emergencyApp = express();
+        emergencyApp.use(express.json());
+        
+        // Emergency health check
+        emergencyApp.get("/api/health", (req, res) => {
+          res.json({ 
+            status: "emergency", 
+            timestamp: new Date().toISOString(),
+            message: "Server running in emergency mode due to initialization failure"
+          });
+        });
+        
+        // Emergency fallback for all routes
+        emergencyApp.use("*", (req, res) => {
+          res.status(503).json({
+            error: "Service temporarily unavailable",
+            message: "Server is in emergency mode"
+          });
+        });
+        
+        const port = parseInt(process.env.PORT || '5000');
+        emergencyApp.listen(port, '0.0.0.0', () => {
+          console.log(`Emergency server running on port ${port}`);
+        });
+        
+      } catch (emergencyError) {
+        console.error('Emergency server failed:', emergencyError);
+        process.exit(1);
+      }
     } else {
       throw error;
     }
