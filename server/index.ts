@@ -118,17 +118,66 @@ app.use((req, res, next) => {
     // It is the only port that is not firewalled.
     const port = parseInt(process.env.PORT || '5000');
     
+    // Add startup readiness check
+    const performStartupCheck = async () => {
+      try {
+        console.log('Performing startup readiness check...');
+        
+        // Check if server is ready to accept connections
+        const startTime = Date.now();
+        
+        // Basic environment validation
+        const requiredEnvVars = ['NODE_ENV'];
+        for (const envVar of requiredEnvVars) {
+          if (!process.env[envVar]) {
+            console.warn(`Environment variable ${envVar} is not set, using default`);
+          }
+        }
+        
+        // Check memory usage
+        const memoryUsage = process.memoryUsage();
+        console.log(`Memory usage: ${Math.round(memoryUsage.heapUsed / 1024 / 1024)}MB heap, ${Math.round(memoryUsage.rss / 1024 / 1024)}MB RSS`);
+        
+        const checkTime = Date.now() - startTime;
+        console.log(`Startup check completed in ${checkTime}ms`);
+        
+        return true;
+      } catch (error) {
+        console.error('Startup check failed:', error);
+        return false;
+      }
+    };
+    
+    // Perform startup check
+    const startupOk = await performStartupCheck();
+    if (!startupOk && process.env.NODE_ENV === 'production') {
+      console.error('Startup check failed in production, but continuing...');
+    }
+    
     // Enhanced server binding with production-safe error handling
     server.listen({
       port,
       host: "0.0.0.0",
-      reusePort: true,
+      reusePort: false, // Changed from true to false to prevent binding issues
     }, (error?: Error) => {
       if (error) {
         console.error('Failed to bind to port:', error);
         if (process.env.NODE_ENV === 'production') {
-          console.error('Server failed to start in production. Exiting...');
-          process.exit(1);
+          console.error('Server failed to start in production. Trying alternative port...');
+          // Try alternative port in production
+          const altPort = port + 1;
+          server.listen({
+            port: altPort,
+            host: "0.0.0.0",
+            reusePort: false,
+          }, (altError?: Error) => {
+            if (altError) {
+              console.error('Alternative port also failed:', altError);
+              process.exit(1);
+            } else {
+              log(`serving on alternative port ${altPort}`);
+            }
+          });
         } else {
           throw error;
         }

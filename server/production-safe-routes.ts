@@ -72,17 +72,32 @@ export async function registerProductionSafeRoutes(app: Express): Promise<Server
     }
   });
 
-  // Address lookup endpoint
+  // Address lookup endpoint with enhanced error handling
   app.get("/api/address-lookup/:postcode", async (req, res) => {
     try {
       const { postcode } = req.params;
+      
+      // Input validation
+      if (!postcode || postcode.length < 5) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Invalid postcode format" 
+        });
+      }
+      
       const cleanPostcode = postcode.replace(/\s/g, '').toUpperCase();
 
       // Try getAddress.io first (demo key has limited usage)
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
         const response = await fetch(
-          `https://api.getAddress.io/find/${cleanPostcode}?api-key=demo&format=json`
+          `https://api.getAddress.io/find/${cleanPostcode}?api-key=demo&format=json`,
+          { signal: controller.signal }
         );
+        
+        clearTimeout(timeoutId);
 
         if (response.ok) {
           const data = await response.json();
@@ -96,12 +111,21 @@ export async function registerProductionSafeRoutes(app: Express): Promise<Server
           }
         }
       } catch (error) {
-        console.warn("getAddress.io API failed:", error);
+        console.warn("getAddress.io API failed:", error instanceof Error ? error.message : 'Unknown error');
       }
 
       // Fallback to postcodes.io
       try {
-        const response = await fetch(`https://api.postcodes.io/postcodes/${cleanPostcode}`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
+        const response = await fetch(
+          `https://api.postcodes.io/postcodes/${cleanPostcode}`,
+          { signal: controller.signal }
+        );
+        
+        clearTimeout(timeoutId);
+        
         if (response.ok) {
           const data = await response.json();
           if (data.result) {
@@ -121,7 +145,7 @@ export async function registerProductionSafeRoutes(app: Express): Promise<Server
           }
         }
       } catch (error) {
-        console.warn("postcodes.io API failed:", error);
+        console.warn("postcodes.io API failed:", error instanceof Error ? error.message : 'Unknown error');
       }
 
       // If all APIs fail, return error

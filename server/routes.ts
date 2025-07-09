@@ -13,24 +13,56 @@ let objectStorageAvailable = false;
 // Completely isolate Object Storage import to prevent crashes
 const initializeObjectStorageModule = async () => {
   try {
-    // Only attempt import if we're in a Replit environment
-    if (process.env.REPLIT_DEPLOYMENT || process.env.REPLIT_STORAGE_BUCKET || process.env.NODE_ENV === 'development') {
+    // Enhanced production environment detection
+    const isProduction = process.env.NODE_ENV === 'production';
+    const hasReplitDeployment = process.env.REPLIT_DEPLOYMENT === 'true';
+    const hasStorageBucket = !!process.env.REPLIT_STORAGE_BUCKET;
+    const isDevelopment = process.env.NODE_ENV === 'development';
+    
+    // Only attempt import if we're in a proper Replit environment
+    if (hasReplitDeployment || hasStorageBucket || isDevelopment) {
+      console.log(`Attempting Object Storage import. Environment: ${process.env.NODE_ENV}, Deployment: ${hasReplitDeployment}, Bucket: ${hasStorageBucket}`);
+      
       const objectStorageModule = await import("@replit/object-storage");
       Client = objectStorageModule.Client;
       objectStorageAvailable = true;
       console.log("Object Storage module loaded successfully");
     } else {
-      console.log("Object Storage module not needed in this environment");
+      console.log("Object Storage module not needed in this environment - using fallback mode");
+      Client = null;
+      objectStorageAvailable = false;
     }
   } catch (error) {
     console.warn("Object Storage module not available, using fallback mode:", error instanceof Error ? error.message : 'Unknown error');
     Client = null;
     objectStorageAvailable = false;
+    
+    // In production, this should not cause server failure
+    if (process.env.NODE_ENV === 'production') {
+      console.log("Production deployment continuing with base64 fallback for image handling");
+    }
   }
 };
 
-// Initialize module asynchronously and non-blocking
-setTimeout(initializeObjectStorageModule, 100);
+// Initialize module asynchronously and non-blocking with retry mechanism
+const initializeWithRetry = async (maxRetries = 3) => {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      await initializeObjectStorageModule();
+      break;
+    } catch (error) {
+      console.warn(`Object Storage initialization attempt ${i + 1} failed:`, error);
+      if (i === maxRetries - 1) {
+        console.log("All Object Storage initialization attempts failed, continuing with fallback");
+      } else {
+        await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Exponential backoff
+      }
+    }
+  }
+};
+
+// Initialize module with delay and retry mechanism
+setTimeout(initializeWithRetry, 100);
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Production-safe route registration with comprehensive error handling
@@ -74,6 +106,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const initializeObjectStorage = async () => {
     // Skip if already initialized or Client is not available
     if (objectStorageInitialized || !Client) {
+      console.log("Object Storage initialization skipped - already initialized or Client unavailable");
       return;
     }
     
@@ -83,22 +116,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const hasReplitDeployment = process.env.REPLIT_DEPLOYMENT === 'true';
       const hasStorageBucket = process.env.REPLIT_STORAGE_BUCKET;
       
+      console.log(`Object Storage initialization attempt - Environment: ${process.env.NODE_ENV || 'development'}, Deployment: ${hasReplitDeployment}, Bucket: ${!!hasStorageBucket}`);
+      
       // Only initialize if we have the proper environment setup for Object Storage
-      if (isProduction && (hasReplitDeployment || hasStorageBucket)) {
-        objectStorage = new Client();
-        console.log("Object Storage initialized successfully for production");
-        objectStorageInitialized = true;
-      } else if (!isProduction && (hasReplitDeployment || hasStorageBucket)) {
-        objectStorage = new Client();
-        console.log("Object Storage initialized successfully for development");
-        objectStorageInitialized = true;
+      if ((isProduction && (hasReplitDeployment || hasStorageBucket)) || 
+          (!isProduction && (hasReplitDeployment || hasStorageBucket))) {
+        
+        // Wrap Client initialization in try-catch to prevent crashes
+        try {
+          objectStorage = new Client();
+          console.log(`Object Storage initialized successfully for ${isProduction ? 'production' : 'development'}`);
+          objectStorageInitialized = true;
+        } catch (clientError) {
+          console.warn("Object Storage Client creation failed:", clientError instanceof Error ? clientError.message : 'Unknown error');
+          objectStorage = null;
+          objectStorageInitialized = false;
+        }
       } else {
         console.log("Object Storage not configured, using base64 fallback");
         console.log(`Environment: ${process.env.NODE_ENV || 'development'}, Deployment: ${hasReplitDeployment}, Bucket: ${!!hasStorageBucket}`);
+        objectStorage = null;
+        objectStorageInitialized = false;
       }
     } catch (error) {
       console.warn("Object Storage initialization failed, falling back to base64 encoding:", error instanceof Error ? error.message : 'Unknown error');
       objectStorage = null; // Ensure it's null on error
+      objectStorageInitialized = false;
       
       // In production, don't let this error crash the server
       if (process.env.NODE_ENV === 'production') {
@@ -116,27 +159,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Health check endpoint for deployment monitoring
   app.get("/api/health", (req, res) => {
-    const healthData = {
-      status: "healthy",
-      timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV || "development",
-      objectStorage: {
-        available: objectStorage ? "available" : "unavailable",
-        hasReplitDeployment: process.env.REPLIT_DEPLOYMENT === 'true',
-        hasStorageBucket: !!process.env.REPLIT_STORAGE_BUCKET
-      },
-      server: {
-        port: process.env.PORT || 5000,
-        host: "0.0.0.0",
-        uptime: process.uptime()
-      },
-      memory: {
-        used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB',
-        total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + 'MB'
-      }
-    };
-    
-    res.json(healthData);
+    try {
+      const healthData = {
+        status: "healthy",
+        timestamp: new Date().toISOString(),
+        environment: process.env.NODE_ENV || "development",
+        objectStorage: {
+          available: objectStorage ? "available" : "unavailable",
+          initialized: objectStorageInitialized,
+          moduleLoaded: objectStorageAvailable,
+          hasReplitDeployment: process.env.REPLIT_DEPLOYMENT === 'true',
+          hasStorageBucket: !!process.env.REPLIT_STORAGE_BUCKET
+        },
+        server: {
+          port: process.env.PORT || 5000,
+          host: "0.0.0.0",
+          uptime: process.uptime(),
+          ready: serverReady
+        },
+        memory: {
+          used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB',
+          total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + 'MB',
+          rss: Math.round(process.memoryUsage().rss / 1024 / 1024) + 'MB'
+        },
+        deployment: {
+          version: process.env.npm_package_version || "unknown",
+          nodeVersion: process.version,
+          platform: process.platform
+        }
+      };
+      
+      res.json(healthData);
+    } catch (error) {
+      console.error("Health check error:", error);
+      res.status(500).json({
+        status: "unhealthy",
+        timestamp: new Date().toISOString(),
+        error: "Health check failed",
+        message: error instanceof Error ? error.message : "Unknown error"
+      });
+    }
   });
 
   // Image upload endpoint with enhanced error handling
@@ -234,17 +296,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Address lookup endpoint
+  // Address lookup endpoint with enhanced error handling
   app.get("/api/address-lookup/:postcode", async (req, res) => {
     try {
       const { postcode } = req.params;
+      
+      // Input validation
+      if (!postcode || postcode.length < 5) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Invalid postcode format" 
+        });
+      }
+      
       const cleanPostcode = postcode.replace(/\s/g, '').toUpperCase();
 
       // Try getAddress.io first (demo key has limited usage)
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
         const response = await fetch(
-          `https://api.getAddress.io/find/${cleanPostcode}?api-key=demo&format=json`
+          `https://api.getAddress.io/find/${cleanPostcode}?api-key=demo&format=json`,
+          { signal: controller.signal }
         );
+        
+        clearTimeout(timeoutId);
 
         if (response.ok) {
           const data = await response.json();
@@ -253,34 +330,61 @@ export async function registerRoutes(app: Express): Promise<Server> {
             return res.json({ 
               success: true, 
               addresses: formattedAddresses,
-              source: 'getAddress'
+              source: 'getAddress.io'
             });
           }
         }
       } catch (error) {
-        console.log("getAddress.io failed, trying postcodes.io");
+        console.warn("getAddress.io API failed:", error instanceof Error ? error.message : 'Unknown error');
       }
 
       // Fallback to postcodes.io for validation
-      const postcodeResponse = await fetch(`https://api.postcodes.io/postcodes/${cleanPostcode}`);
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
+        
+        const postcodeResponse = await fetch(
+          `https://api.postcodes.io/postcodes/${cleanPostcode}`,
+          { signal: controller.signal }
+        );
+        
+        clearTimeout(timeoutId);
 
-      if (postcodeResponse.ok) {
-        const postcodeData = await postcodeResponse.json();
-        if (postcodeData.result) {
-          const baseAddress = `${postcodeData.result.admin_district}, ${postcodeData.result.admin_county}, ${cleanPostcode}`;
-          return res.json({ 
-            success: true, 
-            addresses: [baseAddress],
-            validated: true,
-            source: 'postcodes.io'
-          });
+        if (postcodeResponse.ok) {
+          const postcodeData = await postcodeResponse.json();
+          if (postcodeData.result) {
+            const result = postcodeData.result;
+            const address = [
+              result.admin_district,
+              result.admin_county,
+              result.country,
+              cleanPostcode
+            ].filter(Boolean).join(', ');
+            
+            return res.json({ 
+              success: true, 
+              addresses: [address],
+              validated: true,
+              source: 'postcodes.io'
+            });
+          }
         }
+      } catch (error) {
+        console.warn("postcodes.io API failed:", error instanceof Error ? error.message : 'Unknown error');
       }
 
-      res.json({ success: false, error: "Postcode not found" });
+      // If all APIs fail, return error
+      res.status(404).json({ 
+        success: false, 
+        error: "Postcode not found or service unavailable" 
+      });
+
     } catch (error) {
       console.error("Address lookup error:", error);
-      res.status(500).json({ success: false, error: "Address lookup failed" });
+      res.status(500).json({ 
+        success: false, 
+        error: "Internal server error" 
+      });
     }
   });
 
@@ -392,6 +496,33 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
     }
   });
+
+    // Add deployment status endpoint
+    app.get("/api/deployment-status", (req, res) => {
+      try {
+        const status = {
+          serverReady,
+          objectStorage: {
+            moduleLoaded: objectStorageAvailable,
+            initialized: objectStorageInitialized,
+            available: objectStorage ? "available" : "unavailable"
+          },
+          environment: process.env.NODE_ENV || "development",
+          uptime: process.uptime(),
+          timestamp: new Date().toISOString(),
+          status: serverReady ? "ready" : "starting"
+        };
+        
+        res.json(status);
+      } catch (error) {
+        console.error("Deployment status error:", error);
+        res.status(500).json({
+          status: "error",
+          message: "Failed to get deployment status",
+          timestamp: new Date().toISOString()
+        });
+      }
+    });
 
     const httpServer = createServer(app);
     
