@@ -23,22 +23,50 @@ export async function registerRoutes(app: Express): Promise<Server> {
     },
   });
 
+  // Server startup status tracking
+  let serverReady = false;
+  
+  // Middleware to ensure server is fully ready before handling requests
+  app.use((req, res, next) => {
+    if (!serverReady && !req.path.includes('/health')) {
+      return res.status(503).json({ 
+        error: "Server is starting up", 
+        message: "Please wait a moment and try again" 
+      });
+    }
+    next();
+  });
+
   // Initialize Object Storage client with enhanced error handling
   let objectStorage: Client | null = null;
   
-  // Non-blocking initialization function
+  // Non-blocking initialization function with production environment checks
   const initializeObjectStorage = () => {
     try {
+      // Check for production environment variables first
+      const isProduction = process.env.NODE_ENV === 'production';
+      const hasReplitDeployment = process.env.REPLIT_DEPLOYMENT === 'true';
+      const hasStorageBucket = process.env.REPLIT_STORAGE_BUCKET;
+      
       // Only initialize if we have the proper environment setup for Object Storage
-      if (process.env.REPLIT_DEPLOYMENT || process.env.REPLIT_STORAGE_BUCKET) {
+      if (isProduction && (hasReplitDeployment || hasStorageBucket)) {
         objectStorage = new Client();
-        console.log("Object Storage initialized successfully");
+        console.log("Object Storage initialized successfully for production");
+      } else if (!isProduction && (hasReplitDeployment || hasStorageBucket)) {
+        objectStorage = new Client();
+        console.log("Object Storage initialized successfully for development");
       } else {
-        console.log("Object Storage not configured in development environment, using base64 fallback");
+        console.log("Object Storage not configured, using base64 fallback");
+        console.log(`Environment: ${process.env.NODE_ENV || 'development'}, Deployment: ${hasReplitDeployment}, Bucket: ${!!hasStorageBucket}`);
       }
     } catch (error) {
-      console.warn("Object Storage not available, falling back to base64 encoding:", error instanceof Error ? error.message : 'Unknown error');
+      console.warn("Object Storage initialization failed, falling back to base64 encoding:", error instanceof Error ? error.message : 'Unknown error');
       objectStorage = null; // Ensure it's null on error
+      
+      // In production, don't let this error crash the server
+      if (process.env.NODE_ENV === 'production') {
+        console.warn("Continuing server startup without Object Storage in production...");
+      }
     }
   };
   
@@ -47,12 +75,27 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Health check endpoint for deployment monitoring
   app.get("/api/health", (req, res) => {
-    res.json({ 
-      status: "healthy", 
+    const healthData = {
+      status: "healthy",
       timestamp: new Date().toISOString(),
-      objectStorage: objectStorage ? "available" : "unavailable",
-      environment: process.env.NODE_ENV || "development"
-    });
+      environment: process.env.NODE_ENV || "development",
+      objectStorage: {
+        available: objectStorage ? "available" : "unavailable",
+        hasReplitDeployment: process.env.REPLIT_DEPLOYMENT === 'true',
+        hasStorageBucket: !!process.env.REPLIT_STORAGE_BUCKET
+      },
+      server: {
+        port: process.env.PORT || 5000,
+        host: "0.0.0.0",
+        uptime: process.uptime()
+      },
+      memory: {
+        used: Math.round(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB',
+        total: Math.round(process.memoryUsage().heapTotal / 1024 / 1024) + 'MB'
+      }
+    };
+    
+    res.json(healthData);
   });
 
   // Image upload endpoint with enhanced error handling
@@ -104,7 +147,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
     } catch (error) {
       console.error("Image upload error:", error);
-      res.status(500).json({ success: false, error: "Image upload failed" });
+      // Enhanced error handling for production
+      const errorMessage = process.env.NODE_ENV === 'production' 
+        ? "Failed to upload image" 
+        : `Failed to upload image: ${error instanceof Error ? error.message : 'Unknown error'}`;
+      
+      res.status(500).json({ 
+        success: false, 
+        error: errorMessage 
+      });
     }
   });
 
@@ -302,5 +353,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   const httpServer = createServer(app);
+  
+  // Mark server as ready after all routes are registered
+  setTimeout(() => {
+    serverReady = true;
+    console.log("Server initialization complete - ready to accept requests");
+  }, 100);
+  
   return httpServer;
 }
