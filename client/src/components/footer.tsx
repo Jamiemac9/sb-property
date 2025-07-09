@@ -1,4 +1,4 @@
-import { MapPin, Phone, Mail, Facebook, Twitter, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail } from "lucide-react";
 
 export default function Footer() {
 
@@ -10,85 +10,94 @@ export default function Footer() {
   };
 
   return (
-    <footer id="contact" className="bg-gray-800 text-white py-16">
+    <footer id="contact" className="bg-gradient-to-br from-gray-900 via-gray-800 to-brand-green/10 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">SB Property Clearance</h3>
+            <h3 className="text-xl font-bold text-brand-green-light mb-4">SB Property Clearance</h3>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Professional property clearance services with a commitment to environmental responsibility and customer satisfaction.
+              Professional property clearance services across Staffordshire and the Midlands with a commitment to environmental responsibility and customer satisfaction.
             </p>
-            <div className="flex space-x-4">
-              <button className="text-gray-400 hover:text-brand-green-light transition-colors">
-                <Facebook size={20} />
-              </button>
-              <button className="text-gray-400 hover:text-brand-green-light transition-colors">
-                <Twitter size={20} />
-              </button>
-              <button className="text-gray-400 hover:text-brand-green-light transition-colors">
-                <Instagram size={20} />
-              </button>
+            <div className="bg-brand-green/10 border border-brand-green/20 rounded-lg p-4">
+              <p className="text-brand-green-light font-semibold text-sm">Serving the Midlands Since 2014</p>
+              <p className="text-gray-400 text-xs mt-1">Fully Licensed • Insured • Eco-Friendly</p>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
+            <h4 className="text-lg font-semibold text-brand-green-light mb-4">Quick Links</h4>
+            <ul className="space-y-3">
               <li>
                 <button 
                   onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors"
+                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
                   Home
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => scrollToSection("services")}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors"
+                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
                   Services
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => scrollToSection("location")}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors"
+                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
                   Location
                 </button>
               </li>
               <li>
                 <button 
                   onClick={() => scrollToSection("contact")}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors"
+                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
                   Contact
                 </button>
               </li>
               <li>
-                <a href="/quotes" className="text-gray-300 hover:text-brand-green-light transition-colors font-semibold">Free Quotes</a>
+                <a href="/quotes" className="text-brand-green-light hover:text-brand-green transition-colors font-semibold flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green-light rounded-full mr-3 group-hover:bg-brand-green transition-colors"></span>
+                  Free Quotes
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">Contact Us</h4>
-            <div className="space-y-3 text-gray-300">
-              <div className="flex items-center">
-                <MapPin className="text-brand-green-light mr-3" size={20} />
-                <span>Stafford, Staffordshire, UK</span>
+            <h4 className="text-lg font-semibold text-brand-green-light mb-4">Contact Us</h4>
+            <div className="space-y-4">
+              <div className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors">
+                <MapPin className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
+                <div>
+                  <p className="text-gray-300 font-medium">Service Area</p>
+                  <p className="text-gray-400 text-sm">Stafford, Staffordshire & Midlands</p>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Phone className="text-brand-green-light mr-3" size={20} />
-                <span>07946 495782</span>
+              <div className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors">
+                <Phone className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
+                <div>
+                  <p className="text-gray-300 font-medium">Call Us</p>
+                  <p className="text-brand-green-light text-sm font-semibold">07946 495782</p>
+                </div>
               </div>
-              <div className="flex items-center">
-                <Mail className="text-brand-green-light mr-3" size={20} />
-                <span>sbpropertyclearance@gmail.com</span>
+              <div className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors">
+                <Mail className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
+                <div>
+                  <p className="text-gray-300 font-medium">Email Us</p>
+                  <p className="text-gray-400 text-sm break-all">sbpropertyclearance@gmail.com</p>
+                </div>
               </div>
             </div>
           </div>
@@ -96,13 +105,25 @@ export default function Footer() {
 
         </div>
 
-        <div className="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-          <p className="text-gray-400 text-sm">
-              © 2024 SB Property Clearance. Serving Staffordshire & the Midlands. All rights reserved.
+        <div className="border-t border-brand-green/20 mt-12 pt-8">
+          <div className="text-center">
+            <p className="text-gray-400 text-sm mb-3">
+              © 2024 SB Property Clearance. Professional Property Clearance Services Across Staffordshire & the Midlands. All rights reserved.
             </p>
-            <p className="text-gray-400 text-xs mt-2">
-              Property clearance services in Stafford, Cannock, Lichfield, Stone, Rugeley, Eccleshall, Penkridge, Uttoxeter, Newport and surrounding Midlands areas.
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-500">
+              <div>
+                <p className="font-medium text-brand-green-light mb-1">Primary Service Areas:</p>
+                <p>Stafford • Cannock • Lichfield • Stone • Rugeley • Eccleshall • Penkridge • Uttoxeter • Newport</p>
+              </div>
+              <div>
+                <p className="font-medium text-brand-green-light mb-1">Services:</p>
+                <p>House Clearance • Garden Clearance • Office Clearance • Waste Removal • Skip Hire Alternative • Rubbish Removal</p>
+              </div>
+            </div>
+            <p className="text-gray-500 text-xs mt-4">
+              Fully Licensed Waste Carriers • Environment Agency Registered • Serving Staffordshire, West Midlands, East Midlands, Shropshire & Surrounding Areas
             </p>
+          </div>
         </div>
       </div>
     </footer>
