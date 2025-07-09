@@ -20,41 +20,68 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <img 
-              src="/logo.png" 
-              alt="SB Property Clearance" 
-              className="h-12 w-auto max-w-[200px] object-contain"
-              onLoad={() => console.log('Logo loaded successfully')}
-              onError={(e) => {
-                console.error('Logo failed to load, showing fallback');
-                e.currentTarget.style.display = 'none';
-                const parent = e.currentTarget.parentElement;
-                if (parent && !parent.querySelector('.logo-fallback')) {
-                  const fallbackDiv = document.createElement('div');
-                  fallbackDiv.className = 'logo-fallback';
-                  fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green">SB Property Clearance</span>';
-                  parent.appendChild(fallbackDiv);
-                }
+            <button
+              onClick={() => {
+                // Navigate to home page or scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-            />
+              className="focus:outline-none focus:ring-2 focus:ring-brand-green focus:ring-offset-2 rounded-lg"
+            >
+              <img 
+                src="/logo.png" 
+                alt="SB Property Clearance" 
+                className="h-12 w-auto max-w-[200px] object-contain hover:opacity-90 transition-opacity"
+                onLoad={() => console.log('Logo loaded successfully')}
+                onError={(e) => {
+                  console.error('Logo failed to load, showing fallback');
+                  e.currentTarget.style.display = 'none';
+                  const parent = e.currentTarget.parentElement;
+                  if (parent && !parent.querySelector('.logo-fallback')) {
+                    const fallbackDiv = document.createElement('div');
+                    fallbackDiv.className = 'logo-fallback';
+                    fallbackDiv.innerHTML = '<span class="text-xl font-bold text-brand-green hover:text-brand-green-light transition-colors">SB Property Clearance</span>';
+                    parent.appendChild(fallbackDiv);
+                  }
+                }}
+              />
+            </button>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
             <button 
-              onClick={() => scrollToSection("services")}
+              onClick={() => {
+                // Check if we're on the home page, if not navigate first
+                if (window.location.pathname !== '/') {
+                  window.location.href = '/#services';
+                } else {
+                  scrollToSection("services");
+                }
+              }}
               className="text-gray-700 hover:text-brand-green font-medium transition-colors"
             >
               Services
             </button>
             <button 
-              onClick={() => scrollToSection("how-it-works")}
+              onClick={() => {
+                if (window.location.pathname !== '/') {
+                  window.location.href = '/#how-it-works';
+                } else {
+                  scrollToSection("how-it-works");
+                }
+              }}
               className="text-gray-700 hover:text-brand-green font-medium transition-colors"
             >
               How It Works
             </button>
             <button 
-              onClick={() => scrollToSection("contact")}
+              onClick={() => {
+                if (window.location.pathname !== '/') {
+                  window.location.href = '/#contact';
+                } else {
+                  scrollToSection("contact");
+                }
+              }}
               className="text-gray-700 hover:text-brand-green font-medium transition-colors"
             >
               Contact
@@ -86,19 +113,37 @@ export default function Header() {
           <div className="md:hidden py-4 border-t border-gray-100">
             <nav className="flex flex-col space-y-4">
               <button 
-                onClick={() => scrollToSection("services")}
+                onClick={() => {
+                  if (window.location.pathname !== '/') {
+                    window.location.href = '/#services';
+                  } else {
+                    scrollToSection("services");
+                  }
+                }}
                 className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
               >
                 Services
               </button>
               <button 
-                onClick={() => scrollToSection("how-it-works")}
+                onClick={() => {
+                  if (window.location.pathname !== '/') {
+                    window.location.href = '/#how-it-works';
+                  } else {
+                    scrollToSection("how-it-works");
+                  }
+                }}
                 className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
               >
                 How It Works
               </button>
               <button 
-                onClick={() => scrollToSection("contact")}
+                onClick={() => {
+                  if (window.location.pathname !== '/') {
+                    window.location.href = '/#contact';
+                  } else {
+                    scrollToSection("contact");
+                  }
+                }}
                 className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
               >
                 Contact
