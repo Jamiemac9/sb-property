@@ -51,6 +51,18 @@ export default function Header() {
           <nav className="hidden md:flex space-x-8">
             <button 
               onClick={() => {
+                if (window.location.pathname !== '/') {
+                  window.location.href = '/#about';
+                } else {
+                  scrollToSection("about");
+                }
+              }}
+              className="text-gray-700 hover:text-brand-green font-medium transition-colors"
+            >
+              About
+            </button>
+            <button 
+              onClick={() => {
                 // Check if we're on the home page, if not navigate first
                 if (window.location.pathname !== '/') {
                   window.location.href = '/#services';
@@ -112,6 +124,18 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
             <nav className="flex flex-col space-y-4">
+              <button 
+                onClick={() => {
+                  if (window.location.pathname !== '/') {
+                    window.location.href = '/#about';
+                  } else {
+                    scrollToSection("about");
+                  }
+                }}
+                className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
+              >
+                About
+              </button>
               <button 
                 onClick={() => {
                   if (window.location.pathname !== '/') {

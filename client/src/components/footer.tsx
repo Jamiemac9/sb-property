@@ -40,6 +40,15 @@ export default function Footer() {
               </li>
               <li>
                 <button 
+                  onClick={() => scrollToSection("about")}
+                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
+                >
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  About
+                </button>
+              </li>
+              <li>
+                <button 
                   onClick={() => scrollToSection("services")}
                   className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
@@ -85,20 +94,26 @@ export default function Footer() {
                   <p className="text-gray-400 text-sm">Stafford, Staffordshire & Midlands</p>
                 </div>
               </div>
-              <div className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors">
+              <button 
+                onClick={() => window.open('tel:07946495782', '_self')}
+                className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors w-full text-left cursor-pointer"
+              >
                 <Phone className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
                 <div>
                   <p className="text-gray-300 font-medium">Call Us</p>
                   <p className="text-brand-green-light text-sm font-semibold">07946 495782</p>
                 </div>
-              </div>
-              <div className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors">
+              </button>
+              <button 
+                onClick={() => window.open('mailto:sbpropertyclearance@gmail.com', '_self')}
+                className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors w-full text-left cursor-pointer"
+              >
                 <Mail className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
                 <div>
                   <p className="text-gray-300 font-medium">Email Us</p>
                   <p className="text-gray-400 text-sm break-all">sbpropertyclearance@gmail.com</p>
                 </div>
-              </div>
+              </button>
             </div>
           </div>
 
