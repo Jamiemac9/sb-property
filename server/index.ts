@@ -62,7 +62,9 @@ app.use((req, res, next) => {
   let server;
   
   try {
+    console.log('Starting server initialization...');
     server = await registerRoutes(app);
+    console.log('Routes registered successfully');
     
     app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
       const status = err.status || err.statusCode || 500;
@@ -84,7 +86,8 @@ app.use((req, res, next) => {
     // importantly only setup vite in development and after
     // setting up all the other routes so the catch-all route
     // doesn't interfere with the other routes
-    if (app.get("env") === "development") {
+    const isProduction = process.env.NODE_ENV === 'production';
+    if (!isProduction) {
       await setupVite(app, server);
     } else {
       serveStatic(app);
@@ -95,12 +98,40 @@ app.use((req, res, next) => {
     // It is the only port that is not firewalled.
     const port = parseInt(process.env.PORT || '5000');
     
+    // Enhanced server binding with production-safe error handling
     server.listen({
       port,
       host: "0.0.0.0",
       reusePort: true,
-    }, () => {
-      log(`serving on port ${port}`);
+    }, (error?: Error) => {
+      if (error) {
+        console.error('Failed to bind to port:', error);
+        if (process.env.NODE_ENV === 'production') {
+          console.error('Server failed to start in production. Exiting...');
+          process.exit(1);
+        } else {
+          throw error;
+        }
+      } else {
+        log(`serving on port ${port}`);
+      }
+    });
+    
+    // Handle server errors
+    server.on('error', (error: any) => {
+      if (error.code === 'EADDRINUSE') {
+        console.error(`Port ${port} is already in use`);
+        if (process.env.NODE_ENV === 'production') {
+          console.error('Port conflict in production. Exiting...');
+          process.exit(1);
+        }
+      } else {
+        console.error('Server error:', error);
+        if (process.env.NODE_ENV === 'production') {
+          console.error('Server error in production. Exiting...');
+          process.exit(1);
+        }
+      }
     });
     
     // Handle graceful shutdown

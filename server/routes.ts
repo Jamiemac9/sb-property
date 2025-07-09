@@ -5,43 +5,62 @@ import { insertCallbackRequestSchema, insertQuoteRequestSchema } from "@shared/s
 import { generateAIResponse } from "./ai-chat";
 import { z } from "zod";
 import multer from "multer";
-import { Client } from "@replit/object-storage";
+
+// Import Object Storage with production-safe error handling
+let Client: any = null;
+try {
+  const objectStorageModule = await import("@replit/object-storage");
+  Client = objectStorageModule.Client;
+} catch (error) {
+  console.warn("Object Storage module not available in this environment, using fallback mode");
+  Client = null;
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Configure multer for file uploads
-  const upload = multer({
-    storage: multer.memoryStorage(),
-    limits: {
-      fileSize: 5 * 1024 * 1024, // 5MB limit
-    },
-    fileFilter: (req, file, cb) => {
-      if (file.mimetype.startsWith('image/')) {
-        cb(null, true);
-      } else {
-        cb(new Error('Only image files are allowed'));
+  // Production-safe route registration with comprehensive error handling
+  console.log('Registering routes for environment:', process.env.NODE_ENV || 'development');
+  
+  try {
+    // Configure multer for file uploads
+    const upload = multer({
+      storage: multer.memoryStorage(),
+      limits: {
+        fileSize: 5 * 1024 * 1024, // 5MB limit
+      },
+      fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+          cb(null, true);
+        } else {
+          cb(new Error('Only image files are allowed'));
+        }
+      },
+    });
+
+    // Server startup status tracking
+    let serverReady = false;
+    
+    // Middleware to ensure server is fully ready before handling requests
+    app.use((req, res, next) => {
+      if (!serverReady && !req.path.includes('/health')) {
+        return res.status(503).json({ 
+          error: "Server is starting up", 
+          message: "Please wait a moment and try again" 
+        });
       }
-    },
-  });
+      next();
+    });
 
-  // Server startup status tracking
-  let serverReady = false;
+  // Initialize Object Storage client with production-safe error handling
+  let objectStorage: any = null;
+  let objectStorageInitialized = false;
   
-  // Middleware to ensure server is fully ready before handling requests
-  app.use((req, res, next) => {
-    if (!serverReady && !req.path.includes('/health')) {
-      return res.status(503).json({ 
-        error: "Server is starting up", 
-        message: "Please wait a moment and try again" 
-      });
+  // Production-safe asynchronous initialization function
+  const initializeObjectStorage = async () => {
+    // Skip if already initialized or Client is not available
+    if (objectStorageInitialized || !Client) {
+      return;
     }
-    next();
-  });
-
-  // Initialize Object Storage client with enhanced error handling
-  let objectStorage: Client | null = null;
-  
-  // Non-blocking initialization function with production environment checks
-  const initializeObjectStorage = () => {
+    
     try {
       // Check for production environment variables first
       const isProduction = process.env.NODE_ENV === 'production';
@@ -52,9 +71,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (isProduction && (hasReplitDeployment || hasStorageBucket)) {
         objectStorage = new Client();
         console.log("Object Storage initialized successfully for production");
+        objectStorageInitialized = true;
       } else if (!isProduction && (hasReplitDeployment || hasStorageBucket)) {
         objectStorage = new Client();
         console.log("Object Storage initialized successfully for development");
+        objectStorageInitialized = true;
       } else {
         console.log("Object Storage not configured, using base64 fallback");
         console.log(`Environment: ${process.env.NODE_ENV || 'development'}, Deployment: ${hasReplitDeployment}, Bucket: ${!!hasStorageBucket}`);
@@ -70,8 +91,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   };
   
-  // Initialize Object Storage without blocking server startup
-  initializeObjectStorage();
+  // Initialize Object Storage asynchronously without blocking server startup
+  if (Client) {
+    setTimeout(initializeObjectStorage, 1000); // Delay initialization to ensure server is ready
+  }
 
   // Health check endpoint for deployment monitoring
   app.get("/api/health", (req, res) => {
@@ -352,13 +375,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  const httpServer = createServer(app);
-  
-  // Mark server as ready after all routes are registered
-  setTimeout(() => {
-    serverReady = true;
-    console.log("Server initialization complete - ready to accept requests");
-  }, 100);
-  
-  return httpServer;
+    const httpServer = createServer(app);
+    
+    // Mark server as ready after all routes are registered
+    setTimeout(() => {
+      serverReady = true;
+      console.log("Server initialization complete - ready to accept requests");
+    }, 100);
+    
+    return httpServer;
+    
+  } catch (error) {
+    console.error('Fatal error during routes registration:', error);
+    // In production, don't crash the entire application
+    if (process.env.NODE_ENV === 'production') {
+      console.error('Routes registration failed in production. Creating minimal server...');
+      
+      // Create a minimal server that can at least respond to health checks
+      const httpServer = createServer(app);
+      
+      // Basic health check for failed deployment
+      app.get("/api/health", (req, res) => {
+        res.json({ 
+          status: "degraded", 
+          timestamp: new Date().toISOString(),
+          error: "Routes registration failed",
+          environment: process.env.NODE_ENV || "development"
+        });
+      });
+      
+      // Default error response for all other routes
+      app.use("*", (req, res) => {
+        res.status(503).json({
+          error: "Service temporarily unavailable",
+          message: "Server is experiencing initialization issues"
+        });
+      });
+      
+      return httpServer;
+    } else {
+      throw error;
+    }
+  }
 }
