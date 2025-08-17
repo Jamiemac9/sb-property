@@ -4,6 +4,13 @@ import { Link } from "wouter";
 export default function Footer() {
 
   const scrollToSection = (id: string) => {
+    // If we're not on the home page, navigate there first
+    if (window.location.pathname !== '/') {
+      window.location.href = `/#${id}`;
+      return;
+    }
+    
+    // If we're on the home page, scroll to the section
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
