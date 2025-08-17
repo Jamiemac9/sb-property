@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail } from "lucide-react";
+import { Link } from "wouter";
 
 export default function Footer() {
 
@@ -12,7 +13,7 @@ export default function Footer() {
   return (
     <footer id="contact" className="bg-gradient-to-br from-gray-900 via-gray-800 to-brand-green/10 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold text-brand-green-light mb-4">SB Property Clearance</h3>
@@ -30,17 +31,20 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-brand-green-light mb-4">Quick Links</h4>
             <ul className="space-y-3">
               <li>
-                <button 
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
-                >
+                <Link href="/" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
                   <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
                   Home
-                </button>
+                </Link>
               </li>
               <li>
                 <button 
-                  onClick={() => scrollToSection("about")}
+                  onClick={() => {
+                    if (window.location.pathname !== '/') {
+                      window.location.href = '/#about';
+                    } else {
+                      scrollToSection("about");
+                    }
+                  }}
                   className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
                   <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
@@ -49,25 +53,13 @@ export default function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => scrollToSection("services")}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
-                >
-                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
-                  Services
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection("location")}
-                  className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
-                >
-                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
-                  Location
-                </button>
-              </li>
-              <li>
-                <button 
-                  onClick={() => scrollToSection("contact")}
+                  onClick={() => {
+                    if (window.location.pathname !== '/') {
+                      window.location.href = '/#contact';
+                    } else {
+                      scrollToSection("contact");
+                    }
+                  }}
                   className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group"
                 >
                   <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
@@ -75,10 +67,59 @@ export default function Footer() {
                 </button>
               </li>
               <li>
-                <a href="/quotes" className="text-brand-green-light hover:text-brand-green transition-colors font-semibold flex items-center group">
+                <Link href="/quotes" className="text-brand-green-light hover:text-brand-green transition-colors font-semibold flex items-center group">
                   <span className="w-2 h-2 bg-brand-green-light rounded-full mr-3 group-hover:bg-brand-green transition-colors"></span>
                   Free Quotes
-                </a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h4 className="text-lg font-semibold text-brand-green-light mb-4">Our Services</h4>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/services/house-clearance" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  House Clearance
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/garden-clearance" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Garden Clearance
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/waste-removal" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Waste Removal
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/commercial-work" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Commercial Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/skip-bags" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Skip Bags
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/cleaning-services" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Cleaning Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/home-removals" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Home Removals
+                </Link>
               </li>
             </ul>
           </div>

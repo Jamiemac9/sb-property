@@ -1,0 +1,246 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Home, CheckCircle, Clock, Shield, Recycle, Star } from "lucide-react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import QuoteForm from "@/components/quote-form";
+
+export default function HouseClearance() {
+  const features = [
+    {
+      icon: CheckCircle,
+      title: "Full Property Clearance",
+      description: "Complete house and flat clearances across Staffordshire and the Midlands"
+    },
+    {
+      icon: Clock,
+      title: "Same/Next Day Service",
+      description: "Urgent clearances available with same day and next day booking options"
+    },
+    {
+      icon: Shield,
+      title: "Fully Licensed & Insured",
+      description: "Professional service with full insurance coverage and proper licensing"
+    },
+    {
+      icon: Recycle,
+      title: "Eco-Friendly Disposal",
+      description: "Responsible disposal with recycling and donation options where possible"
+    }
+  ];
+
+  const pricing = [
+    {
+      type: "Single Room",
+      price: "From £150",
+      details: "Bedroom, small lounge, or kitchen clearance"
+    },
+    {
+      type: "2-3 Bedroom House",
+      price: "From £400",
+      details: "Full house clearance including garage/shed"
+    },
+    {
+      type: "4+ Bedroom House",
+      price: "From £650",
+      details: "Large properties with garden clearance"
+    },
+    {
+      type: "Partial Clearance",
+      price: "From £100",
+      details: "Specific items or areas only"
+    }
+  ];
+
+  const areasServed = [
+    "Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", 
+    "Eccleshall", "Penkridge", "Uttoxeter", "Newport", "Burton-on-Trent"
+  ];
+
+  return (
+    <div className="min-h-screen bg-white">
+      <Header />
+      
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-br from-brand-green to-brand-green-light text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="flex items-center mb-6">
+                <Home className="mr-4" size={48} />
+                <h1 className="text-4xl lg:text-5xl font-bold">
+                  House & Flat Clearance Staffordshire
+                </h1>
+              </div>
+              <p className="text-xl mb-8 text-white/90">
+                Professional property clearance services across Staffordshire and the Midlands. 
+                Full and partial clearances with same day service available.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <QuoteForm 
+                  trigger={
+                    <Button size="lg" className="bg-white text-brand-green hover:bg-gray-50">
+                      Get FREE Quote
+                    </Button>
+                  }
+                />
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="border-white text-white hover:bg-white hover:text-brand-green"
+                  onClick={() => window.open('tel:07946495782', '_self')}
+                >
+                  Call Now: 07946 495782
+                </Button>
+              </div>
+            </div>
+            <div className="lg:text-right">
+              <img 
+                src="/bedroom-before.jpg" 
+                alt="House clearance before" 
+                className="rounded-lg shadow-2xl w-full max-w-md ml-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Why Choose Our House Clearance Service?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Professional, reliable, and eco-friendly house clearance services with over 10 years of experience in Staffordshire.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <feature.icon className="mx-auto mb-4 text-brand-green" size={48} />
+                  <h3 className="text-lg font-semibold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What We Clear Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">
+                What We Clear
+              </h2>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  "Furniture & Appliances", "Electrical Items", "Clothing & Textiles", 
+                  "Books & Documents", "Garden Items", "White Goods",
+                  "Carpets & Flooring", "DIY Materials", "General Household Items",
+                  "Loft & Cellar Contents", "Garage Clearance", "Shed Clearance"
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center">
+                    <CheckCircle className="text-brand-green mr-2" size={16} />
+                    <span className="text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="space-y-6">
+              <Card className="p-6 bg-brand-green/5 border-brand-green/20">
+                <h3 className="text-lg font-semibold text-brand-green mb-2">
+                  <Star className="inline mr-2" size={20} />
+                  Professional Standards
+                </h3>
+                <p className="text-gray-700">
+                  All our team members are uniformed, professional, and treat your property with respect. 
+                  We protect floors and walls during clearance work.
+                </p>
+              </Card>
+              <Card className="p-6 bg-blue-50 border-blue-200">
+                <h3 className="text-lg font-semibold text-blue-800 mb-2">
+                  <Recycle className="inline mr-2" size={20} />
+                  Environmental Responsibility
+                </h3>
+                <p className="text-gray-700">
+                  We recycle up to 85% of cleared items and donate reusable items to local charities 
+                  whenever possible.
+                </p>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Transparent Pricing
+            </h2>
+            <p className="text-xl text-gray-600">
+              No hidden fees - clear pricing for all house clearance services
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pricing.map((price, index) => (
+              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-2">{price.type}</h3>
+                  <div className="text-2xl font-bold text-brand-green mb-2">{price.price}</div>
+                  <p className="text-gray-600 text-sm">{price.details}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <p className="text-gray-600 mb-4">
+              All prices include labour, transport, and responsible disposal
+            </p>
+            <QuoteForm 
+              trigger={
+                <Button className="bg-brand-green text-white hover:bg-brand-green-light">
+                  Get Exact Quote
+                </Button>
+              }
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Areas Served */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Areas We Serve
+            </h2>
+            <p className="text-xl text-gray-600">
+              House clearance services across Staffordshire and the Midlands
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            {areasServed.map((area, index) => (
+              <div key={index} className="p-4 bg-gray-50 rounded-lg hover:bg-brand-green/5 transition-colors">
+                <span className="font-medium text-gray-800">{area}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Footer />
+    </div>
+  );
+}

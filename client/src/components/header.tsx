@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import { Link } from "wouter";
 import QuoteForm from "./quote-form";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -61,19 +63,50 @@ export default function Header() {
             >
               About
             </button>
-            <button 
-              onClick={() => {
-                // Check if we're on the home page, if not navigate first
-                if (window.location.pathname !== '/') {
-                  window.location.href = '/#services';
-                } else {
-                  scrollToSection("services");
-                }
-              }}
-              className="text-gray-700 hover:text-brand-green font-medium transition-colors"
-            >
-              Services
-            </button>
+            
+            {/* Services Dropdown */}
+            <div className="relative">
+              <button 
+                onClick={() => setIsServicesOpen(!isServicesOpen)}
+                onMouseEnter={() => setIsServicesOpen(true)}
+                className="text-gray-700 hover:text-brand-green font-medium transition-colors flex items-center"
+              >
+                Services
+                <ChevronDown className={`ml-1 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} size={16} />
+              </button>
+              
+              {isServicesOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
+                  onMouseLeave={() => setIsServicesOpen(false)}
+                >
+                  <div className="py-2">
+                    <Link href="/services/house-clearance" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      House & Flat Clearance
+                    </Link>
+                    <Link href="/services/garden-clearance" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      Garden Clearance
+                    </Link>
+                    <Link href="/services/waste-removal" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      Waste Removal
+                    </Link>
+                    <Link href="/services/commercial-work" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      Commercial Work
+                    </Link>
+                    <Link href="/services/skip-bags" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      Skip Bags
+                    </Link>
+                    <Link href="/services/cleaning-services" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      Cleaning Services
+                    </Link>
+                    <Link href="/services/home-removals" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                      Home Removals
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+            
             <button 
               onClick={() => {
                 if (window.location.pathname !== '/') {
@@ -136,18 +169,33 @@ export default function Header() {
               >
                 About
               </button>
-              <button 
-                onClick={() => {
-                  if (window.location.pathname !== '/') {
-                    window.location.href = '/#services';
-                  } else {
-                    scrollToSection("services");
-                  }
-                }}
-                className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
-              >
-                Services
-              </button>
+              
+              {/* Mobile Services Links */}
+              <div className="space-y-2">
+                <div className="text-gray-500 text-sm font-medium uppercase tracking-wide">Services</div>
+                <Link href="/services/house-clearance" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  House & Flat Clearance
+                </Link>
+                <Link href="/services/garden-clearance" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  Garden Clearance
+                </Link>
+                <Link href="/services/waste-removal" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  Waste Removal
+                </Link>
+                <Link href="/services/commercial-work" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  Commercial Work
+                </Link>
+                <Link href="/services/skip-bags" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  Skip Bags
+                </Link>
+                <Link href="/services/cleaning-services" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  Cleaning Services
+                </Link>
+                <Link href="/services/home-removals" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
+                  Home Removals
+                </Link>
+              </div>
+              
               <button 
                 onClick={() => {
                   if (window.location.pathname !== '/') {
