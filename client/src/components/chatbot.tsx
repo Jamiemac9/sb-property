@@ -181,7 +181,7 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     }
 
     // Default response with helpful suggestions
-    return "I'd be happy to help! 😊\n\n**I can assist with:**\n• Free quotes and pricing\n• Service information\n• Availability and booking\n• Coverage areas\n• Emergency services\n• Environmental policies\n\n**Try asking:**\n• 'How much for house clearance?'\n• 'What services do you offer?'\n• 'Do you cover my area?'\n• 'When are you available?'\n\n**Need immediate help?** Call us at 07946 495782\n\nWhat specific information would you like?";
+    return "I'd be happy to help! 😊\n\n**I can assist with:**\n• Free quotes and pricing\n• Service information\n• Availability and booking\n• Coverage areas\n• Emergency services\n• Environmental policies\n\n**Try asking:**\n• 'How much for house clearance?'\n• 'What services do you offer?'\n• 'Do you cover my area?'\n• 'When are you available?'\n\n**Need immediate help?** Call us at +4477019152348\n\nWhat specific information would you like?";
   };
 
   const handleQuickResponse = (action: string, text: string) => {
@@ -238,7 +238,7 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     } catch (error) {
       console.error('Error getting AI response:', error);
       setTimeout(() => {
-        addMessage("I apologize, but I'm having trouble processing your message right now. Please try calling us directly at 07946 495782 or try asking again.", 'bot');
+        addMessage("I apologize, but I'm having trouble processing your message right now. Please try calling us directly at +4477019152348 or try asking again.", 'bot');
       }, 1000);
     }
   };
