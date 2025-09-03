@@ -50,8 +50,8 @@ export default function Services() {
     {
       icon: Car,
       title: "Cleaning Services",
-      description: "Professional cleaning specialists with 10+ years experience in driveway, patio, gutter and end of tenancy cleaning.",
-      features: ["Driveway cleaning", "Patio restoration", "Gutter cleaning", "End of tenancy cleans"],
+      description: "Professional cleaning specialists with 10+ years experience in driveway, patio and end of tenancy cleaning.",
+      features: ["Driveway cleaning", "Patio restoration", "Deep cleaning", "End of tenancy cleans"],
       color: "from-slate-500 to-slate-600",
       link: "/services/cleaning-services"
     },

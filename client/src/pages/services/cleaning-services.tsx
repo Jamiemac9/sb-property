@@ -10,20 +10,12 @@ export default function CleaningServices() {
     {
       icon: Car,
       title: "Driveway & Patio Cleaning",
-      description: "Professional pressure washing to restore your outdoor surfaces to like-new condition",
-      price: "From £80"
-    },
-    {
-      icon: Droplets,
-      title: "Gutter Cleaning",
-      description: "Complete gutter cleaning and maintenance to ensure proper water flow",
-      price: "From £45"
+      description: "Professional pressure washing to restore your outdoor surfaces to like-new condition"
     },
     {
       icon: PaintBucket,
       title: "End of Tenancy Cleaning",
-      description: "Deep cleaning service to help secure your deposit return",
-      price: "From £150"
+      description: "Deep cleaning service to help secure your deposit return"
     }
   ];
 
@@ -73,8 +65,8 @@ export default function CleaningServices() {
                 Professional Cleaning Services Staffordshire
               </h1>
               <p className="text-xl mb-8 text-white/90">
-                Expert cleaning services including driveway & patio cleaning, gutter maintenance, 
-                and end of tenancy cleaning across Staffordshire and the Midlands.
+                Expert cleaning services including driveway & patio cleaning and end of tenancy cleaning 
+                across Staffordshire and the Midlands.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <QuoteForm 
@@ -87,17 +79,17 @@ export default function CleaningServices() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-cyan-700"
-                  onClick={() => window.open('tel:07946495782', '_self')}
+                  className="border-white text-white bg-white/10 hover:bg-white hover:text-cyan-700"
+                  onClick={() => window.open('tel:07753226214', '_self')}
                 >
-                  Call Now: 07946 495782
+                  Call Now: 07753 226214
                 </Button>
               </div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8">
               <h3 className="text-xl font-semibold mb-4">Our Cleaning Services</h3>
               <div className="space-y-3">
-                {["Driveway & Patio Cleaning", "Gutter Cleaning & Maintenance", "End of Tenancy Cleaning", "10+ Years Experience", "Fully Insured"].map((service, index) => (
+                {["Driveway & Patio Cleaning", "End of Tenancy Cleaning", "Professional Equipment", "10+ Years Experience", "Fully Insured"].map((service, index) => (
                   <div key={index} className="flex items-center">
                     <CheckCircle className="mr-3" size={16} />
                     <span className="text-sm">{service}</span>
@@ -121,14 +113,13 @@ export default function CleaningServices() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {services.map((service, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow h-full">
                 <CardContent className="p-6 flex flex-col h-full">
                   <service.icon className="mx-auto mb-4 text-cyan-600" size={48} />
                   <h3 className="text-lg font-semibold mb-2">{service.title}</h3>
                   <p className="text-gray-600 mb-4 flex-grow">{service.description}</p>
-                  <div className="text-xl font-bold text-cyan-600">{service.price}</div>
                 </CardContent>
               </Card>
             ))}

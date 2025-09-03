@@ -29,26 +29,21 @@ export default function HouseClearance() {
     }
   ];
 
-  const pricing = [
+  const beforeAfterExamples = [
     {
-      type: "Single Room",
-      price: "From £150",
-      details: "Bedroom, small lounge, or kitchen clearance"
+      title: "Bedroom Clearance",
+      before: "Cluttered space with furniture, clothes, and personal items throughout",
+      after: "Clean, empty room ready for new occupant or renovation"
     },
     {
-      type: "2-3 Bedroom House",
-      price: "From £400",
-      details: "Full house clearance including garage/shed"
+      title: "Full Property",
+      before: "House filled with decades of accumulated belongings and furniture",
+      after: "Completely cleared property, professionally cleaned and move-in ready"
     },
     {
-      type: "4+ Bedroom House",
-      price: "From £650",
-      details: "Large properties with garden clearance"
-    },
-    {
-      type: "Partial Clearance",
-      price: "From £100",
-      details: "Specific items or areas only"
+      title: "Garden & Shed",
+      before: "Overgrown garden with shed full of tools, equipment, and garden waste",
+      after: "Cleared outdoor space with tidy, empty shed and maintained garden area"
     }
   ];
 
@@ -87,10 +82,10 @@ export default function HouseClearance() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-brand-green"
-                  onClick={() => window.open('tel:07946495782', '_self')}
+                  className="border-white text-white bg-white/10 hover:bg-white hover:text-brand-green"
+                  onClick={() => window.open('tel:07753226214', '_self')}
                 >
-                  Call Now: 07946 495782
+                  Call Now: 07753 226214
                 </Button>
               </div>
             </div>
@@ -179,38 +174,65 @@ export default function HouseClearance() {
         </div>
       </section>
 
-      {/* Pricing Section */}
+      {/* Our Process */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Transparent Pricing
+              How Our House Clearance Process Works
             </h2>
             <p className="text-xl text-gray-600">
-              No hidden fees - clear pricing for all house clearance services
+              Simple, professional process from initial contact to completion
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricing.map((price, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2">{price.type}</h3>
-                  <div className="text-2xl font-bold text-brand-green mb-2">{price.price}</div>
-                  <p className="text-gray-600 text-sm">{price.details}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="grid md:grid-cols-4 gap-8">
+            <Card className="text-center p-6">
+              <div className="bg-brand-green/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-brand-green">1</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Contact & Quote</h3>
+              <p className="text-gray-600 text-sm">
+                Free phone consultation and property assessment to provide accurate quote
+              </p>
+            </Card>
+            
+            <Card className="text-center p-6">
+              <div className="bg-brand-green/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-brand-green">2</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Schedule Service</h3>
+              <p className="text-gray-600 text-sm">
+                Book convenient time slot with same day and next day options available
+              </p>
+            </Card>
+            
+            <Card className="text-center p-6">
+              <div className="bg-brand-green/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-brand-green">3</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Professional Clearance</h3>
+              <p className="text-gray-600 text-sm">
+                Licensed team carefully removes all items with full insurance coverage
+              </p>
+            </Card>
+            
+            <Card className="text-center p-6">
+              <div className="bg-brand-green/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                <span className="text-2xl font-bold text-brand-green">4</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Clean & Complete</h3>
+              <p className="text-gray-600 text-sm">
+                Final cleanup, eco-friendly disposal, and property ready for next use
+              </p>
+            </Card>
           </div>
 
           <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
-              All prices include labour, transport, and responsible disposal
-            </p>
             <QuoteForm 
               trigger={
                 <Button className="bg-brand-green text-white hover:bg-brand-green-light">
-                  Get Exact Quote
+                  Get Your Free Quote
                 </Button>
               }
             />
@@ -218,8 +240,40 @@ export default function HouseClearance() {
         </div>
       </section>
 
-      {/* Areas Served */}
+      {/* Before & After Results */}
       <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Before & After: Our House Clearance Results
+            </h2>
+            <p className="text-xl text-gray-600">
+              See the transformation we achieve with our professional house clearance services
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {beforeAfterExamples.map((example, index) => (
+              <Card key={index} className="text-center p-6">
+                <h3 className="text-lg font-semibold mb-4 text-brand-green">{example.title}</h3>
+                <div className="space-y-4">
+                  <div className="bg-red-50 border border-red-200 rounded p-3">
+                    <h4 className="text-sm font-medium text-red-800 mb-1">Before</h4>
+                    <p className="text-red-700 text-sm">{example.before}</p>
+                  </div>
+                  <div className="bg-green-50 border border-green-200 rounded p-3">
+                    <h4 className="text-sm font-medium text-green-800 mb-1">After</h4>
+                    <p className="text-green-700 text-sm">{example.after}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+      
+      {/* Areas Served */}
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -232,7 +286,7 @@ export default function HouseClearance() {
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
             {areasServed.map((area, index) => (
-              <div key={index} className="p-4 bg-gray-50 rounded-lg hover:bg-brand-green/5 transition-colors">
+              <div key={index} className="p-4 bg-white rounded-lg hover:bg-brand-green/5 transition-colors shadow-sm">
                 <span className="font-medium text-gray-800">{area}</span>
               </div>
             ))}

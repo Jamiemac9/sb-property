@@ -88,10 +88,10 @@ export default function GardenClearance() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-green-700"
-                  onClick={() => window.open('tel:07946495782', '_self')}
+                  className="border-white text-white bg-white/10 hover:bg-white hover:text-green-700"
+                  onClick={() => window.open('tel:07753226214', '_self')}
                 >
-                  Call Now: 07946 495782
+                  Call Now: 07753 226214
                 </Button>
               </div>
             </div>

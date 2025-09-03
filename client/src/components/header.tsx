@@ -51,18 +51,6 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
-            <button 
-              onClick={() => {
-                if (window.location.pathname !== '/') {
-                  window.location.href = '/#about';
-                } else {
-                  scrollToSection("about");
-                }
-              }}
-              className="text-gray-700 hover:text-brand-green font-medium transition-colors"
-            >
-              About
-            </button>
             
             {/* Services Dropdown */}
             <div className="relative">
@@ -157,18 +145,6 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
             <nav className="flex flex-col space-y-4">
-              <button 
-                onClick={() => {
-                  if (window.location.pathname !== '/') {
-                    window.location.href = '/#about';
-                  } else {
-                    scrollToSection("about");
-                  }
-                }}
-                className="text-gray-700 hover:text-brand-green font-medium transition-colors text-left"
-              >
-                About
-              </button>
               
               {/* Mobile Services Links */}
               <div className="space-y-2">
