@@ -48,8 +48,8 @@ export default function Chatbot({ trigger }: ChatbotProps) {
   });
   const { toast } = useToast();
 
-  const businessPhone = "077018152348";
-  const whatsappNumber = "44077018152348";
+  const businessPhone = "+447708152348";
+  const whatsappNumber = "447708152348";
   const businessEmail = "sbpropertyclearance@gmail.com";
 
   const quickResponses = [
@@ -148,11 +148,11 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     }
 
     if (lowerMessage.includes('area') || lowerMessage.includes('location') || lowerMessage.includes('cover')) {
-      return "📍 **Our Service Area:**\n\nWe're based in **Stafford, Staffordshire** and serve a 25-mile radius including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n• Newport\n• Penkridge\n\n🚛 **Travel:** No extra charges within our standard area\n📞 **Not sure?** Call us at 07946 495782 - we'll let you know if we cover your location!";
+      return "📍 **Our Service Area:**\n\nWe're based in **Stafford, Staffordshire** and serve a 25-mile radius including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n• Newport\n• Penkridge\n\n🚛 **Travel:** No extra charges within our standard area\n📞 **Not sure?** Call us at +447708152348 - we'll let you know if we cover your location!";
     }
 
     if (lowerMessage.includes('when') || lowerMessage.includes('available') || lowerMessage.includes('book')) {
-      return "🗓️ **Availability & Booking:**\n\n**Standard Service:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment only\n• Usually available within 48-72 hours\n\n**Emergency Service:**\n• 24/7 availability for urgent situations\n• Same-day service possible\n• Call immediately: 07946 495782\n\n**Booking Process:**\n1. Free quote (no obligation)\n2. Schedule at your convenience\n3. Professional clearance\n4. Eco-friendly disposal\n\nReady to book? Let's get you a quote!";
+      return "🗓️ **Availability & Booking:**\n\n**Standard Service:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment only\n• Usually available within 48-72 hours\n\n**Emergency Service:**\n• 24/7 availability for urgent situations\n• Same-day service possible\n• Call immediately: +447708152348\n\n**Booking Process:**\n1. Free quote (no obligation)\n2. Schedule at your convenience\n3. Professional clearance\n4. Eco-friendly disposal\n\nReady to book? Let's get you a quote!";
     }
 
     if (lowerMessage.includes('recycle') || lowerMessage.includes('environment') || lowerMessage.includes('disposal')) {
@@ -160,11 +160,11 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     }
 
     if (lowerMessage.includes('contact') || lowerMessage.includes('call') || lowerMessage.includes('phone')) {
-      return "📞 **Get In Touch:**\n\n**Phone:** 07946 495782\n**Email:** sbpropertyclearance@gmail.com\n**WhatsApp:** Same number as phone\n\n**Business Hours:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment\n• Emergency: 24/7 available\n\n**Response Times:**\n• Phone calls: Immediate\n• WhatsApp: Within 30 minutes\n• Email: Within 2 hours\n\n**Prefer to chat?** I'm here to help with quotes, questions, or booking!";
+      return "📞 **Get In Touch:**\n\n**Phone:** +447708152348\n**Email:** sbpropertyclearance@gmail.com\n**WhatsApp:** Same number as phone\n\n**Business Hours:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment\n• Emergency: 24/7 available\n\n**Response Times:**\n• Phone calls: Immediate\n• WhatsApp: Within 30 minutes\n• Email: Within 2 hours\n\n**Prefer to chat?** I'm here to help with quotes, questions, or booking!";
     }
 
     if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent') || lowerMessage.includes('asap')) {
-      return "🚨 **Emergency Clearance Service:**\n\n**24/7 Availability** for urgent situations:\n\n⚡ **Emergency Scenarios:**\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n• Insurance claims\n• Bereavement situations\n\n📞 **Immediate Response:**\n• Call now: 07946 495782\n• Same-day service available\n• Out-of-hours callouts\n• Weekend emergency service\n\n**Please call directly for emergencies - don't wait for chat responses!**";
+      return "🚨 **Emergency Clearance Service:**\n\n**24/7 Availability** for urgent situations:\n\n⚡ **Emergency Scenarios:**\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n• Insurance claims\n• Bereavement situations\n\n📞 **Immediate Response:**\n• Call now: +447708152348\n• Same-day service available\n• Out-of-hours callouts\n• Weekend emergency service\n\n**Please call directly for emergencies - don't wait for chat responses!**";
     }
 
     if (lowerMessage.includes('insurance') || lowerMessage.includes('licensed') || lowerMessage.includes('certified')) {
@@ -201,7 +201,7 @@ export default function Chatbot({ trigger }: ChatbotProps) {
           addMessage("Our business hours are:\n\n📅 Monday-Saturday: 8 AM - 6 PM\n📅 Sunday: By appointment only\n\nWe offer emergency clearance services 24/7 for urgent situations.", 'bot');
           break;
         case "emergency":
-          addMessage("We provide 24/7 emergency property clearance services for urgent situations like:\n\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n\nCall us immediately at +4477019152348 for emergency service.", 'bot');
+          addMessage("We provide 24/7 emergency property clearance services for urgent situations like:\n\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n\nCall us immediately at +447708152348 for emergency service.", 'bot');
           break;
         case "coverage":
           addMessage("We serve Stafford and surrounding areas within a 25-mile radius, including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n\nNot sure if we cover your area? Just ask!", 'bot');

@@ -22,8 +22,8 @@ export default function ContactWidget({ trigger }: ContactWidgetProps) {
   });
   const { toast } = useToast();
 
-  const businessPhone = "+4477019152348";
-  const whatsappNumber = "4477019152348";
+  const businessPhone = "+447708152348";
+  const whatsappNumber = "447708152348";
   const businessEmail = "info@sbpropertyclearance.co.uk";
 
   const handleCallDirect = () => {

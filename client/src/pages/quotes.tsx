@@ -272,7 +272,7 @@ export default function Quotes() {
               variant="outline"
               className="border-white text-white hover:bg-white hover:text-brand-green px-8 py-4 text-lg font-semibold rounded-lg"
             >
-              Call: 07753 226214
+              Call: +447708152348
             </Button>
           </div>
         </div>

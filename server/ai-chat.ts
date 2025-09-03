@@ -58,7 +58,7 @@ function getContextualResponse(message: string): string | string[] {
   
   // Contact information
   if (message.includes('contact') || message.includes('phone') || message.includes('call') || message.includes('email')) {
-    return "📞 **Ready to get in touch? Here's how:**\n\n**Phone:** +4477019152348\n• Direct line to our team\n• Available Mon-Sat 8 AM - 6 PM\n• Emergency line 24/7\n\n**WhatsApp:** Same number (+4477019152348)\n• Quick responses (usually within 30 minutes)\n• Send photos of items to clear\n• Easy quote requests\n\n**Email:** sbpropertyclearance@gmail.com\n• Detailed inquiries welcome\n• Response within 2 hours during business hours\n• Great for quotes and documentation\n\n**Response Promise:**\n• Phone calls: Answered immediately\n• WhatsApp: Within 30 minutes\n• Emails: Within 2 hours\n\n**Prefer to keep chatting here?** I can help with quotes, booking, and any questions you have!";
+    return "📞 **Ready to get in touch? Here's how:**\n\n**Phone:** +447708152348\n• Direct line to our team\n• Available Mon-Sat 8 AM - 6 PM\n• Emergency line 24/7\n\n**WhatsApp:** Same number (+447708152348)\n• Quick responses (usually within 30 minutes)\n• Send photos of items to clear\n• Easy quote requests\n\n**Email:** sbpropertyclearance@gmail.com\n• Detailed inquiries welcome\n• Response within 2 hours during business hours\n• Great for quotes and documentation\n\n**Response Promise:**\n• Phone calls: Answered immediately\n• WhatsApp: Within 30 minutes\n• Emails: Within 2 hours\n\n**Prefer to keep chatting here?** I can help with quotes, booking, and any questions you have!";
   }
   
   // Emergency services

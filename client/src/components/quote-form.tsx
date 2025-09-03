@@ -108,7 +108,7 @@ export default function QuoteForm({ trigger }: QuoteFormProps) {
 
   // WhatsApp integration function
   const sendToWhatsApp = (quoteData: QuoteFormData, imageUrls: string[] = []) => {
-    const phoneNumber = "4477019152348"; // SB Property Clearance WhatsApp business number
+    const phoneNumber = "447708152348"; // SB Property Clearance WhatsApp business number
     
     let imageSection = '';
     if (imageUrls.length > 0) {
