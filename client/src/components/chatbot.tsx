@@ -49,8 +49,8 @@ export default function Chatbot({ trigger }: ChatbotProps) {
   });
   const { toast } = useToast();
 
-  const businessPhone = "07753226214";
-  const whatsappNumber = "447753226214";
+  const businessPhone = "077018152348";
+  const whatsappNumber = "44077018152348";
   const businessEmail = "sbpropertyclearance@gmail.com";
 
   const quickResponses = [

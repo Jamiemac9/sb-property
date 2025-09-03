@@ -113,9 +113,9 @@ export default function WasteRemoval() {
                   size="lg" 
                   variant="outline" 
                   className="border-white text-white bg-white/10 hover:bg-white hover:text-emerald-700"
-                  onClick={() => window.open('tel:07753226214', '_self')}
+                  onClick={() => window.open('tel:077018152348', '_self')}
                 >
-                  Call Now: 07753 226214
+                  Call Now: 077018152348
                 </Button>
               </div>
             </div>

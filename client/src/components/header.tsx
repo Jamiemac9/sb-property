@@ -22,13 +22,10 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <button
-              onClick={() => {
-                // Navigate to home page or scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="focus:outline-none focus:ring-2 focus:ring-brand-green focus:ring-offset-2 rounded-lg"
-            >
+            <Link href="/">
+              <button
+                className="focus:outline-none focus:ring-2 focus:ring-brand-green focus:ring-offset-2 rounded-lg"
+              >
               <img 
                 src="/logo.png" 
                 alt="SB Property Clearance" 
@@ -46,11 +43,15 @@ export default function Header() {
                   }
                 }}
               />
-            </button>
+              </button>
+            </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-8">
+            <Link href="/" className="text-gray-700 hover:text-brand-green font-medium transition-colors">
+              Home
+            </Link>
             
             {/* Services Dropdown */}
             <div className="relative">
@@ -81,9 +82,7 @@ export default function Header() {
                     <Link href="/services/commercial-work" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Commercial Work
                     </Link>
-                    <Link href="/services/skip-bags" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
-                      Skip Bags
-                    </Link>
+
                     <Link href="/services/cleaning-services" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Cleaning Services
                     </Link>
@@ -145,6 +144,9 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-100">
             <nav className="flex flex-col space-y-4">
+              <Link href="/" className="text-gray-700 hover:text-brand-green font-medium transition-colors">
+                Home
+              </Link>
               
               {/* Mobile Services Links */}
               <div className="space-y-2">
@@ -161,9 +163,7 @@ export default function Header() {
                 <Link href="/services/commercial-work" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
                   Commercial Work
                 </Link>
-                <Link href="/services/skip-bags" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
-                  Skip Bags
-                </Link>
+
                 <Link href="/services/cleaning-services" className="block pl-4 text-gray-600 hover:text-brand-green transition-colors text-sm">
                   Cleaning Services
                 </Link>

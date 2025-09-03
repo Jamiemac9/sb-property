@@ -10,7 +10,7 @@ import HouseClearance from "@/pages/services/house-clearance";
 import GardenClearance from "@/pages/services/garden-clearance";
 import WasteRemoval from "@/pages/services/waste-removal";
 import CommercialWork from "@/pages/services/commercial-work";
-import SkipBags from "@/pages/services/skip-bags";
+
 import CleaningServices from "@/pages/services/cleaning-services";
 import HomeRemovals from "@/pages/services/home-removals";
 
@@ -29,6 +29,9 @@ function AppContent() {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
+    } else if (location.startsWith('/services/')) {
+      // Scroll to top when navigating to service pages
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [location]);
 
@@ -41,7 +44,7 @@ function AppContent() {
       <Route path="/services/garden-clearance" component={GardenClearance} />
       <Route path="/services/waste-removal" component={WasteRemoval} />
       <Route path="/services/commercial-work" component={CommercialWork} />
-      <Route path="/services/skip-bags" component={SkipBags} />
+
       <Route path="/services/cleaning-services" component={CleaningServices} />
       <Route path="/services/home-removals" component={HomeRemovals} />
       <Route component={NotFound} />

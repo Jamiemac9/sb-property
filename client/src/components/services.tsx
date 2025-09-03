@@ -39,14 +39,7 @@ export default function Services() {
       color: "from-green-500 to-green-600",
       link: "/services/garden-clearance"
     },
-    {
-      icon: HardHat,
-      title: "Skip Bags",
-      description: "Fast and flexible skip bag service - you fill it, we'll take it away with fixed pricing.",
-      features: ["Flexible collection", "Fixed price guarantee", "Bulky & light waste", "Easy booking"],
-      color: "from-orange-500 to-orange-600",
-      link: "/services/skip-bags"
-    },
+
     {
       icon: Car,
       title: "Cleaning Services",

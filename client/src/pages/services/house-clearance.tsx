@@ -62,8 +62,8 @@ export default function HouseClearance() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="flex items-center mb-6">
-                <Home className="mr-4" size={48} />
-                <h1 className="text-4xl lg:text-5xl font-bold">
+                <Home className="mr-4 flex-shrink-0" size={48} />
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
                   House & Flat Clearance Staffordshire
                 </h1>
               </div>
@@ -74,7 +74,7 @@ export default function HouseClearance() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <QuoteForm 
                   trigger={
-                    <Button size="lg" className="bg-white text-brand-green hover:bg-gray-50">
+                    <Button size="lg" className="bg-white text-brand-green hover:bg-gray-50 w-full sm:w-auto">
                       Get FREE Quote
                     </Button>
                   }
@@ -82,10 +82,10 @@ export default function HouseClearance() {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white text-white bg-white/10 hover:bg-white hover:text-brand-green"
-                  onClick={() => window.open('tel:07753226214', '_self')}
+                  className="border-white text-white bg-white/10 hover:bg-white hover:text-brand-green w-full sm:w-auto"
+                  onClick={() => window.open('tel:077018152348', '_self')}
                 >
-                  Call Now: 07753 226214
+                  Call Now: 077018152348
                 </Button>
               </div>
             </div>
@@ -93,7 +93,7 @@ export default function HouseClearance() {
               <img 
                 src="/bedroom-before.jpg" 
                 alt="House clearance before" 
-                className="rounded-lg shadow-2xl w-full max-w-md ml-auto"
+                className="rounded-lg shadow-2xl w-full max-w-md mx-auto lg:ml-auto"
               />
             </div>
           </div>
