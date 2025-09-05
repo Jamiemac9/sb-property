@@ -111,12 +111,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/services/skip-bags" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
-                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
-                  Skip Bags
-                </Link>
-              </li>
-              <li>
                 <Link href="/services/cleaning-services" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
                   <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
                   Cleaning Services
@@ -143,13 +137,13 @@ export default function Footer() {
                 </div>
               </div>
               <button 
-                onClick={() => window.open('tel:+447708152348', '_self')}
+                onClick={() => window.open('tel:+44708152348', '_self')}
                 className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors w-full text-left cursor-pointer"
               >
                 <Phone className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
                 <div>
                   <p className="text-gray-300 font-medium">Call Us</p>
-                  <p className="text-brand-green-light text-sm font-semibold">+447708152348</p>
+                  <p className="text-brand-green-light text-sm font-semibold">+44708152348</p>
                 </div>
               </button>
               <button 
