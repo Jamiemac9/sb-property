@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, InfoWindow } from "@react-google-maps/api";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Star, ExternalLink, Phone, Clock } from "lucide-react";
@@ -20,7 +20,7 @@ const businessLocation = {
   lng: -2.1158,
   title: "SB Property Clearance",
   address: "102 Wolverhampton Road, Stafford ST17 4AH, UK",
-  phone: "07123 456789",
+  phone: "+447708152348",
   hours: "Mon-Fri: 8AM-6PM, Sat: 9AM-4PM"
 };
 
@@ -63,9 +63,24 @@ const googleReviews = [
 export default function Location() {
   const [selectedMarker, setSelectedMarker] = useState<boolean>(false);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [marker, setMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
 
-  const onMapLoad = useCallback(() => {
+  const onMapLoad = useCallback((map: google.maps.Map) => {
     setMapLoaded(true);
+    
+    // Create AdvancedMarkerElement
+    const advancedMarker = new google.maps.marker.AdvancedMarkerElement({
+      position: businessLocation,
+      map: map,
+      title: businessLocation.title,
+    });
+
+    // Add click listener
+    advancedMarker.addListener('click', () => {
+      setSelectedMarker(true);
+    });
+
+    setMarker(advancedMarker);
   }, []);
 
   const handleDirectionsClick = () => {
@@ -102,13 +117,17 @@ export default function Location() {
           <div className="space-y-6">
             <Card className="overflow-hidden shadow-lg">
               <CardContent className="p-0">
-                <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+                <LoadScript 
+                  googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+                  libraries={["marker"]}
+                >
                   <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={center}
                     zoom={15}
                     onLoad={onMapLoad}
                     options={{
+                      mapId: "DEMO_MAP_ID", // Required for AdvancedMarkerElement
                       styles: [
                         {
                           featureType: "poi",
@@ -118,10 +137,6 @@ export default function Location() {
                       ]
                     }}
                   >
-                    <Marker
-                      position={businessLocation}
-                      onClick={() => setSelectedMarker(true)}
-                    />
                     {selectedMarker && (
                       <InfoWindow
                         position={businessLocation}
@@ -132,7 +147,7 @@ export default function Location() {
                           <p className="text-sm text-gray-600 mb-2">{businessLocation.address}</p>
                           <div className="flex items-center text-sm text-gray-600 mb-1">
                             <Phone size={14} className="mr-1" />
-                            {businessLocation.phone}
+                            +447708152348
                           </div>
                           <div className="flex items-center text-sm text-gray-600">
                             <Clock size={14} className="mr-1" />

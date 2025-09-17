@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogDescription } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageCircle, Phone, Mail, Clock, MapPin, Send, Bot, User, Calculator, FileText, Truck, Recycle } from "lucide-react";
@@ -48,8 +48,8 @@ export default function Chatbot({ trigger }: ChatbotProps) {
   });
   const { toast } = useToast();
 
-  const businessPhone = "+44708152348";
-  const whatsappNumber = "44708152348";
+  const businessPhone = "+447708152348";
+  const whatsappNumber = "447708152348";
   const businessEmail = "sbpropertyclearance@gmail.com";
 
   const quickResponses = [
@@ -148,7 +148,7 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     }
 
     if (lowerMessage.includes('area') || lowerMessage.includes('location') || lowerMessage.includes('cover')) {
-      return "📍 **Our Service Area:**\n\nWe're based in **Stafford, Staffordshire** and serve a 25-mile radius including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n• Newport\n• Penkridge\n\n🚛 **Travel:** No extra charges within our standard area\n📞 **Not sure?** Call us at +44708152348 - we'll let you know if we cover your location!";
+      return "📍 **Our Service Area:**\n\nWe're based in **Stafford, Staffordshire** and serve a 25-mile radius including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n• Newport\n• Penkridge\n\n🚛 **Travel:** No extra charges within our standard area\n📞 **Not sure?** Call us at +447708152348 - we'll let you know if we cover your location!";
     }
 
     if (lowerMessage.includes('when') || lowerMessage.includes('available') || lowerMessage.includes('book')) {
@@ -160,11 +160,11 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     }
 
     if (lowerMessage.includes('contact') || lowerMessage.includes('call') || lowerMessage.includes('phone')) {
-      return "📞 **Get In Touch:**\n\n**Phone:** +44708152348\n**Email:** sbpropertyclearance@gmail.com\n**WhatsApp:** Same number as phone\n\n**Business Hours:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment\n• Emergency: 24/7 available\n\n**Response Times:**\n• Phone calls: Immediate\n• WhatsApp: Within 30 minutes\n• Email: Within 2 hours\n\n**Prefer to chat?** I'm here to help with quotes, questions, or booking!";
+      return "📞 **Get In Touch:**\n\n**Phone:** +447708152348\n**Email:** sbpropertyclearance@gmail.com\n**WhatsApp:** Same number as phone\n\n**Business Hours:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment\n• Emergency: 24/7 available\n\n**Response Times:**\n• Phone calls: Immediate\n• WhatsApp: Within 30 minutes\n• Email: Within 2 hours\n\n**Prefer to chat?** I'm here to help with quotes, questions, or booking!";
     }
 
     if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent') || lowerMessage.includes('asap')) {
-      return "🚨 **Emergency Clearance Service:**\n\n**24/7 Availability** for urgent situations:\n\n⚡ **Emergency Scenarios:**\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n• Insurance claims\n• Bereavement situations\n\n📞 **Immediate Response:**\n• Call now: +44708152348\n• Same-day service available\n• Out-of-hours callouts\n• Weekend emergency service\n\n**Please call directly for emergencies - don't wait for chat responses!**";
+      return "🚨 **Emergency Clearance Service:**\n\n**24/7 Availability** for urgent situations:\n\n⚡ **Emergency Scenarios:**\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n• Insurance claims\n• Bereavement situations\n\n📞 **Immediate Response:**\n• Call now: +447708152348\n• Same-day service available\n• Out-of-hours callouts\n• Weekend emergency service\n\n**Please call directly for emergencies - don't wait for chat responses!**";
     }
 
     if (lowerMessage.includes('insurance') || lowerMessage.includes('licensed') || lowerMessage.includes('certified')) {
@@ -181,7 +181,7 @@ export default function Chatbot({ trigger }: ChatbotProps) {
     }
 
     // Default response with helpful suggestions
-    return "I'd be happy to help! 😊\n\n**I can assist with:**\n• Free quotes and pricing\n• Service information\n• Availability and booking\n• Coverage areas\n• Emergency services\n• Environmental policies\n\n**Try asking:**\n• 'How much for house clearance?'\n• 'What services do you offer?'\n• 'Do you cover my area?'\n• 'When are you available?'\n\n**Need immediate help?** Call us at +44708152348\n\nWhat specific information would you like?";
+    return "I'd be happy to help! 😊\n\n**I can assist with:**\n• Free quotes and pricing\n• Service information\n• Availability and booking\n• Coverage areas\n• Emergency services\n• Environmental policies\n\n**Try asking:**\n• 'How much for house clearance?'\n• 'What services do you offer?'\n• 'Do you cover my area?'\n• 'When are you available?'\n\n**Need immediate help?** Call us at +4477019152348\n\nWhat specific information would you like?";
   };
 
   const handleQuickResponse = (action: string, text: string) => {
@@ -201,7 +201,7 @@ export default function Chatbot({ trigger }: ChatbotProps) {
           addMessage("Our business hours are:\n\n📅 Monday-Saturday: 8 AM - 6 PM\n📅 Sunday: By appointment only\n\nWe offer emergency clearance services 24/7 for urgent situations.", 'bot');
           break;
         case "emergency":
-          addMessage("We provide 24/7 emergency property clearance services for urgent situations like:\n\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n\nCall us immediately at +44708152348 for emergency service.", 'bot');
+          addMessage("We provide 24/7 emergency property clearance services for urgent situations like:\n\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n\nCall us immediately at +447708152348 for emergency service.", 'bot');
           break;
         case "coverage":
           addMessage("We serve Stafford and surrounding areas within a 25-mile radius, including:\n\n• Stafford town center\n• Stone\n• Eccleshall\n• Rugeley\n• Cannock\n• Lichfield\n• Uttoxeter\n\nNot sure if we cover your area? Just ask!", 'bot');
@@ -224,21 +224,21 @@ export default function Chatbot({ trigger }: ChatbotProps) {
   const handleSendMessage = async () => {
     if (!currentMessage.trim()) return;
 
-    const userMsg = currentMessage;
-    addMessage(currentMessage, 'user');
+    const userInput = currentMessage.trim();
     setCurrentMessage("");
+
+    addMessage(userInput, 'user');
     simulateTyping();
 
     try {
-      // Get AI response
-      const aiResponse = await getAIResponse(userMsg);
+      const response = await getAIResponse(userInput);
       setTimeout(() => {
-        addMessage(aiResponse, 'bot');
+        addMessage(response, 'bot');
       }, 1000);
     } catch (error) {
       console.error('Error getting AI response:', error);
       setTimeout(() => {
-        addMessage("I apologize, but I'm having trouble processing your message right now. Please try calling us directly at +44708152348 or try asking again.", 'bot');
+        addMessage("I apologize, but I'm having trouble processing your message right now. Please try calling us directly at +447708152348 or try asking again.", 'bot');
       }, 1000);
     }
   };
@@ -353,9 +353,6 @@ Please provide a detailed quote for this customer.`;
             <MessageCircle className="h-5 w-5 text-brand-green" />
             Chat with SB Property Clearance
           </DialogTitle>
-          <DialogDescription>
-            Get instant help with your property clearance needs or request a free quote.
-          </DialogDescription>
         </DialogHeader>
 
         <div className="flex-1 flex flex-col min-h-0">
