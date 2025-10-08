@@ -163,8 +163,8 @@ export default function Chatbot({ trigger }: ChatbotProps) {
       return "📞 **Get In Touch:**\n\n**Phone:** +447708152348\n**Email:** sbpropertyclearance@gmail.com\n**WhatsApp:** Same number as phone\n\n**Business Hours:**\n• Monday-Saturday: 8 AM - 6 PM\n• Sunday: By appointment\n• Emergency: 24/7 available\n\n**Response Times:**\n• Phone calls: Immediate\n• WhatsApp: Within 30 minutes\n• Email: Within 2 hours\n\n**Prefer to chat?** I'm here to help with quotes, questions, or booking!";
     }
 
-    if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent') || lowerMessage.includes('asap')) {
-      return "🚨 **Emergency Clearance Service:**\n\n**24/7 Availability** for urgent situations:\n\n⚡ **Emergency Scenarios:**\n• Flooding or water damage\n• Fire damage cleanup\n• Urgent property sales\n• Landlord emergencies\n• Insurance claims\n• Bereavement situations\n\n📞 **Immediate Response:**\n• Call now: +447708152348\n• Same-day service available\n• Out-of-hours callouts\n• Weekend emergency service\n\n**Please call directly for emergencies - don't wait for chat responses!**";
+    if (lowerMessage.includes('emergency') || lowerMessage.includes('urgent') || lowerMessage.includes('asap') || lowerMessage.includes('quick')) {
+      return "🚨 **Emergency Property Clearance - We're Here 24/7:**\n\n**Emergency Situations We Handle:**\n• Flood or water damage cleanup\n• Fire damage clearance\n• Urgent property sales\n• Landlord emergencies\n• Insurance claim support\n• Bereavement clearance\n• Tenant abandonment\n\n**Emergency Response:**\n• Available 24/7, 365 days a year\n• Same-day service possible\n• Team can be with you within 2-4 hours\n• Out-of-hours and weekend callouts\n\n**What to expect:**\n• Professional, sympathetic service\n• Immediate assessment\n• Urgent action plan\n• Full documentation for insurance\n\n**URGENT?** Call +447708152348 immediately\n\nDon't wait - we understand emergencies can't wait for business hours!";
     }
 
     if (lowerMessage.includes('insurance') || lowerMessage.includes('licensed') || lowerMessage.includes('certified')) {
@@ -180,8 +180,8 @@ export default function Chatbot({ trigger }: ChatbotProps) {
       return "Hello! 👋 Welcome to SB Property Clearance. I'm here to help with all your clearance needs.\n\n**Quick Options:**\n• Get a free quote\n• Learn about our services\n• Check our coverage area\n• Emergency clearance info\n\n**Popular Questions:**\n• 'How much does house clearance cost?'\n• 'What areas do you cover?'\n• 'When are you available?'\n\nWhat would you like to know?";
     }
 
-    // Default response with helpful suggestions
-    return "I'd be happy to help! 😊\n\n**I can assist with:**\n• Free quotes and pricing\n• Service information\n• Availability and booking\n• Coverage areas\n• Emergency services\n• Environmental policies\n\n**Try asking:**\n• 'How much for house clearance?'\n• 'What services do you offer?'\n• 'Do you cover my area?'\n• 'When are you available?'\n\n**Need immediate help?** Call us at +4477019152348\n\nWhat specific information would you like?";
+    // Default intelligent response
+    return "I'd love to help you with that! 😊\n\n**Here's what I'm excellent at:**\n• **Free Quotes** - Get personalized pricing in minutes\n• **Service Info** - Learn about our full range of clearance services\n• **Scheduling** - Book appointments at your convenience\n• **Coverage Areas** - Check if we serve your location\n• **Emergency Help** - 24/7 urgent clearance services\n\n**Try asking me:**\n• 'How much will it cost to clear my house?'\n• 'What services do you offer?'\n• 'Do you cover [your area]?'\n• 'When are you available?'\n• 'I need emergency clearance'\n\n**Need immediate help?** Call +447708152348\n\nWhat specific information would be most helpful for you right now?";
   };
 
   const handleQuickResponse = (action: string, text: string) => {

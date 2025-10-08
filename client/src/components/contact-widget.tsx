@@ -39,7 +39,7 @@ export default function ContactWidget({ trigger }: ContactWidgetProps) {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
-    
+
     toast({
       title: "Opening WhatsApp",
       description: "Connecting you directly with our team...",
@@ -51,7 +51,7 @@ export default function ContactWidget({ trigger }: ContactWidgetProps) {
     const body = "Hello,\n\nI found your website and would like to discuss property clearance services.\n\nBest regards";
     const mailtoUrl = `mailto:${businessEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     window.location.href = mailtoUrl;
-    
+
     toast({
       title: "Opening Email",
       description: "Your email client will open with our details...",
@@ -127,12 +127,12 @@ Please respond to this customer inquiry promptly.`;
             Contact SB Property Clearance
           </DialogTitle>
         </DialogHeader>
-        
+
         <div className="space-y-6">
           {/* Quick Contact Options */}
           <div className="grid gap-3">
             <h3 className="font-semibold text-gray-900">Quick Contact</h3>
-            
+
             <Button 
               onClick={handleCallDirect}
               className="w-full justify-start bg-green-600 hover:bg-green-700 text-white"
@@ -140,7 +140,7 @@ Please respond to this customer inquiry promptly.`;
               <Phone size={16} className="mr-3" />
               Call Now: {businessPhone}
             </Button>
-            
+
             <Button 
               onClick={handleWhatsAppDirect}
               className="w-full justify-start bg-green-500 hover:bg-green-600 text-white"
@@ -148,7 +148,7 @@ Please respond to this customer inquiry promptly.`;
               <MessageCircle size={16} className="mr-3" />
               WhatsApp Chat
             </Button>
-            
+
             <Button 
               onClick={handleEmailDirect}
               variant="outline"
@@ -191,14 +191,14 @@ Please respond to this customer inquiry promptly.`;
                   onChange={(e) => setContactForm(prev => ({ ...prev, phone: e.target.value }))}
                 />
               </div>
-              
+
               <Input
                 placeholder="Email address"
                 type="email"
                 value={contactForm.email}
                 onChange={(e) => setContactForm(prev => ({ ...prev, email: e.target.value }))}
               />
-              
+
               <div className="space-y-2">
                 <label className="text-sm font-medium">Urgency Level</label>
                 <select 
@@ -211,14 +211,14 @@ Please respond to this customer inquiry promptly.`;
                   <option value="emergency">Emergency Service</option>
                 </select>
               </div>
-              
+
               <Textarea
                 placeholder="Tell us about your property clearance needs... *"
                 value={contactForm.message}
                 onChange={(e) => setContactForm(prev => ({ ...prev, message: e.target.value }))}
                 rows={3}
               />
-              
+
               <Button 
                 onClick={handleFormSubmit}
                 className="w-full bg-brand-green text-white hover:bg-brand-green-light"
@@ -226,7 +226,7 @@ Please respond to this customer inquiry promptly.`;
                 <Send size={16} className="mr-2" />
                 Send Message via WhatsApp
               </Button>
-              
+
               <p className="text-xs text-gray-500 text-center">
                 Your message will be sent directly to our WhatsApp business account for immediate attention.
               </p>
