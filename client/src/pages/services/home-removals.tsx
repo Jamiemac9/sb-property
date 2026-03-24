@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Truck, CheckCircle, Clock, Shield, Package, Users } from "lucide-react";
+import { Truck, CheckCircle, Clock, Shield, Package, Users, TrendingUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
@@ -172,6 +172,116 @@ export default function HomeRemovals() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-indigo-600" size={36} />
+              Home Removal Pricing
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent, competitive pricing based on property size. From estimates shown.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <Card className="hover:shadow-lg transition-all border-indigo-200 hover:border-indigo-400">
+              <CardContent className="p-6">
+                <h4 className="text-lg font-bold text-gray-900 mb-2">Studio/1 Bed</h4>
+                <div className="mb-4">
+                  <span className="text-3xl font-bold text-indigo-600">From £200</span>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">2-4 hours, small flat</p>
+                <QuoteForm 
+                  trigger={
+                    <Button className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white text-sm">
+                      Get Quote
+                    </Button>
+                  }
+                />
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-all border-indigo-200 hover:border-indigo-400">
+              <CardContent className="p-6">
+                <h4 className="text-lg font-bold text-gray-900 mb-2">2 Bedroom</h4>
+                <div className="mb-4">
+                  <span className="text-3xl font-bold text-indigo-600">From £350</span>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">4-6 hours, standard home</p>
+                <QuoteForm 
+                  trigger={
+                    <Button className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white text-sm">
+                      Get Quote
+                    </Button>
+                  }
+                />
+              </CardContent>
+            </Card>
+
+            <Card className="ring-2 ring-indigo-600 shadow-lg hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <h4 className="text-lg font-bold text-gray-900 mb-2">3 Bedroom</h4>
+                <div className="mb-4">
+                  <span className="text-3xl font-bold text-indigo-600">From £550</span>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">6-8 hours, larger property</p>
+                <QuoteForm 
+                  trigger={
+                    <Button className="w-full bg-indigo-600 text-white hover:bg-indigo-700 text-sm">
+                      Get Quote
+                    </Button>
+                  }
+                />
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-all border-indigo-200 hover:border-indigo-400">
+              <CardContent className="p-6">
+                <h4 className="text-lg font-bold text-gray-900 mb-2">4+ Bedroom</h4>
+                <div className="mb-4">
+                  <span className="text-3xl font-bold text-indigo-600">From £750</span>
+                </div>
+                <p className="text-xs text-gray-600 mb-4">8+ hours, large property</p>
+                <QuoteForm 
+                  trigger={
+                    <Button className="w-full border border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white text-sm">
+                      Get Quote
+                    </Button>
+                  }
+                />
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-indigo-50 rounded-lg p-8 border border-indigo-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Additional Services</h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">Full Packing Service</p>
+                <p className="text-indigo-600 font-bold">+£150</p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">Partial Packing</p>
+                <p className="text-indigo-600 font-bold">+£80</p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">Furniture Assembly</p>
+                <p className="text-indigo-600 font-bold">+£50</p>
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">Disposal & Waste</p>
+                <p className="text-indigo-600 font-bold">+£60</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mt-6 italic">
+              * Prices are approximate and based on local moves within 50-mile radius. Long-distance rates available on request. Final quote provided after inventory assessment.
+            </p>
           </div>
         </div>
       </section>

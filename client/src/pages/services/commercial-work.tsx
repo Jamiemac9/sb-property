@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Building, CheckCircle, Clock, Shield, Recycle, Users } from "lucide-react";
+import { Building, CheckCircle, Clock, Shield, Recycle, Users, TrendingUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
@@ -168,6 +168,103 @@ export default function CommercialWork() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-purple-600" size={36} />
+              Commercial Pricing
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Flexible pricing options for businesses of all sizes. From estimates shown.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {pricingOptions.map((option, index) => (
+              <Card 
+                key={index} 
+                className={`flex flex-col h-full ${option.type === 'One-Off Clearance' ? 'ring-2 ring-purple-600 shadow-lg' : 'hover:shadow-lg'} transition-all`}
+              >
+                <CardContent className="p-6 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{option.type}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-purple-600">{option.price}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-6 flex-1">{option.description}</p>
+                  <QuoteForm 
+                    trigger={
+                      <Button 
+                        className={`w-full ${option.type === 'One-Off Clearance' ? 'bg-purple-600 text-white hover:bg-purple-700' : 'border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white'}`}
+                      >
+                        Get Quote
+                      </Button>
+                    }
+                  />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8">
+            <Card className="bg-purple-50 border-purple-200">
+              <CardContent className="p-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Office Clearance Services</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="font-semibold text-gray-900">Small Office (up to 500 sq ft)</p>
+                    <p className="text-purple-600 font-bold">From £250</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Medium Office (500-1000 sq ft)</p>
+                    <p className="text-purple-600 font-bold">From £500</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Large Office (1000+ sq ft)</p>
+                    <p className="text-purple-600 font-bold">From £800</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">IT Equipment Disposal</p>
+                    <p className="text-purple-600 font-bold">From £100</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-purple-50 border-purple-200">
+              <CardContent className="p-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Ongoing Services</h3>
+                <div className="space-y-3">
+                  <div>
+                    <p className="font-semibold text-gray-900">Weekly Collections</p>
+                    <p className="text-purple-600 font-bold">From £80/month</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Bi-Weekly Collections</p>
+                    <p className="text-purple-600 font-bold">From £120/month</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Monthly Collections</p>
+                    <p className="text-purple-600 font-bold">From £150/month</p>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Confidential Waste</p>
+                    <p className="text-purple-600 font-bold">From £50</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-8 bg-blue-50 rounded-lg p-6 border border-blue-200">
+            <p className="text-sm text-gray-600">
+              <span className="font-semibold text-gray-900">Volume Discounts Available:</span> Contact us for pricing on large-scale projects or regular monthly collections. We offer tailored packages for businesses requiring ongoing waste management services.
+            </p>
           </div>
         </div>
       </section>

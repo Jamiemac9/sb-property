@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Recycle, Truck, CheckCircle, Shield, Clock, Leaf } from "lucide-react";
+import { Recycle, Truck, CheckCircle, Shield, Clock, Leaf, TrendingUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
@@ -156,6 +156,65 @@ export default function WasteRemoval() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-emerald-600" size={36} />
+              Waste Removal Pricing
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent, item-based pricing. Prices shown are from estimates.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {pricingItems.map((item, index) => (
+              <Card key={index} className="hover:shadow-lg transition-all border-emerald-200 hover:border-emerald-400">
+                <CardContent className="p-6">
+                  <h4 className="font-semibold text-gray-900 mb-2">{item.item}</h4>
+                  <p className="text-2xl font-bold text-emerald-600">{item.price}</p>
+                  <div className="mt-4">
+                    <QuoteForm 
+                      trigger={
+                        <Button className="w-full border border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white text-sm">
+                          Get Quote
+                        </Button>
+                      }
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="bg-emerald-50 rounded-lg p-8 border border-emerald-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Bulk Pricing & Custom Services</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Small Van Load</h4>
+                <p className="text-emerald-600 font-bold text-lg">From £120</p>
+                <p className="text-sm text-gray-600 mt-2">Up to 5 cubic meters of waste</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Large Van Load</h4>
+                <p className="text-emerald-600 font-bold text-lg">From £200</p>
+                <p className="text-sm text-gray-600 mt-2">Up to 10 cubic meters of waste</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Same Day Service</h4>
+                <p className="text-emerald-600 font-bold text-lg">+£50</p>
+                <p className="text-sm text-gray-600 mt-2">Express collection premium</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mt-4 italic">
+              * Prices are approximate and may vary based on waste type and location. Final quote provided after assessment.
+            </p>
           </div>
         </div>
       </section>

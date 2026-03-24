@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, CheckCircle, Clock, Shield, Recycle, Star } from "lucide-react";
+import { Home, CheckCircle, Clock, Shield, Recycle, Star, TrendingUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
@@ -27,6 +27,68 @@ export default function HouseClearance() {
       title: "Eco-Friendly Disposal",
       description: "Responsible disposal with recycling and donation options where possible"
     }
+  ];
+
+  const pricingTiers = [
+    {
+      title: "Single Room",
+      fromPrice: "£150",
+      description: "Ideal for bedrooms, small offices, or single rooms",
+      items: [
+        "Up to 1 room clearance",
+        "Furniture & household items",
+        "Eco-friendly disposal",
+        "Same day service available"
+      ],
+      highlight: false
+    },
+    {
+      title: "1-2 Bed Property",
+      fromPrice: "£300",
+      description: "Perfect for flats and small houses",
+      items: [
+        "Full 1-2 bed property clearance",
+        "Garden & shed clearance",
+        "White goods removal",
+        "Professional cleaning"
+      ],
+      highlight: false
+    },
+    {
+      title: "3-4 Bed Property",
+      fromPrice: "£700",
+      description: "Complete house clearance package",
+      items: [
+        "Full property clearance",
+        "Garage & storage areas",
+        "Loft & basement content",
+        "Final deep clean included"
+      ],
+      highlight: true
+    },
+    {
+      title: "5+ Bed Property",
+      fromPrice: "£1,100",
+      description: "Large properties & estates",
+      items: [
+        "Full estate clearance",
+        "Multiple outbuildings",
+        "Specialist waste handling",
+        "Multi-day service available"
+      ],
+      highlight: false
+    }
+  ];
+
+  const itemPricing = [
+    { item: "Sofa", fromPrice: "£25-£50" },
+    { item: "Double Bed Frame", fromPrice: "£30-£60" },
+    { item: "Wardrobe/Chest of Drawers", fromPrice: "£15-£40" },
+    { item: "Dining Table & Chairs", fromPrice: "£40-£80" },
+    { item: "Large Appliance (Fridge, Washing Machine)", fromPrice: "£20-£50" },
+    { item: "Television", fromPrice: "£10-£30" },
+    { item: "Filing Cabinets/Shelving", fromPrice: "£10-£25" },
+    { item: "Office Desk", fromPrice: "£15-£35" },
   ];
 
   const beforeAfterExamples = [
@@ -122,6 +184,73 @@ export default function HouseClearance() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Tiers Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-brand-green" size={36} />
+              House Clearance Pricing
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent, competitive pricing based on property size. Prices shown are from estimates.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {pricingTiers.map((tier, index) => (
+              <Card 
+                key={index} 
+                className={`flex flex-col h-full ${tier.highlight ? 'ring-2 ring-brand-green shadow-lg scale-105 md:scale-100' : 'hover:shadow-lg'} transition-all`}
+              >
+                <CardContent className="p-6 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{tier.title}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-brand-green">{tier.fromPrice}</span>
+                    <span className="text-gray-600 ml-2">from</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-6">{tier.description}</p>
+                  <ul className="flex-1 space-y-2 mb-6">
+                    {tier.items.map((item, i) => (
+                      <li key={i} className="flex items-start text-sm text-gray-700">
+                        <CheckCircle className="text-brand-green mr-2 flex-shrink-0 mt-0.5" size={16} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <QuoteForm 
+                    trigger={
+                      <Button 
+                        className={`w-full ${tier.highlight ? 'bg-brand-green text-white hover:bg-brand-green-light' : 'border border-brand-green text-brand-green hover:bg-brand-green hover:text-white'}`}
+                      >
+                        Get Quote
+                      </Button>
+                    }
+                  />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {/* Item-Based Pricing */}
+          <div className="bg-gray-50 rounded-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Individual Item Pricing</h3>
+            <p className="text-gray-600 mb-6">Can't find your property size above? We also offer item-based pricing for specific clearances:</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {itemPricing.map((price, index) => (
+                <div key={index} className="bg-white rounded-lg p-4 border border-gray-200 hover:border-brand-green transition-colors">
+                  <h4 className="font-semibold text-gray-900 mb-2">{price.item}</h4>
+                  <p className="text-brand-green font-bold">{price.fromPrice}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-gray-600 mt-6 italic">
+              * Prices are approximate and may vary based on condition, size, and accessibility. Final quote provided after assessment.
+            </p>
           </div>
         </div>
       </section>
