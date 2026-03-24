@@ -108,7 +108,7 @@ export default function Quotes() {
       <section className="relative bg-gradient-to-r from-brand-green to-brand-green-light py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            Get Your FREE Quote Today
+            Staffordshire Property Clearance — Get a FREE Quote
           </h1>
           <p className="text-xl md:text-2xl text-brand-green-lighter mb-8 max-w-3xl mx-auto">
             Choose your preferred method to get a free, no-obligation quote for all your property clearance needs
