@@ -27,7 +27,7 @@ export default function BeforeAfterCarousel() {
     {
       id: "garden-clearance-west",
       title: "Garden Project",
-      beforeImage: "/garden-before-2.jpg",
+      beforeImage: "/garden-before-1.jpg",
       afterImage: "/garden-before-2.jpg",
       description: "Large scale garden clearance and restoration",
       category: "Garden Clearance"
@@ -39,6 +39,14 @@ export default function BeforeAfterCarousel() {
       afterImage: "/garden-before-3.jpg",
       description: "Complete garden transformation and landscaping",
       category: "Landscaping"
+    },
+    {
+      id: "bedroom-clearance",
+      title: "Bedroom Clearance",
+      beforeImage: "/bedroom-before.jpg",
+      afterImage: "/bedroom-before.jpg",
+      description: "Full bedroom and household contents clearance",
+      category: "Property Clearance"
     }
   ];
 
