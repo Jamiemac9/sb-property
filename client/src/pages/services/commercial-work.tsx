@@ -193,103 +193,6 @@ export default function CommercialWork() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
-              <TrendingUp className="text-purple-600" size={36} />
-              Commercial Pricing
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Flexible pricing options for businesses of all sizes. From estimates shown.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {pricingOptions.map((option, index) => (
-              <Card 
-                key={index} 
-                className={`flex flex-col h-full ${option.type === 'One-Off Clearance' ? 'ring-2 ring-purple-600 shadow-lg' : 'hover:shadow-lg'} transition-all`}
-              >
-                <CardContent className="p-6 flex flex-col h-full">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{option.type}</h3>
-                  <div className="mb-4">
-                    <span className="text-4xl font-bold text-purple-600">{option.price}</span>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-6 flex-1">{option.description}</p>
-                  <QuoteForm 
-                    trigger={
-                      <Button 
-                        className={`w-full ${option.type === 'One-Off Clearance' ? 'bg-purple-600 text-white hover:bg-purple-700' : 'border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white'}`}
-                      >
-                        Get Quote
-                      </Button>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            <Card className="bg-purple-50 border-purple-200">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Office Clearance Services</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="font-semibold text-gray-900">Small Office (up to 500 sq ft)</p>
-                    <p className="text-purple-600 font-bold">From £250</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Medium Office (500-1000 sq ft)</p>
-                    <p className="text-purple-600 font-bold">From £500</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Large Office (1000+ sq ft)</p>
-                    <p className="text-purple-600 font-bold">From £800</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">IT Equipment Disposal</p>
-                    <p className="text-purple-600 font-bold">From £100</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-purple-50 border-purple-200">
-              <CardContent className="p-8">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Ongoing Services</h3>
-                <div className="space-y-3">
-                  <div>
-                    <p className="font-semibold text-gray-900">Weekly Collections</p>
-                    <p className="text-purple-600 font-bold">From £80/month</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Bi-Weekly Collections</p>
-                    <p className="text-purple-600 font-bold">From £120/month</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Monthly Collections</p>
-                    <p className="text-purple-600 font-bold">From £150/month</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Confidential Waste</p>
-                    <p className="text-purple-600 font-bold">From £50</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-8 bg-blue-50 rounded-lg p-6 border border-blue-200">
-            <p className="text-sm text-gray-600">
-              <span className="font-semibold text-gray-900">Volume Discounts Available:</span> Contact us for pricing on large-scale projects or regular monthly collections. We offer tailored packages for businesses requiring ongoing waste management services.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Business Types Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -386,40 +289,65 @@ export default function CommercialWork() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Commercial Pricing Options
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-purple-600" size={36} />
+              Commercial Pricing in Staffordshire
             </h2>
-            <p className="text-xl text-gray-600">
-              Flexible pricing structures to suit different business needs
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Flexible pricing options for businesses of all sizes. From estimates shown.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {pricingOptions.map((option, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2">{option.type}</h3>
-                  <div className="text-2xl font-bold text-purple-600 mb-2">{option.price}</div>
-                  <p className="text-gray-600 text-sm">{option.description}</p>
+              <Card 
+                key={index} 
+                className={`flex flex-col h-full ${option.type === 'One-Off Clearance' ? 'ring-2 ring-purple-600 shadow-lg' : 'hover:shadow-lg'} transition-all`}
+              >
+                <CardContent className="p-6 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{option.type}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-purple-600">{option.price}</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-6 flex-1">{option.description}</p>
+                  <QuoteForm trigger={<Button className={`w-full ${option.type === 'One-Off Clearance' ? 'bg-purple-600 text-white hover:bg-purple-700' : 'border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white'}`}>Get Quote</Button>} />
                 </CardContent>
               </Card>
             ))}
           </div>
 
-          <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
-              All commercial services include full documentation and compliance certificates
+          <div className="grid lg:grid-cols-2 gap-8">
+            <Card className="bg-purple-50 border-purple-200">
+              <CardContent className="p-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Office Clearance Services</h3>
+                <div className="space-y-3">
+                  <div><p className="font-semibold text-gray-900">Small Office (up to 500 sq ft)</p><p className="text-purple-600 font-bold">From £250</p></div>
+                  <div><p className="font-semibold text-gray-900">Medium Office (500-1000 sq ft)</p><p className="text-purple-600 font-bold">From £500</p></div>
+                  <div><p className="font-semibold text-gray-900">Large Office (1000+ sq ft)</p><p className="text-purple-600 font-bold">From £800</p></div>
+                  <div><p className="font-semibold text-gray-900">IT Equipment Disposal</p><p className="text-purple-600 font-bold">From £100</p></div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="bg-purple-50 border-purple-200">
+              <CardContent className="p-8">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Ongoing Services</h3>
+                <div className="space-y-3">
+                  <div><p className="font-semibold text-gray-900">Weekly Collections</p><p className="text-purple-600 font-bold">From £80/month</p></div>
+                  <div><p className="font-semibold text-gray-900">Bi-Weekly Collections</p><p className="text-purple-600 font-bold">From £120/month</p></div>
+                  <div><p className="font-semibold text-gray-900">Monthly Collections</p><p className="text-purple-600 font-bold">From £150/month</p></div>
+                  <div><p className="font-semibold text-gray-900">Confidential Waste</p><p className="text-purple-600 font-bold">From £50</p></div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-8 bg-blue-50 rounded-lg p-6 border border-blue-200">
+            <p className="text-sm text-gray-600">
+              <span className="font-semibold text-gray-900">Volume Discounts Available:</span> Contact us for pricing on large-scale projects or regular monthly collections. We offer tailored packages for businesses requiring ongoing waste management services.
             </p>
-            <QuoteForm 
-              trigger={
-                <Button className="bg-purple-600 text-white hover:bg-purple-700">
-                  Get Commercial Quote
-                </Button>
-              }
-            />
           </div>
         </div>
       </section>
@@ -440,6 +368,36 @@ export default function CommercialWork() {
               <div key={index} className="p-4 bg-white rounded-lg hover:bg-purple-50 transition-colors shadow-sm">
                 <span className="font-medium text-gray-800">{area}</span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-purple-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Commercial Clearance FAQs — Staffordshire & Midlands
+            </h2>
+            <p className="text-xl text-gray-600">Common questions about our commercial clearance services</p>
+          </div>
+          <div className="space-y-3">
+            {[
+              { q: "Do you work outside normal business hours?", a: "Yes, we offer early morning, evening, and weekend slots to minimise disruption to your business operations. Same-day and next-day bookings are often available." },
+              { q: "Are you fully licensed for commercial waste removal?", a: "Yes, SB Property Clearance holds a valid Environment Agency waste carrier licence. We provide waste transfer notes and compliance certificates for all commercial collections." },
+              { q: "Can you handle confidential document destruction?", a: "Yes, we offer secure confidential waste disposal compliant with GDPR requirements. We provide certificates of destruction for your records." },
+              { q: "Do you offer regular contract collections?", a: "Absolutely. We offer weekly, bi-weekly, and monthly collection contracts for businesses needing ongoing waste management. Volume discounts apply." },
+              { q: "How quickly can you respond to an urgent commercial clearance?", a: "In most cases we can respond within 24 hours for urgent commercial clearances across Staffordshire and the West Midlands. Call us on 07708 152348 for same-day availability." }
+            ].map((faq, index) => (
+              <details key={index} className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden group">
+                <summary className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                  <span className="text-gray-900 font-semibold text-lg leading-snug">{faq.q}</span>
+                </summary>
+                <div className="px-6 pb-5">
+                  <p className="text-gray-600 leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
             ))}
           </div>
         </div>

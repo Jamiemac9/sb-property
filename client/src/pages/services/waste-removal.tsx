@@ -227,65 +227,6 @@ export default function WasteRemoval() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
-              <TrendingUp className="text-emerald-600" size={36} />
-              Waste Removal Pricing
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transparent, item-based pricing. Prices shown are from estimates.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {pricingItems.map((item, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all border-emerald-200 hover:border-emerald-400">
-                <CardContent className="p-6">
-                  <h4 className="font-semibold text-gray-900 mb-2">{item.item}</h4>
-                  <p className="text-2xl font-bold text-emerald-600">{item.price}</p>
-                  <div className="mt-4">
-                    <QuoteForm 
-                      trigger={
-                        <Button className="w-full border border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white text-sm">
-                          Get Quote
-                        </Button>
-                      }
-                    />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="bg-emerald-50 rounded-lg p-8 border border-emerald-200">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Bulk Pricing & Custom Services</h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Small Van Load</h4>
-                <p className="text-emerald-600 font-bold text-lg">From £120</p>
-                <p className="text-sm text-gray-600 mt-2">Up to 5 cubic meters of waste</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Large Van Load</h4>
-                <p className="text-emerald-600 font-bold text-lg">From £200</p>
-                <p className="text-sm text-gray-600 mt-2">Up to 10 cubic meters of waste</p>
-              </div>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-2">Same Day Service</h4>
-                <p className="text-emerald-600 font-bold text-lg">+£50</p>
-                <p className="text-sm text-gray-600 mt-2">Express collection premium</p>
-              </div>
-            </div>
-            <p className="text-sm text-gray-600 mt-4 italic">
-              * Prices are approximate and may vary based on waste type and location. Final quote provided after assessment.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Waste Types Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -341,44 +282,6 @@ export default function WasteRemoval() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Transparent Pricing
-            </h2>
-            <p className="text-xl text-gray-600">
-              Fixed pricing for common items - no hidden fees or surprises
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricingItems.map((pricing, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2">{pricing.item}</h3>
-                  <div className="text-2xl font-bold text-emerald-600">{pricing.price}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
-              All prices include collection, transport, and responsible disposal
-            </p>
-            <QuoteForm 
-              trigger={
-                <Button className="bg-emerald-600 text-white hover:bg-emerald-700">
-                  Get Exact Quote
-                </Button>
-              }
-            />
-          </div>
-        </div>
-      </section>
-
       {/* Process Section */}
       <section className="py-16 bg-emerald-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -418,6 +321,80 @@ export default function WasteRemoval() {
                 Professional team collects and disposes of waste responsibly
               </p>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-emerald-600" size={36} />
+              Waste Removal Pricing in Staffordshire
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent, item-based pricing. Prices shown are from estimates.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {pricingItems.map((item, index) => (
+              <Card key={index} className="hover:shadow-lg transition-all border-emerald-200 hover:border-emerald-400">
+                <CardContent className="p-6">
+                  <h4 className="font-semibold text-gray-900 mb-2">{item.item}</h4>
+                  <p className="text-2xl font-bold text-emerald-600">{item.price}</p>
+                  <div className="mt-4">
+                    <QuoteForm trigger={<Button className="w-full border border-emerald-600 text-emerald-600 hover:bg-emerald-600 hover:text-white text-sm">Get Quote</Button>} />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="bg-emerald-50 rounded-lg p-8 border border-emerald-200">
+            <h3 className="text-xl font-bold text-gray-900 mb-4">Bulk Pricing & Custom Services</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Small Van Load</h4>
+                <p className="text-emerald-600 font-bold text-lg">From £120</p>
+                <p className="text-sm text-gray-600 mt-2">Up to 5 cubic meters of waste</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Large Van Load</h4>
+                <p className="text-emerald-600 font-bold text-lg">From £200</p>
+                <p className="text-sm text-gray-600 mt-2">Up to 10 cubic meters of waste</p>
+              </div>
+              <div>
+                <h4 className="font-semibold text-gray-900 mb-2">Same Day Service</h4>
+                <p className="text-emerald-600 font-bold text-lg">+£50</p>
+                <p className="text-sm text-gray-600 mt-2">Express collection premium</p>
+              </div>
+            </div>
+            <p className="text-sm text-gray-600 mt-4 italic">
+              * Prices are approximate and may vary based on waste type and location. Final quote provided after assessment.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Areas We Serve */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Areas We Serve — Staffordshire & Midlands
+            </h2>
+            <p className="text-xl text-gray-600">
+              Fast waste removal across Staffordshire and surrounding areas
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            {["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Penkridge", "Eccleshall", "Tamworth", "Wolverhampton", "Burton upon Trent"].map((area, index) => (
+              <div key={index} className="p-4 bg-white rounded-lg hover:bg-emerald-50 transition-colors shadow-sm">
+                <span className="font-medium text-gray-800">{area}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

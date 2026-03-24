@@ -237,7 +237,7 @@ export default function HouseClearance() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Why Choose Our House Clearance Service?
+              Staffordshire House Clearance — What We Include
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Professional, reliable, and eco-friendly house clearance services with over 10 years of experience in Staffordshire.
@@ -254,73 +254,6 @@ export default function HouseClearance() {
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Tiers Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
-              <TrendingUp className="text-brand-green" size={36} />
-              House Clearance Pricing
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transparent, competitive pricing based on property size. Prices shown are from estimates.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            {pricingTiers.map((tier, index) => (
-              <Card 
-                key={index} 
-                className={`flex flex-col h-full ${tier.highlight ? 'ring-2 ring-brand-green shadow-lg scale-105 md:scale-100' : 'hover:shadow-lg'} transition-all`}
-              >
-                <CardContent className="p-6 flex flex-col h-full">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{tier.title}</h3>
-                  <div className="mb-4">
-                    <span className="text-4xl font-bold text-brand-green">{tier.fromPrice}</span>
-                    <span className="text-gray-600 ml-2">from</span>
-                  </div>
-                  <p className="text-sm text-gray-600 mb-6">{tier.description}</p>
-                  <ul className="flex-1 space-y-2 mb-6">
-                    {tier.items.map((item, i) => (
-                      <li key={i} className="flex items-start text-sm text-gray-700">
-                        <CheckCircle className="text-brand-green mr-2 flex-shrink-0 mt-0.5" size={16} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <QuoteForm 
-                    trigger={
-                      <Button 
-                        className={`w-full ${tier.highlight ? 'bg-brand-green text-white hover:bg-brand-green-light' : 'border border-brand-green text-brand-green hover:bg-brand-green hover:text-white'}`}
-                      >
-                        Get Quote
-                      </Button>
-                    }
-                  />
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Item-Based Pricing */}
-          <div className="bg-gray-50 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Individual Item Pricing</h3>
-            <p className="text-gray-600 mb-6">Can't find your property size above? We also offer item-based pricing for specific clearances:</p>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {itemPricing.map((price, index) => (
-                <div key={index} className="bg-white rounded-lg p-4 border border-gray-200 hover:border-brand-green transition-colors">
-                  <h4 className="font-semibold text-gray-900 mb-2">{price.item}</h4>
-                  <p className="text-brand-green font-bold">{price.fromPrice}</p>
-                </div>
-              ))}
-            </div>
-            <p className="text-sm text-gray-600 mt-6 italic">
-              * Prices are approximate and may vary based on condition, size, and accessibility. Final quote provided after assessment.
-            </p>
           </div>
         </div>
       </section>
@@ -471,6 +404,72 @@ export default function HouseClearance() {
         </div>
       </section>
       
+      {/* Pricing Tiers Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-brand-green" size={36} />
+              House Clearance Pricing in Staffordshire
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent, competitive pricing based on property size. Prices shown are from estimates.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            {pricingTiers.map((tier, index) => (
+              <Card 
+                key={index} 
+                className={`flex flex-col h-full ${tier.highlight ? 'ring-2 ring-brand-green shadow-lg scale-105 md:scale-100' : 'hover:shadow-lg'} transition-all`}
+              >
+                <CardContent className="p-6 flex flex-col h-full">
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{tier.title}</h3>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-brand-green">{tier.fromPrice}</span>
+                    <span className="text-gray-600 ml-2">from</span>
+                  </div>
+                  <p className="text-sm text-gray-600 mb-6">{tier.description}</p>
+                  <ul className="flex-1 space-y-2 mb-6">
+                    {tier.items.map((item, i) => (
+                      <li key={i} className="flex items-start text-sm text-gray-700">
+                        <CheckCircle className="text-brand-green mr-2 flex-shrink-0 mt-0.5" size={16} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <QuoteForm 
+                    trigger={
+                      <Button 
+                        className={`w-full ${tier.highlight ? 'bg-brand-green text-white hover:bg-brand-green-light' : 'border border-brand-green text-brand-green hover:bg-brand-green hover:text-white'}`}
+                      >
+                        Get Quote
+                      </Button>
+                    }
+                  />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="bg-gray-50 rounded-lg p-8">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Individual Item Pricing</h3>
+            <p className="text-gray-600 mb-6">Can't find your property size above? We also offer item-based pricing for specific clearances:</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {itemPricing.map((price, index) => (
+                <div key={index} className="bg-white rounded-lg p-4 border border-gray-200 hover:border-brand-green transition-colors">
+                  <h4 className="font-semibold text-gray-900 mb-2">{price.item}</h4>
+                  <p className="text-brand-green font-bold">{price.fromPrice}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-gray-600 mt-6 italic">
+              * Prices are approximate and may vary based on condition, size, and accessibility. Final quote provided after assessment.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Areas Served */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

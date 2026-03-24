@@ -201,107 +201,6 @@ export default function GardenClearance() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
-              <TrendingUp className="text-green-600" size={36} />
-              Garden Clearance Pricing
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Transparent pricing based on garden size. From estimates shown.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <Card className="hover:shadow-lg transition-all">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Small Garden</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-green-600">£120</span>
-                  <span className="text-gray-600 ml-2">from</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">Up to 3 hours, small clearance</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-all">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Medium Garden</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-green-600">£250</span>
-                  <span className="text-gray-600 ml-2">from</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">Half-day clearance, moderate vegetation</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-
-            <Card className="ring-2 ring-green-600 shadow-lg hover:shadow-lg transition-all">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Large Garden</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-green-600">£450</span>
-                  <span className="text-gray-600 ml-2">from</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">Full day work, heavy overgrowth</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full bg-green-600 text-white hover:bg-green-700">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-all">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Estate/Complex</h3>
-                <div className="mb-4">
-                  <span className="text-4xl font-bold text-green-600">£700</span>
-                  <span className="text-gray-600 ml-2">from</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">Multiple areas, specialist work</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="bg-green-50 rounded-lg p-6 border border-green-200">
-            <h3 className="text-lg font-semibold text-gray-900 mb-3">Additional Services Pricing</h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <div className="text-sm"><span className="font-medium">Hedge Trimming:</span> From £60</div>
-              <div className="text-sm"><span className="font-medium">Tree Felling:</span> From £80</div>
-              <div className="text-sm"><span className="font-medium">Shed Removal:</span> From £100</div>
-              <div className="text-sm"><span className="font-medium">Patio Clear:</span> From £90</div>
-              <div className="text-sm"><span className="font-medium">Decking Removal:</span> From £120</div>
-              <div className="text-sm"><span className="font-medium">Green Waste Removal:</span> £25/bag</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* What We Clear */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -399,37 +298,96 @@ export default function GardenClearance() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-green-600" size={36} />
+              Garden Clearance Pricing in Staffordshire
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Transparent pricing based on garden size. From estimates shown.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <Card className="hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Small Garden</h3>
+                <div className="mb-4">
+                  <span className="text-4xl font-bold text-green-600">£120</span>
+                  <span className="text-gray-600 ml-2">from</span>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">Up to 3 hours, small clearance</p>
+                <QuoteForm trigger={<Button className="w-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Medium Garden</h3>
+                <div className="mb-4">
+                  <span className="text-4xl font-bold text-green-600">£250</span>
+                  <span className="text-gray-600 ml-2">from</span>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">Half-day clearance, moderate vegetation</p>
+                <QuoteForm trigger={<Button className="w-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+
+            <Card className="ring-2 ring-green-600 shadow-lg hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Large Garden</h3>
+                <div className="mb-4">
+                  <span className="text-4xl font-bold text-green-600">£450</span>
+                  <span className="text-gray-600 ml-2">from</span>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">Full day work, heavy overgrowth</p>
+                <QuoteForm trigger={<Button className="w-full bg-green-600 text-white hover:bg-green-700">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+
+            <Card className="hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">Estate/Complex</h3>
+                <div className="mb-4">
+                  <span className="text-4xl font-bold text-green-600">£700</span>
+                  <span className="text-gray-600 ml-2">from</span>
+                </div>
+                <p className="text-sm text-gray-600 mb-4">Multiple areas, specialist work</p>
+                <QuoteForm trigger={<Button className="w-full border border-green-600 text-green-600 hover:bg-green-600 hover:text-white">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-green-50 rounded-lg p-6 border border-green-200">
+            <h3 className="text-lg font-semibold text-gray-900 mb-3">Additional Services Pricing</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div className="text-sm"><span className="font-medium">Hedge Trimming:</span> From £60</div>
+              <div className="text-sm"><span className="font-medium">Tree Felling:</span> From £80</div>
+              <div className="text-sm"><span className="font-medium">Shed Removal:</span> From £100</div>
+              <div className="text-sm"><span className="font-medium">Patio Clear:</span> From £90</div>
+              <div className="text-sm"><span className="font-medium">Decking Removal:</span> From £120</div>
+              <div className="text-sm"><span className="font-medium">Green Waste Removal:</span> £25/bag</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Areas We Serve */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Garden Clearance Pricing
+              Areas We Serve — Staffordshire & Midlands
             </h2>
             <p className="text-xl text-gray-600">
-              Competitive rates for all garden clearance services
+              Professional garden clearance across Staffordshire and surrounding areas
             </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricing.map((price, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <h3 className="text-lg font-semibold mb-2">{price.type}</h3>
-                  <div className="text-2xl font-bold text-green-600 mb-2">{price.price}</div>
-                  <p className="text-gray-600 text-sm">{price.description}</p>
-                </CardContent>
-              </Card>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            {["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Penkridge", "Eccleshall", "Tamworth", "Wolverhampton", "Burton upon Trent"].map((area, index) => (
+              <div key={index} className="p-4 bg-white rounded-lg hover:bg-green-50 transition-colors shadow-sm">
+                <span className="font-medium text-gray-800">{area}</span>
+              </div>
             ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <p className="text-gray-600 mb-4">
-              All prices include labour, equipment, and eco-friendly disposal
-            </p>
-            <QuoteForm 
-              trigger={
-                <Button className="bg-green-600 text-white hover:bg-green-700">
-                  Get Garden Quote
-                </Button>
-              }
-            />
           </div>
         </div>
       </section>
