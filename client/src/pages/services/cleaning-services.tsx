@@ -149,96 +149,6 @@ export default function CleaningServices() {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
-              <TrendingUp className="text-cyan-600" size={36} />
-              Cleaning Services Pricing
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Competitive pricing for professional cleaning services. From estimates shown.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            <Card className="hover:shadow-lg transition-all border-cyan-200 hover:border-cyan-400">
-              <CardContent className="p-6">
-                <h4 className="text-xl font-bold text-gray-900 mb-2">Driveway Cleaning</h4>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-cyan-600">From £90</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">Up to 150 sq meters</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-
-            <Card className="ring-2 ring-cyan-600 shadow-lg hover:shadow-lg transition-all">
-              <CardContent className="p-6">
-                <h4 className="text-xl font-bold text-gray-900 mb-2">Large Driveway</h4>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-cyan-600">From £180</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">150+ sq meters</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full bg-cyan-600 text-white hover:bg-cyan-700">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition-all border-cyan-200 hover:border-cyan-400">
-              <CardContent className="p-6">
-                <h4 className="text-xl font-bold text-gray-900 mb-2">End of Tenancy</h4>
-                <div className="mb-4">
-                  <span className="text-3xl font-bold text-cyan-600">From £200</span>
-                </div>
-                <p className="text-sm text-gray-600 mb-4">1-2 bed property</p>
-                <QuoteForm 
-                  trigger={
-                    <Button className="w-full border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white">
-                      Get Quote
-                    </Button>
-                  }
-                />
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="bg-cyan-50 rounded-lg p-6 border border-cyan-200">
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Additional Cleaning Services</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="flex justify-between items-center text-sm">
-                <span className="font-medium text-gray-900">Patio Cleaning (up to 100 sq m)</span>
-                <span className="text-cyan-600 font-bold">From £80</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="font-medium text-gray-900">Window Cleaning (domestic)</span>
-                <span className="text-cyan-600 font-bold">From £60</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="font-medium text-gray-900">Sealing Service (per sq m)</span>
-                <span className="text-cyan-600 font-bold">From £0.80</span>
-              </div>
-              <div className="flex justify-between items-center text-sm">
-                <span className="font-medium text-gray-900">3+ Bed Tenancy Clean</span>
-                <span className="text-cyan-600 font-bold">From £350</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Driveway & Patio Cleaning */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -449,6 +359,58 @@ export default function CleaningServices() {
         </div>
       </section>
 
+      {/* Pricing Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-2">
+              <TrendingUp className="text-cyan-600" size={36} />
+              Cleaning Services Pricing in Staffordshire
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Competitive pricing for professional cleaning services. From estimates shown.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <Card className="hover:shadow-lg transition-all border-cyan-200 hover:border-cyan-400">
+              <CardContent className="p-6">
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Driveway Cleaning</h4>
+                <div className="mb-4"><span className="text-3xl font-bold text-cyan-600">From £90</span></div>
+                <p className="text-sm text-gray-600 mb-4">Up to 150 sq meters</p>
+                <QuoteForm trigger={<Button className="w-full border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+            <Card className="ring-2 ring-cyan-600 shadow-lg hover:shadow-lg transition-all">
+              <CardContent className="p-6">
+                <h4 className="text-xl font-bold text-gray-900 mb-2">Large Driveway</h4>
+                <div className="mb-4"><span className="text-3xl font-bold text-cyan-600">From £180</span></div>
+                <p className="text-sm text-gray-600 mb-4">150+ sq meters</p>
+                <QuoteForm trigger={<Button className="w-full bg-cyan-600 text-white hover:bg-cyan-700">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-all border-cyan-200 hover:border-cyan-400">
+              <CardContent className="p-6">
+                <h4 className="text-xl font-bold text-gray-900 mb-2">End of Tenancy</h4>
+                <div className="mb-4"><span className="text-3xl font-bold text-cyan-600">From £200</span></div>
+                <p className="text-sm text-gray-600 mb-4">1-2 bed property</p>
+                <QuoteForm trigger={<Button className="w-full border border-cyan-600 text-cyan-600 hover:bg-cyan-600 hover:text-white">Get Quote</Button>} />
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="bg-cyan-50 rounded-lg p-6 border border-cyan-200">
+            <h3 className="text-lg font-bold text-gray-900 mb-4">Additional Cleaning Services</h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="flex justify-between items-center text-sm"><span className="font-medium text-gray-900">Patio Cleaning (up to 100 sq m)</span><span className="text-cyan-600 font-bold">From £80</span></div>
+              <div className="flex justify-between items-center text-sm"><span className="font-medium text-gray-900">Window Cleaning (domestic)</span><span className="text-cyan-600 font-bold">From £60</span></div>
+              <div className="flex justify-between items-center text-sm"><span className="font-medium text-gray-900">Sealing Service (per sq m)</span><span className="text-cyan-600 font-bold">From £0.80</span></div>
+              <div className="flex justify-between items-center text-sm"><span className="font-medium text-gray-900">3+ Bed Tenancy Clean</span><span className="text-cyan-600 font-bold">From £350</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Areas We Serve */}
       <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -465,6 +427,35 @@ export default function CleaningServices() {
               <div key={index} className="p-4 bg-white rounded-lg hover:bg-cyan-50 transition-colors shadow-sm">
                 <span className="font-medium text-gray-800">{area}</span>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-cyan-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Cleaning Services FAQs — Staffordshire & Midlands
+            </h2>
+          </div>
+          <div className="space-y-3">
+            {[
+              { q: "What areas do you cover for cleaning services?", a: "We provide professional cleaning services across Staffordshire and the Midlands, including Stafford, Cannock, Lichfield, and surrounding areas. Same-day bookings often available." },
+              { q: "Are your cleaning products eco-friendly?", a: "Yes, we use environmentally friendly and biodegradable cleaning products that are safe for families, pets, and the environment." },
+              { q: "How long does a typical driveway cleaning take?", a: "A standard driveway cleaning typically takes 2-3 hours depending on size and condition. Larger driveways (150+ sq m) may take up to 4-5 hours." },
+              { q: "Do you offer end-of-tenancy cleaning?", a: "Yes, we specialise in professional end-of-tenancy cleaning that meets landlord and letting agent standards. We provide detailed before/after reports." },
+              { q: "Can you handle stubborn stains and algae?", a: "Yes, we use industrial-grade pressure washing and specialist treatments for stubborn stains, algae, and moss. Most stains can be effectively removed." }
+            ].map((faq, index) => (
+              <details key={index} className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <summary className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors cursor-pointer">
+                  <span className="text-gray-900 font-semibold text-lg leading-snug">{faq.q}</span>
+                </summary>
+                <div className="px-6 pb-5">
+                  <p className="text-gray-600 leading-relaxed">{faq.a}</p>
+                </div>
+              </details>
             ))}
           </div>
         </div>
