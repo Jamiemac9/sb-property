@@ -424,6 +424,27 @@ export default function CommercialWork() {
         </div>
       </section>
 
+      {/* Areas We Serve */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Areas We Serve — Staffordshire & Midlands
+            </h2>
+            <p className="text-xl text-gray-600">
+              Commercial waste management and office clearance across Staffordshire and the wider Midlands
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+            {["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Penkridge", "Eccleshall", "Tamworth", "Wolverhampton", "Burton upon Trent"].map((area, index) => (
+              <div key={index} className="p-4 bg-white rounded-lg hover:bg-purple-50 transition-colors shadow-sm">
+                <span className="font-medium text-gray-800">{area}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
