@@ -9,23 +9,37 @@ import { useSEO } from "@/hooks/use-seo";
 
 const houseClearanceSchema = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "House Clearance Staffordshire",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "SB Property Clearance",
-    "telephone": "07708152348",
-    "url": "https://sbpropertyclearance.com"
-  },
-  "description": "Professional house and flat clearance services across Staffordshire and the Midlands. Full and partial property clearances with same-day service available.",
-  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "GBP",
-    "lowPrice": "150",
-    "highPrice": "2000",
-    "offerCount": "4"
-  }
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "House Clearance Staffordshire",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "SB Property Clearance",
+        "telephone": "07708152348",
+        "url": "https://sbpropertyclearance.com"
+      },
+      "description": "Professional house and flat clearance services across Staffordshire and the Midlands. Full and partial property clearances with same-day service available.",
+      "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "GBP",
+        "lowPrice": "150",
+        "highPrice": "2000",
+        "offerCount": "4"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much does a house clearance cost in Staffordshire?", "acceptedAnswer": { "@type": "Answer", "text": "House clearance costs in Staffordshire start from around £150 for a single room, £300 for a 1-2 bed property, £700 for a 3-4 bed property, and from £1,100 for larger estates. All prices include labour, transport and eco-friendly disposal." } },
+        { "@type": "Question", "name": "How long does a house clearance take?", "acceptedAnswer": { "@type": "Answer", "text": "A single room clearance typically takes 1-2 hours. A 1-2 bed property usually takes half a day, a 3-4 bed property a full day, and larger estates may take 2-3 days." } },
+        { "@type": "Question", "name": "Do you clear everything including furniture and white goods?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we clear everything — furniture, white goods (fridges, washing machines), carpets, garden items, sheds, loft contents, and general household waste." } },
+        { "@type": "Question", "name": "Can you do a house clearance in Stafford the same day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer same-day house clearance in Stafford and across Staffordshire, subject to availability. Call us on 07708152348 to check availability." } },
+        { "@type": "Question", "name": "Do you provide a receipt or waste transfer note?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, as a licensed waste carrier we can provide a Waste Transfer Note for your records." } }
+      ]
+    }
+  ]
 };
 
 const houseFaqs = [

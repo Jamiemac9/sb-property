@@ -9,22 +9,36 @@ import { useSEO } from "@/hooks/use-seo";
 
 const gardenSchema = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Garden Clearance Staffordshire",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "SB Property Clearance",
-    "telephone": "07708152348",
-    "url": "https://sbpropertyclearance.com"
-  },
-  "description": "Professional garden clearance and green waste removal across Staffordshire and the Midlands. Small gardens to large estates.",
-  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "GBP",
-    "lowPrice": "120",
-    "highPrice": "700"
-  }
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Garden Clearance Staffordshire",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "SB Property Clearance",
+        "telephone": "07708152348",
+        "url": "https://sbpropertyclearance.com"
+      },
+      "description": "Professional garden clearance and green waste removal across Staffordshire and the Midlands. Small gardens to large estates.",
+      "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "GBP",
+        "lowPrice": "120",
+        "highPrice": "700"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much does garden clearance cost in Staffordshire?", "acceptedAnswer": { "@type": "Answer", "text": "Garden clearance in Staffordshire starts from £120 for a small garden, £250 for a medium garden, £450 for a large garden, and from £700 for large estate or complex clearances. All prices include labour and eco-friendly green waste disposal." } },
+        { "@type": "Question", "name": "What do you remove in a garden clearance?", "acceptedAnswer": { "@type": "Answer", "text": "We remove overgrown vegetation, hedge trimmings, tree branches and logs, grass cuttings, garden furniture, shed contents, patio and decking materials, plant pots, compost heaps, garden ornaments, and fencing materials." } },
+        { "@type": "Question", "name": "Do you offer garden clearance in Cannock and Lichfield?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we cover all of Staffordshire including Cannock, Lichfield, Stafford, Stone, Rugeley, Eccleshall, Penkridge and surrounding areas." } },
+        { "@type": "Question", "name": "What happens to the garden waste you collect?", "acceptedAnswer": { "@type": "Answer", "text": "All green waste is composted or recycled through approved facilities. We never send organic garden waste to landfill." } },
+        { "@type": "Question", "name": "Can you clear a garden in preparation for landscaping?", "acceptedAnswer": { "@type": "Answer", "text": "Absolutely. Site preparation and clearance ahead of new landscaping projects is one of our specialisms. We can clear overgrown areas, remove old structures, and leave a clean, level site ready for your landscaper." } }
+      ]
+    }
+  ]
 };
 
 const gardenFaqs = [

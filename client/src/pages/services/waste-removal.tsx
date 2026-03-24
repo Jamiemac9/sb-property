@@ -9,22 +9,36 @@ import { useSEO } from "@/hooks/use-seo";
 
 const wasteRemovalSchema = {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Waste Removal Staffordshire & Midlands",
-  "provider": {
-    "@type": "LocalBusiness",
-    "name": "SB Property Clearance",
-    "telephone": "07708152348",
-    "url": "https://sbpropertyclearance.com"
-  },
-  "description": "Professional waste removal and rubbish collection services across Staffordshire and the Midlands. Single items to full van loads, same-day service available.",
-  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"],
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "GBP",
-    "lowPrice": "25",
-    "highPrice": "500"
-  }
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": "Waste Removal Staffordshire & Midlands",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "SB Property Clearance",
+        "telephone": "07708152348",
+        "url": "https://sbpropertyclearance.com"
+      },
+      "description": "Professional waste removal and rubbish collection services across Staffordshire and the Midlands. Single items to full van loads, same-day service available.",
+      "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"],
+      "offers": {
+        "@type": "AggregateOffer",
+        "priceCurrency": "GBP",
+        "lowPrice": "25",
+        "highPrice": "500"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "How much does waste removal cost in Staffordshire?", "acceptedAnswer": { "@type": "Answer", "text": "Waste removal in Staffordshire is priced by item or van load. Single items start from £25 (mattress) to £80 (garden shed). A small van load starts from £120 and a large van load from £200." } },
+        { "@type": "Question", "name": "Can you collect waste the same day in Stafford?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer same-day waste collection across Stafford and Staffordshire, subject to availability. An express same-day service has a £50 supplement. Call 07708152348 to book." } },
+        { "@type": "Question", "name": "What types of waste do you collect?", "acceptedAnswer": { "@type": "Answer", "text": "We collect household waste, furniture, appliances, garden waste, construction and renovation debris, office clearance waste, mattresses, carpets, and commercial waste." } },
+        { "@type": "Question", "name": "Do you recycle the waste you collect?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we aim to recycle or donate over 95% of all waste we collect. Materials are taken to licensed recycling facilities and usable items are donated to charity wherever possible." } },
+        { "@type": "Question", "name": "Are you a licensed waste carrier in Staffordshire?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, SB Property Clearance is a fully licensed waste carrier registered with the Environment Agency. We hold full public liability insurance and can provide a Waste Transfer Note on request." } }
+      ]
+    }
+  ]
 };
 
 const wasteFaqs = [
