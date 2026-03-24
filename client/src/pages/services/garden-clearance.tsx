@@ -1,11 +1,64 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Leaf, CheckCircle, Scissors, Truck, Shield, Recycle, TrendingUp } from "lucide-react";
+import { Leaf, CheckCircle, Scissors, Truck, Shield, Recycle, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
+import { useSEO } from "@/hooks/use-seo";
+
+const gardenSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Garden Clearance Staffordshire",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "SB Property Clearance",
+    "telephone": "07708152348",
+    "url": "https://sbpropertyclearance.com"
+  },
+  "description": "Professional garden clearance and green waste removal across Staffordshire and the Midlands. Small gardens to large estates.",
+  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "GBP",
+    "lowPrice": "120",
+    "highPrice": "700"
+  }
+};
+
+const gardenFaqs = [
+  {
+    question: "How much does garden clearance cost in Staffordshire?",
+    answer: "Garden clearance in Staffordshire starts from £120 for a small garden (up to 3 hours work), £250 for a medium garden, £450 for a large garden, and from £700 for large estate or complex clearances. All prices include labour and eco-friendly green waste disposal."
+  },
+  {
+    question: "What do you remove in a garden clearance?",
+    answer: "We remove overgrown vegetation, hedge trimmings, tree branches and logs, grass cuttings, garden furniture, shed contents, patio and decking materials, plant pots, compost heaps, garden ornaments, and fencing materials."
+  },
+  {
+    question: "Do you offer garden clearance in Cannock and Lichfield?",
+    answer: "Yes, we cover all of Staffordshire including Cannock, Lichfield, Stafford, Stone, Rugeley, Eccleshall, Penkridge and surrounding areas. Contact us to confirm availability at your specific postcode."
+  },
+  {
+    question: "What happens to the garden waste you collect?",
+    answer: "All green waste is composted or recycled through approved facilities. We never send organic garden waste to landfill, and can arrange soil improvement deliveries for new landscaping projects."
+  },
+  {
+    question: "Can you clear a garden in preparation for landscaping?",
+    answer: "Absolutely. Site preparation and clearance ahead of new landscaping projects is one of our specialisms. We can clear overgrown areas, remove old structures, and leave a clean, level site ready for your landscaper."
+  }
+];
 
 export default function GardenClearance() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useSEO({
+    title: "Garden Clearance Staffordshire & Midlands | SB Property Clearance",
+    description: "Professional garden clearance and green waste removal across Staffordshire. Small gardens to large estates. Serving Stafford, Cannock, Lichfield, Stone, Rugeley. Free quotes.",
+    canonical: "https://sbpropertyclearance.com/services/garden-clearance",
+    schema: gardenSchema,
+  });
   const services = [
     {
       icon: Scissors,
@@ -98,8 +151,10 @@ export default function GardenClearance() {
             <div className="lg:text-right">
               <img 
                 src="/garden-before-1.jpg" 
-                alt="Garden clearance before" 
+                alt="Garden clearance Staffordshire - overgrown garden before clearance by SB Property Clearance" 
                 className="rounded-lg shadow-2xl w-full max-w-md mx-auto lg:ml-auto"
+                width="600"
+                height="450"
               />
             </div>
           </div>
@@ -264,13 +319,19 @@ export default function GardenClearance() {
             <div className="space-y-4">
               <img 
                 src="/garden-before-2.jpg" 
-                alt="Garden clearance work" 
+                alt="Garden clearance work in progress - SB Property Clearance Staffordshire" 
                 className="rounded-lg shadow-lg w-full"
+                width="600"
+                height="400"
+                loading="lazy"
               />
               <img 
                 src="/garden-before-3.jpg" 
-                alt="Garden clearance results" 
+                alt="Garden clearance results - cleared garden ready for landscaping Staffordshire" 
                 className="rounded-lg shadow-lg w-full"
+                width="600"
+                height="400"
+                loading="lazy"
               />
             </div>
           </div>
@@ -355,6 +416,37 @@ export default function GardenClearance() {
                 </Button>
               }
             />
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-green-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Garden Clearance FAQs — Staffordshire & Midlands
+            </h2>
+            <p className="text-xl text-gray-600">Common questions about our garden clearance services</p>
+          </div>
+          <div className="space-y-3">
+            {gardenFaqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <button
+                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
+                >
+                  <span className="text-gray-900 font-semibold text-lg leading-snug">{faq.question}</span>
+                  {openFaq === index ? <ChevronUp className="text-green-600 flex-shrink-0" size={22} /> : <ChevronDown className="text-green-600 flex-shrink-0" size={22} />}
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-5">
+                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

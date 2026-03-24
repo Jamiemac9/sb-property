@@ -1,14 +1,36 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Car, Droplets, PaintBucket, CheckCircle, Clock, Shield, TrendingUp } from "lucide-react";
+import { Sparkles, Droplets, PaintBucket, CheckCircle, Clock, Shield, TrendingUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
+import { useSEO } from "@/hooks/use-seo";
+
+const cleaningSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Cleaning Services Staffordshire",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "SB Property Clearance",
+    "telephone": "07708152348",
+    "url": "https://sbpropertyclearance.com"
+  },
+  "description": "Professional cleaning services including driveway cleaning, patio cleaning, and end of tenancy cleaning across Staffordshire and the Midlands.",
+  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"]
+};
 
 export default function CleaningServices() {
+  useSEO({
+    title: "Cleaning Services Staffordshire — Driveway, Patio & Tenancy | SB Property Clearance",
+    description: "Professional driveway cleaning, patio cleaning and end of tenancy cleaning across Staffordshire and the Midlands. 10+ years experience. Fully insured. Free quotes.",
+    canonical: "https://sbpropertyclearance.com/services/cleaning-services",
+    schema: cleaningSchema,
+  });
+
   const services = [
     {
-      icon: Car,
+      icon: Sparkles,
       title: "Driveway & Patio Cleaning",
       description: "Professional pressure washing to restore your outdoor surfaces to like-new condition"
     },

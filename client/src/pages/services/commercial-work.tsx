@@ -4,8 +4,29 @@ import { Building, CheckCircle, Clock, Shield, Recycle, Users, TrendingUp } from
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
+import { useSEO } from "@/hooks/use-seo";
+
+const commercialSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Commercial Waste Management Staffordshire",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "SB Property Clearance",
+    "telephone": "07708152348",
+    "url": "https://sbpropertyclearance.com"
+  },
+  "description": "Professional commercial waste management and office clearance services for businesses across Staffordshire and the Midlands. One-off projects and regular collections.",
+  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"]
+};
 
 export default function CommercialWork() {
+  useSEO({
+    title: "Commercial Waste Management & Office Clearance Staffordshire | SB Property Clearance",
+    description: "Professional commercial waste management and office clearance for businesses across Staffordshire and the Midlands. One-off clearances and regular collections. Free quotes.",
+    canonical: "https://sbpropertyclearance.com/services/commercial-work",
+    schema: commercialSchema,
+  });
   const services = [
     {
       icon: Building,
@@ -106,7 +127,7 @@ export default function CommercialWork() {
               <div className="flex items-center mb-6">
                 <Building className="mr-4" size={48} />
                 <h1 className="text-4xl lg:text-5xl font-bold">
-                  Commercial Waste Management
+                  Commercial Waste Management Staffordshire
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">

@@ -1,11 +1,65 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Home, CheckCircle, Clock, Shield, Recycle, Star, TrendingUp } from "lucide-react";
+import { Home, CheckCircle, Clock, Shield, Recycle, Star, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
+import { useSEO } from "@/hooks/use-seo";
+
+const houseClearanceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "House Clearance Staffordshire",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "SB Property Clearance",
+    "telephone": "07708152348",
+    "url": "https://sbpropertyclearance.com"
+  },
+  "description": "Professional house and flat clearance services across Staffordshire and the Midlands. Full and partial property clearances with same-day service available.",
+  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "GBP",
+    "lowPrice": "150",
+    "highPrice": "2000",
+    "offerCount": "4"
+  }
+};
+
+const houseFaqs = [
+  {
+    question: "How much does a house clearance cost in Staffordshire?",
+    answer: "House clearance costs in Staffordshire start from around £150 for a single room, £300 for a 1-2 bed property, £700 for a 3-4 bed property, and from £1,100 for larger estates. All prices include labour, transport and eco-friendly disposal. We provide a free, no-obligation quote first."
+  },
+  {
+    question: "How long does a house clearance take?",
+    answer: "A single room clearance typically takes 1-2 hours. A 1-2 bed property usually takes half a day, a 3-4 bed property a full day, and larger estates may take 2-3 days. We'll give you a realistic timeframe when we provide your quote."
+  },
+  {
+    question: "Do you clear everything including furniture and white goods?",
+    answer: "Yes, we clear everything — furniture, white goods (fridges, washing machines), carpets, garden items, sheds, loft contents, and general household waste. We handle all the heavy lifting so you don't have to."
+  },
+  {
+    question: "Can you do a house clearance in Stafford the same day?",
+    answer: "Yes, we offer same-day house clearance in Stafford and across Staffordshire, subject to availability. Call us on 07708152348 to check if we can accommodate an urgent clearance."
+  },
+  {
+    question: "Do you provide a receipt or waste transfer note?",
+    answer: "Yes, as a licensed waste carrier we can provide a Waste Transfer Note for your records. This is especially important for probate, landlord, or estate clearances where documentation may be required."
+  }
+];
 
 export default function HouseClearance() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useSEO({
+    title: "House Clearance Staffordshire & Midlands | SB Property Clearance",
+    description: "Professional house and flat clearance across Staffordshire and the Midlands. Full & partial clearances, same-day service, free quotes. Serving Stafford, Cannock, Lichfield, Stone, Rugeley.",
+    canonical: "https://sbpropertyclearance.com/services/house-clearance",
+    schema: houseClearanceSchema,
+  });
   const features = [
     {
       icon: CheckCircle,
@@ -154,8 +208,10 @@ export default function HouseClearance() {
             <div className="lg:text-right">
               <img 
                 src="/bedroom-before.jpg" 
-                alt="House clearance before" 
+                alt="House clearance Staffordshire - bedroom before clearance by SB Property Clearance" 
                 className="rounded-lg shadow-2xl w-full max-w-md mx-auto lg:ml-auto"
+                width="600"
+                height="450"
               />
             </div>
           </div>
@@ -417,6 +473,37 @@ export default function HouseClearance() {
             {areasServed.map((area, index) => (
               <div key={index} className="p-4 bg-white rounded-lg hover:bg-brand-green/5 transition-colors shadow-sm">
                 <span className="font-medium text-gray-800">{area}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-brand-green-lighter">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              House Clearance FAQs — Staffordshire & Midlands
+            </h2>
+            <p className="text-xl text-gray-600">Common questions about our house clearance services</p>
+          </div>
+          <div className="space-y-3">
+            {houseFaqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <button
+                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
+                >
+                  <span className="text-gray-900 font-semibold text-lg leading-snug">{faq.question}</span>
+                  {openFaq === index ? <ChevronUp className="text-brand-green flex-shrink-0" size={22} /> : <ChevronDown className="text-brand-green flex-shrink-0" size={22} />}
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-5">
+                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
               </div>
             ))}
           </div>

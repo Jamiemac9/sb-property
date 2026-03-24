@@ -4,8 +4,35 @@ import { Truck, CheckCircle, Clock, Shield, Package, Users, TrendingUp } from "l
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
+import { useSEO } from "@/hooks/use-seo";
+
+const removalsSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Home Removals Staffordshire",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "SB Property Clearance",
+    "telephone": "07708152348",
+    "url": "https://sbpropertyclearance.com"
+  },
+  "description": "Affordable and professional home removals within a 50-mile radius of Staffordshire. Domestic and commercial customers. Fully insured.",
+  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"],
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "GBP",
+    "lowPrice": "200",
+    "highPrice": "1200"
+  }
+};
 
 export default function HomeRemovals() {
+  useSEO({
+    title: "Home Removals Staffordshire & Midlands | SB Property Clearance",
+    description: "Affordable professional home removals across Staffordshire and the Midlands. 50-mile radius coverage, domestic and commercial. Fully insured. Free quotes.",
+    canonical: "https://sbpropertyclearance.com/services/home-removals",
+    schema: removalsSchema,
+  });
   const services = [
     {
       icon: Truck,

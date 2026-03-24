@@ -1,11 +1,64 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Recycle, Truck, CheckCircle, Shield, Clock, Leaf, TrendingUp } from "lucide-react";
+import { Recycle, Truck, CheckCircle, Shield, Clock, Leaf, TrendingUp, ChevronDown, ChevronUp } from "lucide-react";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
+import { useSEO } from "@/hooks/use-seo";
+
+const wasteRemovalSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Waste Removal Staffordshire & Midlands",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "SB Property Clearance",
+    "telephone": "07708152348",
+    "url": "https://sbpropertyclearance.com"
+  },
+  "description": "Professional waste removal and rubbish collection services across Staffordshire and the Midlands. Single items to full van loads, same-day service available.",
+  "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"],
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "GBP",
+    "lowPrice": "25",
+    "highPrice": "500"
+  }
+};
+
+const wasteFaqs = [
+  {
+    question: "How much does waste removal cost in Staffordshire?",
+    answer: "Waste removal in Staffordshire is priced by item or van load. Single items start from £25 (mattress) to £80 (garden shed). A small van load starts from £120 and a large van load from £200. We always quote upfront with no hidden fees."
+  },
+  {
+    question: "Can you collect waste the same day in Stafford?",
+    answer: "Yes, we offer same-day waste collection across Stafford and Staffordshire, subject to availability. An express same-day service has a £50 supplement. Call 07708152348 to book an urgent collection."
+  },
+  {
+    question: "What types of waste do you collect?",
+    answer: "We collect household waste, furniture, appliances, garden waste, construction and renovation debris, office clearance waste, mattresses, carpets, and commercial waste. We cannot collect hazardous waste such as asbestos or clinical waste."
+  },
+  {
+    question: "Do you recycle the waste you collect?",
+    answer: "Yes, we aim to recycle or donate over 95% of all waste we collect. Materials are taken to licensed recycling facilities and usable items are donated to charity wherever possible."
+  },
+  {
+    question: "Are you a licensed waste carrier in Staffordshire?",
+    answer: "Yes, SB Property Clearance is a fully licensed waste carrier registered with the Environment Agency. We hold full public liability insurance and can provide a Waste Transfer Note on request."
+  }
+];
 
 export default function WasteRemoval() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  useSEO({
+    title: "Waste Removal Staffordshire & Midlands | SB Property Clearance",
+    description: "Professional waste removal and rubbish collection across Staffordshire and the Midlands. Single items or full van loads. Same-day service available. Free quotes. Serving Stafford, Cannock, Lichfield.",
+    canonical: "https://sbpropertyclearance.com/services/waste-removal",
+    schema: wasteRemovalSchema,
+  });
   const services = [
     {
       icon: Truck,
@@ -94,7 +147,7 @@ export default function WasteRemoval() {
               <div className="flex items-center mb-6">
                 <Recycle className="mr-4" size={48} />
                 <h1 className="text-4xl lg:text-5xl font-bold">
-                  Waste Removal Midlands
+                  Waste Removal Staffordshire &amp; Midlands
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">
@@ -351,6 +404,37 @@ export default function WasteRemoval() {
                 Professional team collects and disposes of waste responsibly
               </p>
             </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-emerald-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Waste Removal FAQs — Staffordshire & Midlands
+            </h2>
+            <p className="text-xl text-gray-600">Common questions about our waste removal services</p>
+          </div>
+          <div className="space-y-3">
+            {wasteFaqs.map((faq, index) => (
+              <div key={index} className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                <button
+                  className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors"
+                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                  aria-expanded={openFaq === index}
+                >
+                  <span className="text-gray-900 font-semibold text-lg leading-snug">{faq.question}</span>
+                  {openFaq === index ? <ChevronUp className="text-emerald-600 flex-shrink-0" size={22} /> : <ChevronDown className="text-emerald-600 flex-shrink-0" size={22} />}
+                </button>
+                {openFaq === index && (
+                  <div className="px-6 pb-5">
+                    <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>

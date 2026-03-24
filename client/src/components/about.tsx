@@ -19,7 +19,7 @@ export default function About() {
               SB Property Clearance are highly experienced, with over 10 years of being a fully licensed, professional rubbish removal company who offers professional rubbish clearances to domestic and commercial customers in The Midlands, Staffordshire and surrounding areas.
             </p>
             
-            <h4 className="text-xl font-semibold text-gray-900 mb-4">10 Reasons to Choose Our Skip Hire Alternative Service</h4>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">10 Reasons to Choose SB Property Clearance</h3>
             <div className="grid grid-cols-1 gap-3 mb-6">
               <div className="flex items-start space-x-3">
                 <div className="flex-shrink-0 w-5 h-5 bg-brand-green rounded-full flex items-center justify-center mt-0.5">

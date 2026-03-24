@@ -1,4 +1,5 @@
 
+import { useSEO } from "@/hooks/use-seo";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
 import QuoteForm from "@/components/quote-form";
@@ -7,12 +8,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Phone, MessageCircle, Mail, Clock, CheckCircle } from "lucide-react";
 
 export default function Quotes() {
+  useSEO({
+    title: "Free Property Clearance Quote Staffordshire | SB Property Clearance",
+    description: "Get a free, no-obligation quote for house clearance, waste removal, garden clearance or home removals across Staffordshire and the Midlands. Call, WhatsApp or fill in our form.",
+    canonical: "https://sbpropertyclearance.com/quotes",
+  });
+
   const handleCallDirect = () => {
-    window.location.href = "tel:07753226214";
+    window.location.href = "tel:07708152348";
   };
 
   const handleWhatsAppDirect = () => {
-    const phoneNumber = "447753226214";
+    const phoneNumber = "447708152348";
     const message = "Hello! I found your website and would like to get a quote for property clearance services.";
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
@@ -87,7 +94,6 @@ export default function Quotes() {
     "Waste Removal",
     "Commercial Work",
     "Gardening & Landscaping",
-    "Skip Bags",
     "Driveway & Patio Cleaning",
     "Home Removals",
     "Gutter Cleaning",
