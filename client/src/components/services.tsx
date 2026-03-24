@@ -1,7 +1,7 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Home, Building, Leaf, HardHat, Sofa, Recycle, Truck, Car, Droplets, Scissors, PaintBucket } from "lucide-react";
+import { Home, Building, Leaf, Droplets, Truck, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 import QuoteForm from "@/components/quote-form";
 
@@ -16,7 +16,7 @@ export default function Services() {
       link: "/services/house-clearance"
     },
     {
-      icon: Recycle,
+      icon: Truck,
       title: "Waste Removal Midlands",
       description: "Expert waste removal across Staffordshire for small items at home or complete residential waste removal services.",
       features: ["Single item removal Stafford", "Residential waste removal", "Junk removal Cannock area", "Fixed pricing Midlands"],
@@ -41,11 +41,11 @@ export default function Services() {
     },
 
     {
-      icon: Car,
+      icon: Sparkles,
       title: "Cleaning Services",
       description: "Professional cleaning specialists with 10+ years experience in driveway, patio and end of tenancy cleaning.",
       features: ["Driveway cleaning", "Patio restoration", "Deep cleaning", "End of tenancy cleans"],
-      color: "from-slate-500 to-slate-600",
+      color: "from-cyan-500 to-cyan-600",
       link: "/services/cleaning-services"
     },
     {
