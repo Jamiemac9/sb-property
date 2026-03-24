@@ -161,7 +161,7 @@ export default function WasteRemoval() {
               <div className="flex items-center mb-6">
                 <Recycle className="mr-4" size={48} />
                 <h1 className="text-4xl lg:text-5xl font-bold">
-                  Waste Removal Staffordshire &amp; Midlands
+                  Staffordshire Waste Removal &amp; Rubbish Collection
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">

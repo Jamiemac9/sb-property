@@ -123,7 +123,7 @@ export default function HomeRemovals() {
               <div className="flex items-center mb-6">
                 <Truck className="mr-4" size={48} />
                 <h1 className="text-4xl lg:text-5xl font-bold">
-                  Home Removals Staffordshire
+                  Staffordshire Home Removals
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">

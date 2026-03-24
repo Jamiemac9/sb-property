@@ -28,8 +28,10 @@ export default function Header() {
               >
               <img 
                 src="/logo.png" 
-                alt="SB Property Clearance" 
+                alt="SB Property Clearance logo" 
                 className="h-12 w-auto max-w-[200px] object-contain hover:opacity-90 transition-opacity"
+                width="200"
+                height="48"
                 onLoad={() => console.log('Logo loaded successfully')}
                 onError={(e) => {
                   console.error('Logo failed to load, showing fallback');

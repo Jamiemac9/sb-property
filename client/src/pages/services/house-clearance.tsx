@@ -194,7 +194,7 @@ export default function HouseClearance() {
               <div className="flex items-center mb-6">
                 <Home className="mr-4 flex-shrink-0" size={48} />
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-                  House & Flat Clearance Staffordshire
+                  Staffordshire House & Flat Clearance
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">

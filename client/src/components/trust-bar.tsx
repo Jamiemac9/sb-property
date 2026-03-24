@@ -54,15 +54,21 @@ export default function TrustBar() {
             <div className="flex items-center justify-center h-24 bg-white rounded-lg shadow-md border hover:shadow-lg transition-shadow">
               <img 
                 src="/checkatrade-logo.png" 
-                alt="Checkatrade - Where reputation matters" 
+                alt="Checkatrade accredited - SB Property Clearance" 
                 className="max-h-20 max-w-full object-contain px-4"
+                width="200"
+                height="80"
+                loading="lazy"
               />
             </div>
             <div className="flex items-center justify-center h-24 bg-white rounded-lg shadow-md border hover:shadow-lg transition-shadow">
               <img 
                 src="/environment-agency-logo.png" 
-                alt="Environment Agency Licensed" 
+                alt="Environment Agency licensed waste carrier" 
                 className="max-h-20 max-w-full object-contain px-4"
+                width="200"
+                height="80"
+                loading="lazy"
               />
             </div>
           </div>

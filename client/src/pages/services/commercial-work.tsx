@@ -127,7 +127,7 @@ export default function CommercialWork() {
               <div className="flex items-center mb-6">
                 <Building className="mr-4" size={48} />
                 <h1 className="text-4xl lg:text-5xl font-bold">
-                  Commercial Waste Management Staffordshire
+                  Staffordshire Commercial Waste Management
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">

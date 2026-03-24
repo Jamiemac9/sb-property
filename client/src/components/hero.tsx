@@ -20,8 +20,8 @@ export default function Hero() {
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-          Fast, Reliable & Responsible<br />
-          <span className="text-brand-green-light">Property Clearance in Staffordshire</span>
+          <span className="text-brand-green-light">Staffordshire Property Clearance</span><br />
+          Fast, Reliable &amp; Responsible
         </h1>
         <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed">
           Professional house clearance, office clearance, and garden clearance across Staffordshire and the Midlands. Serving Stafford, Cannock, Lichfield, Stone, Rugeley and surrounding areas. We do the heavy lifting, so you don't have to.

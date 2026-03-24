@@ -137,7 +137,7 @@ export default function GardenClearance() {
               <div className="flex items-center mb-6">
                 <Leaf className="mr-4 flex-shrink-0" size={48} />
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-                  Garden Clearance Staffordshire
+                  Staffordshire Garden Clearance
                 </h1>
               </div>
               <p className="text-xl mb-8 text-white/90">

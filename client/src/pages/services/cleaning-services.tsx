@@ -84,7 +84,7 @@ export default function CleaningServices() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-                Professional Cleaning Services Staffordshire
+                Staffordshire Cleaning Services
               </h1>
               <p className="text-xl mb-8 text-white/90">
                 Expert cleaning services including driveway & patio cleaning and end of tenancy cleaning 
