@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* VARIATION 3: MINIMALIST PROFESSIONAL - Clean, sophisticated, premium, quiet elegance */
+:root {
+  --background: hsl(0, 0%, 99%);
+  --foreground: hsl(210, 15%, 20%);
+  --muted: hsl(210, 8%, 94%);
+  --muted-foreground: hsl(210, 10%, 55%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 15%, 20%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(210, 15%, 20%);
+  --border: hsl(210, 8%, 92%);
+  --input: hsl(210, 8%, 96%);
+  --primary: hsl(160, 55%, 42%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 8%, 94%);
+  --secondary-foreground: hsl(210, 15%, 25%);
+  --accent: hsl(160, 55%, 42%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 65%, 50%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(160, 55%, 42%);
+  --radius: 0.625rem;
+  --brand-green: hsl(160, 55%, 42%);
+  --brand-green-light: hsl(160, 55%, 52%);
+  --brand-green-lighter: hsl(160, 55%, 94%);
+  --brand-blue: hsl(210, 60%, 45%);
+  --brand-blue-light: hsl(210, 60%, 55%);
+  --brand-blue-lighter: hsl(210, 60%, 94%);
+  --brand-orange: hsl(25, 75%, 50%);
+  --brand-orange-light: hsl(25, 75%, 60%);
+  --brand-orange-lighter: hsl(25, 75%, 94%);
+  --brand-purple: hsl(270, 65%, 55%);
+  --brand-purple-light: hsl(270, 65%, 65%);
+  --brand-purple-lighter: hsl(270, 65%, 94%);
+  --brand-gray: hsl(210, 10%, 50%);
+  --brand-gray-light: hsl(210, 10%, 62%);
+  --brand-gray-lighter: hsl(210, 10%, 94%);
+}
+
+.dark {
+  --background: hsl(210, 20%, 8%);
+  --foreground: hsl(210, 30%, 94%);
+  --muted: hsl(210, 15%, 22%);
+  --muted-foreground: hsl(210, 20%, 68%);
+  --popover: hsl(210, 20%, 8%);
+  --popover-foreground: hsl(210, 30%, 94%);
+  --card: hsl(210, 20%, 10%);
+  --card-foreground: hsl(210, 30%, 94%);
+  --border: hsl(210, 15%, 25%);
+  --input: hsl(210, 15%, 20%);
+  --primary: hsl(160, 55%, 52%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(210, 15%, 22%);
+  --secondary-foreground: hsl(210, 30%, 94%);
+  --accent: hsl(160, 55%, 52%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 65%, 50%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(160, 55%, 52%);
+  --radius: 0.625rem;
+  --brand-green: hsl(160, 55%, 52%);
+  --brand-green-light: hsl(160, 55%, 62%);
+  --brand-green-lighter: hsl(160, 55%, 94%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: 400;
+    letter-spacing: -0.1px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+    color: hsl(210, 15%, 15%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
