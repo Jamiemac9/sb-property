@@ -84,8 +84,8 @@ export default function About() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-brand-green/20">
-                <div className="text-3xl font-bold text-brand-green mb-2">500+</div>
-                <div className="text-gray-600 font-medium">Properties Cleared</div>
+                <div className="text-3xl font-bold text-brand-green mb-2">40</div>
+                <div className="text-gray-600 font-medium">Checkatrade Reviews</div>
               </div>
               <div className="text-center p-6 bg-white rounded-xl shadow-lg border border-blue-200">
                 <div className="text-3xl font-bold text-blue-600 mb-2">95%</div>

@@ -13,6 +13,7 @@ import CommercialWork from "@/pages/services/commercial-work";
 
 import CleaningServices from "@/pages/services/cleaning-services";
 import HomeRemovals from "@/pages/services/home-removals";
+import AreaPage from "@/pages/area";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +48,7 @@ function AppContent() {
 
       <Route path="/services/cleaning-services" component={CleaningServices} />
       <Route path="/services/home-removals" component={HomeRemovals} />
+      <Route path="/areas/:slug" component={AreaPage} />
       <Route component={NotFound} />
     </Switch>
   );

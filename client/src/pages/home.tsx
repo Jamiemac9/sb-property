@@ -10,6 +10,7 @@ import Location from "@/components/location";
 import Footer from "@/components/footer";
 import Chatbot from "@/components/chatbot";
 import HomeFAQ from "@/components/home-faq";
+import VerifiedReviews from "@/components/verified-reviews";
 
 const homeSchema = {
   "@context": "https://schema.org",
@@ -28,7 +29,7 @@ const homeSchema = {
       "name": "Do you offer same-day property clearance in Stafford?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes, we offer same-day and next-day property clearance across Stafford and the wider Staffordshire area, subject to availability. Call us on 07708152348 to check availability for urgent clearances."
+        "text": "Yes, we offer same-day and next-day property clearance across Stafford and the wider Staffordshire area, subject to availability. Call us on +44 7708 152348 to check availability for urgent clearances."
       }
     },
     {
@@ -83,6 +84,7 @@ export default function Home() {
       <Services />
       <BeforeAfterCarousel />
       <Location />
+      <VerifiedReviews />
       <About />
       <HomeFAQ />
       <Footer />

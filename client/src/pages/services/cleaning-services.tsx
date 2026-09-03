@@ -13,7 +13,7 @@ const cleaningSchema = {
   "provider": {
     "@type": "LocalBusiness",
     "name": "SB Property Clearance",
-    "telephone": "07708152348",
+    "telephone": "+447708152348",
     "url": "https://sbpropertyclearance.com"
   },
   "description": "Professional cleaning services including driveway cleaning, patio cleaning, and end of tenancy cleaning across Staffordshire and the Midlands.",

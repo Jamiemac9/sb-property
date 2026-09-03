@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Link } from "wouter";
+import { serviceAreas } from "@shared/service-areas";
 
 export default function Footer() {
 
@@ -20,7 +21,7 @@ export default function Footer() {
   return (
     <footer id="contact" className="bg-gradient-to-br from-gray-900 via-gray-800 to-brand-green/10 text-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Company Info */}
           <div>
             <h3 className="text-xl font-bold text-brand-green-light mb-4">SB Property Clearance</h3>
@@ -125,6 +126,20 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Areas We Serve */}
+          <div>
+            <h4 className="text-lg font-semibold text-brand-green-light mb-4">Areas We Serve</h4>
+            <ul className="space-y-2">
+              {serviceAreas.map((area) => (
+                <li key={area.slug}>
+                  <Link href={`/areas/${area.slug}`} className="text-gray-300 hover:text-brand-green-light transition-colors">
+                    {area.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Contact Info */}
           <div>
             <h4 className="text-lg font-semibold text-brand-green-light mb-4">Contact Us</h4>
@@ -137,13 +152,13 @@ export default function Footer() {
                 </div>
               </div>
               <button 
-                onClick={() => window.open('tel:+44708152348', '_self')}
+                onClick={() => window.open('tel:+447708152348', '_self')}
                 className="flex items-start p-3 bg-brand-green/5 border border-brand-green/20 rounded-lg hover:bg-brand-green/10 transition-colors w-full text-left cursor-pointer"
               >
                 <Phone className="text-brand-green-light mr-3 mt-1 flex-shrink-0" size={18} />
                 <div>
                   <p className="text-gray-300 font-medium">Call Us</p>
-                  <p className="text-brand-green-light text-sm font-semibold">+44708152348</p>
+                  <p className="text-brand-green-light text-sm font-semibold">+44 7708 152348</p>
                 </div>
               </button>
               <button 
@@ -168,7 +183,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-500">
               <div>
                 <p className="font-medium text-brand-green-light mb-1">Primary Service Areas:</p>
-                <p>Stafford • Cannock • Lichfield • Stone • Rugeley • Eccleshall • Penkridge • Uttoxeter • Newport</p>
+                <p>{serviceAreas.map((area) => area.name).join(" • ")}</p>
               </div>
               <div>
                 <p className="font-medium text-brand-green-light mb-1">Services:</p>

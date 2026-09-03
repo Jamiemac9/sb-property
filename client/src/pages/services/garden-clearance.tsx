@@ -16,7 +16,7 @@ const gardenSchema = {
       "provider": {
         "@type": "LocalBusiness",
         "name": "SB Property Clearance",
-        "telephone": "07708152348",
+        "telephone": "+447708152348",
         "url": "https://sbpropertyclearance.com"
       },
       "description": "Professional garden clearance and green waste removal across Staffordshire and the Midlands. Small gardens to large estates.",

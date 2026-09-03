@@ -13,7 +13,7 @@ const commercialSchema = {
   "provider": {
     "@type": "LocalBusiness",
     "name": "SB Property Clearance",
-    "telephone": "07708152348",
+        "telephone": "+447708152348",
     "url": "https://sbpropertyclearance.com"
   },
   "description": "Professional commercial waste management and office clearance services for businesses across Staffordshire and the Midlands. One-off projects and regular collections.",

@@ -1,0 +1,1 @@
+- [Location-page URL strategy](location-page-url-strategy.md) — use crawlable `/areas/<town>` subfolders; separate town subdomains dilute authority and require DNS.

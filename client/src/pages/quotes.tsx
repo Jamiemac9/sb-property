@@ -15,7 +15,7 @@ export default function Quotes() {
   });
 
   const handleCallDirect = () => {
-    window.location.href = "tel:07708152348";
+    window.location.href = "tel:+447708152348";
   };
 
   const handleWhatsAppDirect = () => {

@@ -13,7 +13,7 @@ const removalsSchema = {
   "provider": {
     "@type": "LocalBusiness",
     "name": "SB Property Clearance",
-    "telephone": "07708152348",
+    "telephone": "+447708152348",
     "url": "https://sbpropertyclearance.com"
   },
   "description": "Affordable and professional home removals within a 50-mile radius of Staffordshire. Domestic and commercial customers. Fully insured.",

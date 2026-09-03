@@ -8,7 +8,7 @@ const faqs = [
   },
   {
     question: "Do you offer same-day property clearance in Stafford?",
-    answer: "Yes, we offer same-day and next-day property clearance across Stafford and the wider Staffordshire area, subject to availability. Call us on 07708152348 to check availability for urgent clearances."
+    answer: "Yes, we offer same-day and next-day property clearance across Stafford and the wider Staffordshire area, subject to availability. Call us on +44 7708 152348 to check availability for urgent clearances."
   },
   {
     question: "Are you a licensed waste carrier in Staffordshire?",

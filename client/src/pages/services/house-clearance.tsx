@@ -16,7 +16,7 @@ const houseClearanceSchema = {
       "provider": {
         "@type": "LocalBusiness",
         "name": "SB Property Clearance",
-        "telephone": "07708152348",
+        "telephone": "+447708152348",
         "url": "https://sbpropertyclearance.com"
       },
       "description": "Professional house and flat clearance services across Staffordshire and the Midlands. Full and partial property clearances with same-day service available.",
@@ -35,7 +35,7 @@ const houseClearanceSchema = {
         { "@type": "Question", "name": "How much does a house clearance cost in Staffordshire?", "acceptedAnswer": { "@type": "Answer", "text": "House clearance costs in Staffordshire start from around £150 for a single room, £300 for a 1-2 bed property, £700 for a 3-4 bed property, and from £1,100 for larger estates. All prices include labour, transport and eco-friendly disposal." } },
         { "@type": "Question", "name": "How long does a house clearance take?", "acceptedAnswer": { "@type": "Answer", "text": "A single room clearance typically takes 1-2 hours. A 1-2 bed property usually takes half a day, a 3-4 bed property a full day, and larger estates may take 2-3 days." } },
         { "@type": "Question", "name": "Do you clear everything including furniture and white goods?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we clear everything — furniture, white goods (fridges, washing machines), carpets, garden items, sheds, loft contents, and general household waste." } },
-        { "@type": "Question", "name": "Can you do a house clearance in Stafford the same day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer same-day house clearance in Stafford and across Staffordshire, subject to availability. Call us on 07708152348 to check availability." } },
+        { "@type": "Question", "name": "Can you do a house clearance in Stafford the same day?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, we offer same-day house clearance in Stafford and across Staffordshire, subject to availability. Call us on +44 7708 152348 to check availability." } },
         { "@type": "Question", "name": "Do you provide a receipt or waste transfer note?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, as a licensed waste carrier we can provide a Waste Transfer Note for your records." } }
       ]
     }
@@ -57,7 +57,7 @@ const houseFaqs = [
   },
   {
     question: "Can you do a house clearance in Stafford the same day?",
-    answer: "Yes, we offer same-day house clearance in Stafford and across Staffordshire, subject to availability. Call us on 07708152348 to check if we can accommodate an urgent clearance."
+    answer: "Yes, we offer same-day house clearance in Stafford and across Staffordshire, subject to availability. Call us on +44 7708 152348 to check if we can accommodate an urgent clearance."
   },
   {
     question: "Do you provide a receipt or waste transfer note?",
