@@ -9,6 +9,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isAreasOpen, setIsAreasOpen] = useState(false);
+  const [isAreasOpen, setIsAreasOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -53,17 +54,25 @@ export default function Header() {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden lg:flex items-center gap-5">
             <Link href="/" className="text-gray-700 hover:text-brand-green font-medium transition-colors">
               Home
             </Link>
             
             {/* Services Dropdown */}
             <div className="relative">
-              <button 
-                onClick={() => setIsServicesOpen(!isServicesOpen)}
-                onMouseEnter={() => setIsServicesOpen(true)}
-                className="text-gray-700 hover:text-brand-green font-medium transition-colors flex items-center"
+              <button
+                onClick={() => {
+                  setIsServicesOpen(!isServicesOpen);
+                  setIsAreasOpen(false);
+                }}
+                onMouseEnter={() => {
+                  setIsServicesOpen(true);
+                  setIsAreasOpen(false);
+                }}
+                className="whitespace-nowrap text-gray-700 hover:text-brand-green font-medium transition-colors flex items-center"
+                aria-expanded={isServicesOpen}
+                aria-haspopup="true"
               >
                 Services
                 <ChevronDown className={`ml-1 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} size={16} />
