@@ -9,7 +9,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isAreasOpen, setIsAreasOpen] = useState(false);
-  const [isAreasOpen, setIsAreasOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -84,23 +83,23 @@ export default function Header() {
                   onMouseLeave={() => setIsServicesOpen(false)}
                 >
                   <div className="py-2">
-                    <Link href="/services/house-clearance" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                    <Link href="/services/house-clearance" onClick={() => setIsServicesOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       House & Flat Clearance
                     </Link>
-                    <Link href="/services/garden-clearance" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                    <Link href="/services/garden-clearance" onClick={() => setIsServicesOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Garden Clearance
                     </Link>
-                    <Link href="/services/waste-removal" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                    <Link href="/services/waste-removal" onClick={() => setIsServicesOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Waste Removal
                     </Link>
-                    <Link href="/services/commercial-work" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                    <Link href="/services/commercial-work" onClick={() => setIsServicesOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Commercial Work
                     </Link>
 
-                    <Link href="/services/cleaning-services" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                    <Link href="/services/cleaning-services" onClick={() => setIsServicesOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Cleaning Services
                     </Link>
-                    <Link href="/services/home-removals" className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
+                    <Link href="/services/home-removals" onClick={() => setIsServicesOpen(false)} className="block px-4 py-2 text-sm text-gray-700 hover:bg-brand-green/5 hover:text-brand-green transition-colors">
                       Home Removals
                     </Link>
                   </div>
@@ -111,9 +110,15 @@ export default function Header() {
               {/* Areas Dropdown */}
               <div className="relative">
                 <button
-                  onClick={() => setIsAreasOpen(!isAreasOpen)}
-                  onMouseEnter={() => setIsAreasOpen(true)}
-                  className="text-brand-green hover:text-brand-green-light font-semibold transition-colors flex items-center"
+                  onClick={() => {
+                    setIsAreasOpen(!isAreasOpen);
+                    setIsServicesOpen(false);
+                  }}
+                  onMouseEnter={() => {
+                    setIsAreasOpen(true);
+                    setIsServicesOpen(false);
+                  }}
+                  className="whitespace-nowrap text-brand-green hover:text-brand-green-light font-semibold transition-colors flex items-center"
                   aria-expanded={isAreasOpen}
                   aria-haspopup="true"
                 >
