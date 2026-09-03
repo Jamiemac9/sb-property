@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { useSEO } from "@/hooks/use-seo";
 import Header from "@/components/header";
 import Hero from "@/components/hero";
@@ -6,11 +7,12 @@ import Services from "@/components/services";
 import BeforeAfterCarousel from "@/components/before-after-carousel";
 import HowItWorks from "@/components/how-it-works";
 import About from "@/components/about";
-import Location from "@/components/location";
 import Footer from "@/components/footer";
-import Chatbot from "@/components/chatbot";
 import HomeFAQ from "@/components/home-faq";
 import VerifiedReviews from "@/components/verified-reviews";
+
+const Location = lazy(() => import("@/components/location"));
+const Chatbot = lazy(() => import("@/components/chatbot"));
 
 const homeSchema = {
   "@context": "https://schema.org",
@@ -83,12 +85,16 @@ export default function Home() {
       <TrustBar />
       <Services />
       <BeforeAfterCarousel />
-      <Location />
+      <Suspense fallback={<section className="min-h-[420px] bg-gray-50" aria-label="Loading location information" />}>
+        <Location />
+      </Suspense>
       <VerifiedReviews />
       <About />
       <HomeFAQ />
       <Footer />
-      <Chatbot />
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
     </div>
   );
 }

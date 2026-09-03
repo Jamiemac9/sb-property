@@ -3,6 +3,9 @@ import { Link } from "wouter";
 import { serviceAreas } from "@shared/service-areas";
 
 export default function Footer() {
+  const preloadAreaPage = () => {
+    void import("@/pages/area");
+  };
 
   const scrollToSection = (id: string) => {
     // If we're not on the home page, navigate there first
@@ -132,7 +135,14 @@ export default function Footer() {
             <ul className="space-y-2">
               {serviceAreas.map((area) => (
                 <li key={area.slug}>
-                  <Link href={`/areas/${area.slug}`} className="text-gray-300 hover:text-brand-green-light transition-colors">
+                  <Link
+                    href={`/areas/${area.slug}`}
+                    className="text-gray-300 hover:text-brand-green-light transition-colors"
+                    onMouseEnter={preloadAreaPage}
+                    onFocus={preloadAreaPage}
+                    onTouchStart={preloadAreaPage}
+                    onClick={() => window.scrollTo({ top: 0, behavior: "auto" })}
+                  >
                     {area.name}
                   </Link>
                 </li>
