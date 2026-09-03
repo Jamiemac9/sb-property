@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Home, Building, Leaf, Droplets, Truck, Sparkles } from "lucide-react";
 import { Link } from "wouter";
 import QuoteForm from "@/components/quote-form";
+import AreaLink from "@/components/area-link";
 
 export default function Services() {
   const services = [
@@ -80,7 +81,21 @@ export default function Services() {
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center text-sm text-gray-600">
                     <span className="w-2 h-2 bg-brand-green rounded-full mr-2"></span>
-                    {feature}
+                    {feature === "Partial clearance Stafford area" ? (
+                      <>Partial clearance <AreaLink slug="stafford">Stafford</AreaLink> area</>
+                    ) : feature === "Single item removal Stafford" ? (
+                      <>Single item removal <AreaLink slug="stafford">Stafford</AreaLink></>
+                    ) : feature === "Junk removal Cannock area" ? (
+                      <>Junk removal <AreaLink slug="cannock">Cannock</AreaLink> area</>
+                    ) : feature === "Garden clearance Lichfield" ? (
+                      <>Garden clearance <AreaLink slug="lichfield">Lichfield</AreaLink></>
+                    ) : feature === "Green waste removal Stone" ? (
+                      <>Green waste removal <AreaLink slug="stone">Stone</AreaLink></>
+                    ) : feature === "Garden maintenance Stafford" ? (
+                      <>Garden maintenance <AreaLink slug="stafford">Stafford</AreaLink></>
+                    ) : (
+                      feature
+                    )}
                   </li>
                 ))}
               </ul>

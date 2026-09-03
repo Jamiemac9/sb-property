@@ -3,6 +3,8 @@ import { GoogleMap, LoadScript, InfoWindow } from "@react-google-maps/api";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Clock } from "lucide-react";
+import AreaLink from "@/components/area-link";
+import { serviceAreas } from "@shared/service-areas";
 
 const containerStyle = {
   width: '100%',
@@ -56,9 +58,11 @@ export default function Location() {
     <section id="location" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Find Us in Stafford</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            Find Us in <AreaLink slug="stafford">Stafford</AreaLink>
+          </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Contact our Stafford-based team for clearance services across the Midlands
+            Contact our <AreaLink slug="stafford">Stafford</AreaLink>-based team for clearance services across the Midlands
           </p>
         </div>
 
@@ -140,6 +144,21 @@ export default function Location() {
               </CardContent>
             </Card>
           </div>
+
+        <div className="mt-12 text-center">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Areas We Serve</h3>
+          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            {serviceAreas.map((area) => (
+              <AreaLink
+                key={area.slug}
+                slug={area.slug}
+                className="inline-flex items-center rounded-full border border-brand-green/30 bg-brand-green-lighter px-4 py-2 no-underline hover:bg-brand-green hover:text-white"
+              >
+                {area.name}
+              </AreaLink>
+            ))}
+          </div>
+        </div>
 
         </div>
       </div>

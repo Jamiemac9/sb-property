@@ -56,24 +56,6 @@ export default function CleaningServices() {
     "Window cleaning", "Carpet cleaning", "Complete property clean"
   ];
 
-  const beforeAfterItems = [
-    {
-      service: "Driveway Cleaning",
-      before: "Stained, moss-covered, blocked",
-      after: "Clean, clear, professionally finished"
-    },
-    {
-      service: "Gutter Cleaning", 
-      before: "Blocked, overflowing, damaged",
-      after: "Free-flowing, clear, functional"
-    },
-    {
-      service: "End of Tenancy",
-      before: "Lived-in, needs attention",
-      after: "Spotless, inspection-ready"
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -313,48 +295,6 @@ export default function CleaningServices() {
                 </div>
               </Card>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Before & After */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Transformation Results
-            </h2>
-            <p className="text-xl text-gray-600">
-              See the dramatic difference our professional cleaning makes
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {beforeAfterItems.map((item, index) => (
-              <Card key={index} className="text-center p-6">
-                <h3 className="text-lg font-semibold mb-4 text-cyan-800">{item.service}</h3>
-                <div className="space-y-4">
-                  <div className="bg-red-50 border border-red-200 rounded p-3">
-                    <h4 className="text-sm font-medium text-red-800 mb-1">Before</h4>
-                    <p className="text-red-700 text-sm">{item.before}</p>
-                  </div>
-                  <div className="bg-green-50 border border-green-200 rounded p-3">
-                    <h4 className="text-sm font-medium text-green-800 mb-1">After</h4>
-                    <p className="text-green-700 text-sm">{item.after}</p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <QuoteForm 
-              trigger={
-                <Button className="bg-cyan-600 text-white hover:bg-cyan-700">
-                  Book Cleaning Service
-                </Button>
-              }
-            />
           </div>
         </div>
       </section>

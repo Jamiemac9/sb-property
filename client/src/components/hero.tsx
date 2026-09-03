@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import QuoteForm from "@/components/quote-form";
+import AreaLink from "@/components/area-link";
 
 export default function Hero() {
   const scrollToSection = (id: string) => {
@@ -24,7 +25,12 @@ export default function Hero() {
           Fast, Reliable &amp; Responsible
         </h1>
         <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-4xl mx-auto leading-relaxed">
-          Professional house clearance, office clearance, and garden clearance across Staffordshire and the Midlands. Serving Stafford, Cannock, Lichfield, Stone, Rugeley and surrounding areas. We do the heavy lifting, so you don't have to.
+           Professional house clearance, office clearance, and garden clearance across Staffordshire and the Midlands. Serving{" "}
+           <AreaLink slug="stafford" className="text-brand-green-light decoration-brand-green-light/60 hover:text-white">Stafford</AreaLink>,{" "}
+           <AreaLink slug="cannock" className="text-brand-green-light decoration-brand-green-light/60 hover:text-white">Cannock</AreaLink>,{" "}
+           <AreaLink slug="lichfield" className="text-brand-green-light decoration-brand-green-light/60 hover:text-white">Lichfield</AreaLink>,{" "}
+           <AreaLink slug="stone" className="text-brand-green-light decoration-brand-green-light/60 hover:text-white">Stone</AreaLink>,{" "}
+           <AreaLink slug="rugeley" className="text-brand-green-light decoration-brand-green-light/60 hover:text-white">Rugeley</AreaLink> and surrounding areas. We do the heavy lifting, so you don't have to.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <QuoteForm 
