@@ -22,6 +22,8 @@ export const verifiedReviews = [
 
 export const checkatradeUrl =
   "https://www.checkatrade.com/trades/SBPropertyClearance/reviews";
+export const googleReviewsUrl =
+  "https://www.google.com/search?q=SB+Property+Clearance+Stafford+reviews";
 
 export default function VerifiedReviews({ compact = false }: { compact?: boolean }) {
   const reviews = compact ? verifiedReviews.slice(0, 2) : verifiedReviews;
@@ -36,9 +38,9 @@ export default function VerifiedReviews({ compact = false }: { compact?: boolean
             ))}
           </div>
           <h2 id="verified-reviews-heading" className="text-3xl font-bold text-gray-900">
-            10/10 from 40 Checkatrade reviews
+            Quality reviews from Checkatrade and Google
           </h2>
-          <p className="mt-3 text-gray-600">Recent feedback published by verified customers</p>
+          <p className="mt-3 text-gray-600">Recent feedback from our public review profiles</p>
         </div>
         <div className={`grid gap-6 ${reviews.length === 3 ? "md:grid-cols-3" : "md:grid-cols-2 max-w-4xl mx-auto"}`}>
           {reviews.map((review) => (
@@ -56,10 +58,15 @@ export default function VerifiedReviews({ compact = false }: { compact?: boolean
             </Card>
           ))}
         </div>
-        <div className="text-center mt-8">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8">
           <Button asChild variant="outline" className="border-brand-green text-brand-green hover:bg-brand-green hover:text-white">
             <a href={checkatradeUrl} target="_blank" rel="noopener noreferrer">
-              Read all verified reviews <ExternalLink className="ml-2 h-4 w-4" />
+              Read Checkatrade reviews <ExternalLink className="ml-2 h-4 w-4" />
+            </a>
+          </Button>
+          <Button asChild variant="outline" className="border-blue-600 text-blue-700 hover:bg-blue-600 hover:text-white">
+            <a href={googleReviewsUrl} target="_blank" rel="noopener noreferrer">
+              Read Google reviews <ExternalLink className="ml-2 h-4 w-4" />
             </a>
           </Button>
         </div>
