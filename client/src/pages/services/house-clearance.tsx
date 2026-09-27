@@ -130,7 +130,7 @@ export default function HouseClearance() {
         "Full property clearance",
         "Garage & storage areas",
         "Loft & basement content",
-        "Final deep clean included"
+        "Discount for deep cleans"
       ],
       highlight: true
     },
