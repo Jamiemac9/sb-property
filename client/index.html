@@ -13,14 +13,34 @@
     <meta name="geo.position" content="52.8066;-2.1194">
     <meta name="ICBM" content="52.8066, -2.1194">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XZFSRZNDW5"></script>
+    <!-- Load analytics after the initial page load and browser idle time. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XZFSRZNDW5');
+      window.addEventListener('load', function () {
+        var loadAnalytics = function () {
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XZFSRZNDW5';
+          document.head.appendChild(script);
+          gtag('js', new Date());
+          gtag('config', 'G-XZFSRZNDW5');
+        };
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(loadAnalytics, { timeout: 3000 });
+        } else {
+          window.setTimeout(loadAnalytics, 1500);
+        }
+      }, { once: true });
     </script>
+    <link
+      rel="preload"
+      as="image"
+      href="/hero-background.webp"
+      imagesrcset="/hero-background-mobile.webp 768w, /hero-background.webp 1216w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -143,6 +163,5 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
   </body>
 </html>

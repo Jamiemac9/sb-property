@@ -12,12 +12,18 @@ export default function Hero() {
 
   return (
     <section className="relative bg-gray-900 min-h-screen flex items-center">
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-        backgroundImage: "url('/hero-background.jpg')"
-      }}>
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-      </div>
+      {/* Background image is an eager, high-priority LCP image rather than a CSS background. */}
+      <picture className="absolute inset-0">
+        <source media="(max-width: 767px)" srcSet="/hero-background-mobile.webp" type="image/webp" />
+        <img
+          src="/hero-background.webp"
+          alt=""
+          {...{ fetchpriority: "high" }}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <span className="absolute inset-0 bg-black bg-opacity-50" aria-hidden="true" />
+      </picture>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">

@@ -29,7 +29,7 @@ export default function Header() {
                 className="focus:outline-none focus:ring-2 focus:ring-brand-green focus:ring-offset-2 rounded-lg"
               >
               <img 
-                src="/logo.png" 
+                src="/logo.webp"
                 alt="SB Property Clearance logo" 
                 className="h-12 w-auto max-w-[200px] object-contain hover:opacity-90 transition-opacity"
                 width="200"

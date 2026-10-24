@@ -1,1 +1,2 @@
 - [Location-page URL strategy](location-page-url-strategy.md) — use crawlable `/areas/<town>` subfolders; separate town subdomains dilute authority and require DNS.
+- [React DOM priority attributes](react-dom-priority-attributes.md) — use lowercase forwarded attributes for image priority with this React 18 runtime; dev warnings can stop Vite.

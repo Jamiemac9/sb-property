@@ -1,56 +1,45 @@
-import { useState, useCallback } from "react";
-import { GoogleMap, LoadScript, InfoWindow } from "@react-google-maps/api";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Clock } from "lucide-react";
 import AreaLink from "@/components/area-link";
 import { serviceAreas } from "@shared/service-areas";
 
-const containerStyle = {
-  width: '100%',
-  height: '400px'
-};
-
-// SB Property Clearance location (Stafford, UK)
-const center = {
-  lat: 52.8077,
-  lng: -2.1158
-};
-
+const LocationMap = lazy(() => import("@/components/location-map"));
 const businessLocation = {
-  lat: 52.8077,
-  lng: -2.1158,
-  title: "SB Property Clearance",
   address: "102 Wolverhampton Road, Stafford ST17 4AH, UK",
   phone: "+447708152348",
-  hours: "Mon-Fri: 8AM-6PM, Sat: 9AM-4PM"
+  hours: "Mon-Fri: 8AM-6PM, Sat: 9AM-4PM",
 };
 
 export default function Location() {
-  const [selectedMarker, setSelectedMarker] = useState<boolean>(false);
-  const [mapLoaded, setMapLoaded] = useState(false);
-  const [marker, setMarker] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
+  const [shouldLoadMap, setShouldLoadMap] = useState(false);
+  const mapSectionRef = useRef<HTMLDivElement>(null);
 
-  const onMapLoad = useCallback((map: google.maps.Map) => {
-    setMapLoaded(true);
-    
-    // Create AdvancedMarkerElement
-    const advancedMarker = new google.maps.marker.AdvancedMarkerElement({
-      position: businessLocation,
-      map: map,
-      title: businessLocation.title,
-    });
+  useEffect(() => {
+    const section = mapSectionRef.current;
+    if (!section) return;
+    if (!("IntersectionObserver" in window)) {
+      setShouldLoadMap(true);
+      return;
+    }
 
-    // Add click listener
-    advancedMarker.addListener('click', () => {
-      setSelectedMarker(true);
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadMap(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "400px 0px" },
+    );
 
-    setMarker(advancedMarker);
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const handleDirectionsClick = () => {
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${businessLocation.lat},${businessLocation.lng}`;
+    const url = "https://www.google.com/maps/dir/?api=1&destination=52.8077,-2.1158";
     window.open(url, '_blank');
   };
 
@@ -69,51 +58,19 @@ export default function Location() {
         <div className="max-w-4xl mx-auto">
           {/* Map Section */}
           <div className="space-y-6">
+            <div ref={mapSectionRef}>
             <Card className="overflow-hidden shadow-lg">
               <CardContent className="p-0">
-                <LoadScript 
-                  googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
-                  libraries={["marker"]}
-                >
-                  <GoogleMap
-                    mapContainerStyle={containerStyle}
-                    center={center}
-                    zoom={15}
-                    onLoad={onMapLoad}
-                    options={{
-                      mapId: "DEMO_MAP_ID", // Required for AdvancedMarkerElement
-                      styles: [
-                        {
-                          featureType: "poi",
-                          elementType: "labels",
-                          stylers: [{ visibility: "off" }]
-                        }
-                      ]
-                    }}
-                  >
-                    {selectedMarker && (
-                      <InfoWindow
-                        position={businessLocation}
-                        onCloseClick={() => setSelectedMarker(false)}
-                      >
-                        <div className="p-2 max-w-xs">
-                          <h3 className="font-semibold text-gray-900 mb-1">{businessLocation.title}</h3>
-                          <p className="text-sm text-gray-600 mb-2">{businessLocation.address}</p>
-                          <div className="flex items-center text-sm text-gray-600 mb-1">
-                            <Phone size={14} className="mr-1" />
-                            +447708152348
-                          </div>
-                          <div className="flex items-center text-sm text-gray-600">
-                            <Clock size={14} className="mr-1" />
-                            {businessLocation.hours}
-                          </div>
-                        </div>
-                      </InfoWindow>
-                    )}
-                  </GoogleMap>
-                </LoadScript>
+                {shouldLoadMap ? (
+                  <Suspense fallback={<div className="h-[400px] bg-gray-100" aria-label="Loading map" />}>
+                    <LocationMap />
+                  </Suspense>
+                ) : (
+                  <div className="h-[400px] bg-gray-100" aria-label="Map loads when nearby" />
+                )}
               </CardContent>
             </Card>
+            </div>
 
             {/* Business Info Card */}
             <Card className="shadow-lg">

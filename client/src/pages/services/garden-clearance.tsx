@@ -164,11 +164,13 @@ export default function GardenClearance() {
             </div>
             <div className="lg:text-right">
               <img 
-                src="/garden-before-1.jpg" 
+                src="/garden-before-1.webp"
                 alt="Garden clearance Staffordshire - overgrown garden before clearance by SB Property Clearance" 
                 className="rounded-lg shadow-2xl w-full max-w-md mx-auto lg:ml-auto"
-                width="600"
-                height="450"
+                width="800"
+                height="900"
+                {...{ fetchpriority: "high" }}
+                decoding="async"
               />
             </div>
           </div>
@@ -231,20 +233,22 @@ export default function GardenClearance() {
             </div>
             <div className="space-y-4">
               <img 
-                src="/garden-before-2.jpg" 
+                src="/garden-before-2.webp"
                 alt="Garden clearance work in progress - SB Property Clearance Staffordshire" 
                 className="rounded-lg shadow-lg w-full"
                 width="600"
                 height="400"
                 loading="lazy"
+                decoding="async"
               />
               <img 
-                src="/garden-before-3.jpg" 
+                src="/garden-before-3.webp"
                 alt="Garden clearance results - cleared garden ready for landscaping Staffordshire" 
                 className="rounded-lg shadow-lg w-full"
                 width="600"
                 height="400"
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

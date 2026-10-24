@@ -27,16 +27,16 @@ export default function BeforeAfterCarousel() {
     {
       id: "garden-clearance-west",
       title: "Garden Project",
-      beforeImage: "/garden-before-1.jpg",
-      afterImage: "/garden-before-2.jpg",
+      beforeImage: "/garden-before-1.webp",
+      afterImage: "/garden-before-2.webp",
       description: "Large scale garden clearance and restoration",
       category: "Garden Clearance"
     },
     {
       id: "garden-landscaping",
       title: "Garden Landscaping & Clearance",
-      beforeImage: "/garden-before-3.jpg",
-      afterImage: "/garden-before-3.jpg",
+      beforeImage: "/garden-before-3.webp",
+      afterImage: "/garden-before-3.webp",
       description: "Complete garden transformation and landscaping",
       category: "Landscaping"
     },
@@ -89,10 +89,16 @@ export default function BeforeAfterCarousel() {
                     <Card className="group transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white/80 glass border-0">
                       <CardContent className="p-0">
                         <div className="relative overflow-hidden rounded-t-xl">
-                          <div 
-                            className="relative h-64 bg-cover bg-center transition-all duration-700 ease-in-out transform group-hover:scale-105"
-                            style={{ backgroundImage: `url('${project.beforeImage}')` }}
-                          >
+                          <div className="relative h-64 overflow-hidden">
+                            <img
+                              src={project.beforeImage}
+                              alt={project.title}
+                              width="800"
+                              height="900"
+                              loading="lazy"
+                              decoding="async"
+                              className="absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ease-in-out transform group-hover:scale-105"
+                            />
                             {/* Overlay gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
