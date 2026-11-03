@@ -31,9 +31,10 @@ export default function LocationMap() {
       position: businessLocation,
       map,
       title: businessLocation.title,
+      gmpClickable: true,
     });
 
-    advancedMarker.addListener("click", () => setSelectedMarker(true));
+    advancedMarker.addEventListener("gmp-click", () => setSelectedMarker(true));
   }, []);
 
   return (
@@ -46,16 +47,7 @@ export default function LocationMap() {
         center={center}
         zoom={15}
         onLoad={onMapLoad}
-        options={{
-          mapId: "DEMO_MAP_ID",
-          styles: [
-            {
-              featureType: "poi",
-              elementType: "labels",
-              stylers: [{ visibility: "off" }],
-            },
-          ],
-        }}
+        options={{ mapId: "DEMO_MAP_ID" }}
       >
         {selectedMarker && (
           <InfoWindow
