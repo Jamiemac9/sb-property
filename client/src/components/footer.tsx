@@ -190,6 +190,7 @@ export default function Footer() {
         <div className="border-t border-brand-green/20 mt-12 pt-8">
           <div className="text-center">
             <p className="text-gray-400 text-sm mb-3">© 2026 SB Property Clearance. Professional Property Clearance Services Across Staffordshire & the Midlands. All rights reserved.</p>
+            <p className="text-gray-400 text-sm mb-3"><Link href="/privacy" className="hover:text-brand-green-light transition-colors">Privacy policy</Link><span className="mx-2">|</span><button type="button" data-cookie-settings className="hover:text-brand-green-light transition-colors">Cookie settings</button></p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-gray-500">
               <div>
                 <p className="font-medium text-brand-green-light mb-1">Primary Service Areas:</p>

@@ -13,26 +13,6 @@
     <meta name="geo.position" content="52.8066;-2.1194">
     <meta name="ICBM" content="52.8066, -2.1194">
 
-    <!-- Load analytics after the initial page load and browser idle time. -->
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.addEventListener('load', function () {
-        var loadAnalytics = function () {
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-XZFSRZNDW5';
-          document.head.appendChild(script);
-          gtag('js', new Date());
-          gtag('config', 'G-XZFSRZNDW5');
-        };
-        if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(loadAnalytics, { timeout: 3000 });
-        } else {
-          window.setTimeout(loadAnalytics, 1500);
-        }
-      }, { once: true });
-    </script>
     <link
       rel="preload"
       as="image"
@@ -159,6 +139,8 @@
         font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
     </style>
+      <!-- Analytics: consent-gated (APX consent kit). Nothing loads until the visitor accepts. -->
+    <script src="/apx-consent.js" defer data-ga="G-XZFSRZNDW5" data-clarity="" data-privacy="/privacy" data-accent="#111111"></script>
   </head>
   <body>
     <div id="root"></div>

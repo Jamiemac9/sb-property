@@ -13,6 +13,7 @@ const CommercialWork = lazy(() => import("@/pages/services/commercial-work"));
 const CleaningServices = lazy(() => import("@/pages/services/cleaning-services"));
 const HomeRemovals = lazy(() => import("@/pages/services/home-removals"));
 const AreaPage = lazy(() => import("@/pages/area"));
+const Privacy = lazy(() => import("@/pages/privacy"));
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,7 @@ function AppContent() {
       <Switch>
         <Route path="/" component={Home} />
         <Route path="/quotes" component={Quotes} />
+        <Route path="/privacy" component={Privacy} />
         {/* Service pages */}
         <Route path="/services/house-clearance" component={HouseClearance} />
         <Route path="/services/garden-clearance" component={GardenClearance} />
