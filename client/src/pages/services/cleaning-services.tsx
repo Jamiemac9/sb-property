@@ -14,7 +14,7 @@ const cleaningSchema = {
     "@type": "LocalBusiness",
     "name": "SB Property Clearance",
     "telephone": "+447708152348",
-    "url": "https://sbpropertyclearance.com"
+    "url": "https://propertyclearancesb.com"
   },
   "description": "Professional cleaning services including driveway cleaning, patio cleaning, and end of tenancy cleaning across Staffordshire and the Midlands.",
   "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"]
@@ -24,7 +24,7 @@ export default function CleaningServices() {
   useSEO({
     title: "Cleaning Services Staffordshire — Driveway, Patio & Tenancy | SB Property Clearance",
     description: "Professional driveway cleaning, patio cleaning and end of tenancy cleaning across Staffordshire and the Midlands. 10+ years experience. Fully insured. Free quotes.",
-    canonical: "https://sbpropertyclearance.com/services/cleaning-services",
+    canonical: "https://propertyclearancesb.com/services/cleaning-services",
     schema: cleaningSchema,
   });
 
