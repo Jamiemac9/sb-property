@@ -14,7 +14,7 @@ const commercialSchema = {
     "@type": "LocalBusiness",
     "name": "SB Property Clearance",
         "telephone": "+447708152348",
-    "url": "https://sbpropertyclearance.com"
+    "url": "https://propertyclearancesb.com"
   },
   "description": "Professional commercial waste management and office clearance services for businesses across Staffordshire and the Midlands. One-off projects and regular collections.",
   "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"]
@@ -24,7 +24,7 @@ export default function CommercialWork() {
   useSEO({
     title: "Commercial Waste Management & Office Clearance Staffordshire | SB Property Clearance",
     description: "Professional commercial waste management and office clearance for businesses across Staffordshire and the Midlands. One-off clearances and regular collections. Free quotes.",
-    canonical: "https://sbpropertyclearance.com/services/commercial-work",
+    canonical: "https://propertyclearancesb.com/services/commercial-work",
     schema: commercialSchema,
   });
   const services = [

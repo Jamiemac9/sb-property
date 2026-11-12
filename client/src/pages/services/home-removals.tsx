@@ -14,7 +14,7 @@ const removalsSchema = {
     "@type": "LocalBusiness",
     "name": "SB Property Clearance",
     "telephone": "+447708152348",
-    "url": "https://sbpropertyclearance.com"
+    "url": "https://propertyclearancesb.com"
   },
   "description": "Affordable and professional home removals within a 50-mile radius of Staffordshire. Domestic and commercial customers. Fully insured.",
   "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"],
@@ -30,7 +30,7 @@ export default function HomeRemovals() {
   useSEO({
     title: "Home Removals Staffordshire & Midlands | SB Property Clearance",
     description: "Affordable professional home removals across Staffordshire and the Midlands. 50-mile radius coverage, domestic and commercial. Fully insured. Free quotes.",
-    canonical: "https://sbpropertyclearance.com/services/home-removals",
+    canonical: "https://propertyclearancesb.com/services/home-removals",
     schema: removalsSchema,
   });
   const services = [
