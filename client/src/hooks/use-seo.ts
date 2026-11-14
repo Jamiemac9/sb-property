@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+const SITE_ORIGIN = "https://www.propertyclearancesb.com";
+
 interface SEOProps {
   title: string;
   description: string;
@@ -51,7 +53,19 @@ export function useSEO({ title, description, canonical, schema }: SEOProps) {
     }
     metaTwitterDesc.content = description;
 
-    const canonicalHref = canonical || window.location.href.split("?")[0];
+    // Canonical always resolves to the live, indexed origin. Search Console shows
+    // www.propertyclearancesb.com is the domain Google indexes; pages may still pass a
+    // legacy sbpropertyclearance.com URL, so only the path from it is used.
+    let canonicalPath = window.location.pathname;
+    if (canonical) {
+      try {
+        canonicalPath = new URL(canonical, SITE_ORIGIN).pathname;
+      } catch {
+        canonicalPath = window.location.pathname;
+      }
+    }
+    const canonicalHref =
+      SITE_ORIGIN + (canonicalPath === "/" ? "/" : canonicalPath.replace(/\/$/, ""));
     let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalTag) {
       canonicalTag = document.createElement("link");

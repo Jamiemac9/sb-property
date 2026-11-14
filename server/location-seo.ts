@@ -18,7 +18,7 @@ export function renderLocationSeoHtml(template: string, pathname: string) {
 
   const title = `Property Clearance ${area.name} | Waste Removal & House Clearance`;
   const description = `Licensed property clearance in ${area.name}, ${area.county}. House, garden and commercial waste removal with free quotes. Call +44 7708 152348.`;
-  const canonical = `https://sbpropertyclearance.com/areas/${area.slug}`;
+  const canonical = `https://www.propertyclearancesb.com/areas/${area.slug}`;
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -29,7 +29,7 @@ export function renderLocationSeoHtml(template: string, pathname: string) {
       "@type": "LocalBusiness",
       name: "SB Property Clearance",
       telephone: "+447708152348",
-      url: "https://sbpropertyclearance.com",
+      url: "https://www.propertyclearancesb.com",
     },
     areaServed: {
       "@type": "City",
