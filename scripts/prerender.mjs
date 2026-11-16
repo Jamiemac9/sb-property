@@ -8,13 +8,13 @@
 // where /x 301s to /x/ and falls back to the homepage shell.
 //
 // The build fails if any page lacks exactly one <h1> or a self-referencing
-// canonical on https://propertyclearancesb.com.
+// canonical on https://www.propertyclearancesb.com.
 import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL, fileURLToPath } from "node:url";
 import { build } from "vite";
 
-const SITE_URL = "https://propertyclearancesb.com";
+const SITE_URL = "https://www.propertyclearancesb.com";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicDir = path.join(root, "dist", "public");
 const ssrDir = path.join(root, "dist", "prerender-ssr");

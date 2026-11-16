@@ -73,7 +73,7 @@ export default function Home() {
   useSEO({
     title: "House Clearance & Waste Removal Staffordshire | SB Property Clearance",
     description: "Professional house clearance, garden clearance and waste removal across Staffordshire and the Midlands. Stafford, Cannock, Lichfield, Stone, Rugeley. Fully licensed and insured. Free quotes.",
-    canonical: "https://propertyclearancesb.com/",
+    canonical: "https://www.propertyclearancesb.com/",
     schema: homeSchema,
   });
 
