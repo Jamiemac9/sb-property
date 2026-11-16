@@ -2,6 +2,47 @@ import { useEffect } from "react";
 
 const SITE_ORIGIN = "https://www.propertyclearancesb.com";
 
+// Hostnames that have ever served this site and must never appear in emitted
+// markup. Matched on hostname only, so email addresses (sbpropertyclearance@
+// gmail.com, info@sbpropertyclearance.co.uk) and third-party profile URLs
+// (checkatrade.com/trades/sbpropertyclearance) are left alone.
+const LEGACY_HOSTS = new Set([
+  "propertyclearancesb.com",
+  "sbpropertyclearance.com",
+  "www.sbpropertyclearance.com",
+]);
+
+// Rewrites an absolute URL on a legacy host onto SITE_ORIGIN, keeping path,
+// query and fragment. Anything that is not a parseable absolute http(s) URL,
+// or is on any other host, is returned untouched.
+function toSiteOrigin(value: string): string {
+  if (!/^https?:\/\//i.test(value)) return value;
+  try {
+    const url = new URL(value);
+    if (!LEGACY_HOSTS.has(url.hostname.toLowerCase())) return value;
+    return SITE_ORIGIN + url.pathname + url.search + url.hash;
+  } catch {
+    return value;
+  }
+}
+
+// Walks a schema object and normalises every URL string inside it. This is the
+// schema equivalent of the canonical rule below: a page can pass a legacy
+// domain and the emitted JSON-LD still comes out on one origin, so no page -
+// including one copied from an existing template - can reintroduce the split.
+function normalizeSchemaUrls(input: unknown): unknown {
+  if (typeof input === "string") return toSiteOrigin(input);
+  if (Array.isArray(input)) return input.map(normalizeSchemaUrls);
+  if (input && typeof input === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [key, val] of Object.entries(input as Record<string, unknown>)) {
+      out[key] = normalizeSchemaUrls(val);
+    }
+    return out;
+  }
+  return input;
+}
+
 interface SEOProps {
   title: string;
   description: string;
@@ -80,7 +121,7 @@ export function useSEO({ title, description, canonical, schema }: SEOProps) {
       const scriptTag = document.createElement("script");
       scriptTag.type = "application/ld+json";
       scriptTag.setAttribute("data-page-schema", "true");
-      scriptTag.textContent = JSON.stringify(schema);
+      scriptTag.textContent = JSON.stringify(normalizeSchemaUrls(schema)).replace(/</g, "\\u003c");
       document.head.appendChild(scriptTag);
     }
 
