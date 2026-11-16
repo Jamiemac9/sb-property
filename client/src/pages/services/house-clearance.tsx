@@ -17,7 +17,7 @@ const houseClearanceSchema = {
         "@type": "LocalBusiness",
         "name": "SB Property Clearance",
         "telephone": "+447708152348",
-        "url": "https://propertyclearancesb.com"
+        "url": "https://www.propertyclearancesb.com"
       },
       "description": "Professional house and flat clearance services across Staffordshire and the Midlands. Full and partial property clearances with same-day service available.",
       "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
@@ -71,7 +71,7 @@ export default function HouseClearance() {
   useSEO({
     title: "House Clearance Staffordshire & Midlands | SB Property Clearance",
     description: "Professional house and flat clearance across Staffordshire and the Midlands. Full & partial clearances, same-day service, free quotes. Serving Stafford, Cannock, Lichfield, Stone, Rugeley.",
-    canonical: "https://propertyclearancesb.com/services/house-clearance",
+    canonical: "https://www.propertyclearancesb.com/services/house-clearance",
     schema: houseClearanceSchema,
   });
   const features = [
