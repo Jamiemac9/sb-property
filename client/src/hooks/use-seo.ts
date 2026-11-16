@@ -1,24 +1,15 @@
 import { useEffect } from "react";
 
-export interface SEOProps {
+const SITE_ORIGIN = "https://www.propertyclearancesb.com";
+
+interface SEOProps {
   title: string;
   description: string;
   canonical?: string;
   schema?: object;
 }
 
-// Build-time prerendering (scripts/prerender.mjs) registers a collector so the
-// static HTML for each route gets the same title, description, canonical and
-// schema that the page sets in the browser. It is never set in the browser.
-let seoCollector: ((props: SEOProps) => void) | null = null;
-
-export function setSEOCollector(collector: ((props: SEOProps) => void) | null) {
-  seoCollector = collector;
-}
-
 export function useSEO({ title, description, canonical, schema }: SEOProps) {
-  if (seoCollector) seoCollector({ title, description, canonical, schema });
-
   useEffect(() => {
     document.title = title;
 
@@ -62,7 +53,19 @@ export function useSEO({ title, description, canonical, schema }: SEOProps) {
     }
     metaTwitterDesc.content = description;
 
-    const canonicalHref = canonical || window.location.href.split("?")[0];
+    // Canonical always resolves to the live, indexed origin. Search Console shows
+    // www.propertyclearancesb.com is the domain Google indexes; pages may still pass a
+    // legacy sbpropertyclearance.com URL, so only the path from it is used.
+    let canonicalPath = window.location.pathname;
+    if (canonical) {
+      try {
+        canonicalPath = new URL(canonical, SITE_ORIGIN).pathname;
+      } catch {
+        canonicalPath = window.location.pathname;
+      }
+    }
+    const canonicalHref =
+      SITE_ORIGIN + (canonicalPath === "/" ? "/" : canonicalPath.replace(/\/$/, ""));
     let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalTag) {
       canonicalTag = document.createElement("link");
@@ -70,11 +73,6 @@ export function useSEO({ title, description, canonical, schema }: SEOProps) {
       document.head.appendChild(canonicalTag);
     }
     canonicalTag.href = canonicalHref;
-
-    for (const property of ["og:url", "twitter:url"]) {
-      const urlTag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
-      if (urlTag) urlTag.content = canonicalHref;
-    }
 
     if (schema) {
       const existingScript = document.querySelector('script[data-page-schema="true"]');
