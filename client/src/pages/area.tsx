@@ -26,7 +26,7 @@ export default function AreaPage() {
 
   if (!area) return null;
 
-  const canonical = `https://propertyclearancesb.com/areas/${area.slug}`;
+  const canonical = `https://www.propertyclearancesb.com/areas/${area.slug}`;
   const faqs = [
     {
       question: `Do you provide property clearance throughout ${area.name}?`,
@@ -58,7 +58,7 @@ export default function AreaPage() {
           "@type": "LocalBusiness",
           name: "SB Property Clearance",
           telephone: "+447708152348",
-          url: "https://propertyclearancesb.com",
+          url: "https://www.propertyclearancesb.com",
         },
         areaServed: {
           "@type": "City",
@@ -77,8 +77,8 @@ export default function AreaPage() {
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Home", item: "https://propertyclearancesb.com/" },
-          { "@type": "ListItem", position: 2, name: "Areas We Serve", item: "https://propertyclearancesb.com/#areas" },
+          { "@type": "ListItem", position: 1, name: "Home", item: "https://www.propertyclearancesb.com/" },
+          { "@type": "ListItem", position: 2, name: "Areas We Serve", item: "https://www.propertyclearancesb.com/#areas" },
           { "@type": "ListItem", position: 3, name: area.name, item: canonical },
         ],
       },
