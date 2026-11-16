@@ -15,6 +15,39 @@ import { pathToFileURL, fileURLToPath } from "node:url";
 import { build } from "vite";
 
 const SITE_URL = "https://www.propertyclearancesb.com";
+
+// Hostnames that have ever served this site. A page may still pass one in its
+// canonical or schema; it is rewritten onto SITE_URL here, exactly as
+// client/src/hooks/use-seo.ts does at runtime, so the prerendered HTML and the
+// client-rendered HTML cannot disagree. Matched on hostname, so
+// sbpropertyclearance@gmail.com, info@sbpropertyclearance.co.uk and
+// checkatrade.com/trades/sbpropertyclearance are untouched.
+const LEGACY_HOSTS = new Set([
+  "propertyclearancesb.com",
+  "sbpropertyclearance.com",
+  "www.sbpropertyclearance.com",
+]);
+
+const toSiteOrigin = (value) => {
+  if (typeof value !== "string" || !/^https?:\/\//i.test(value)) return value;
+  try {
+    const url = new URL(value);
+    if (!LEGACY_HOSTS.has(url.hostname.toLowerCase())) return value;
+    return SITE_URL + url.pathname + url.search + url.hash;
+  } catch {
+    return value;
+  }
+};
+
+const normalizeSchemaUrls = (input) => {
+  if (typeof input === "string") return toSiteOrigin(input);
+  if (Array.isArray(input)) return input.map(normalizeSchemaUrls);
+  if (input && typeof input === "object") {
+    return Object.fromEntries(Object.entries(input).map(([k, v]) => [k, normalizeSchemaUrls(v)]));
+  }
+  return input;
+};
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicDir = path.join(root, "dist", "public");
 const ssrDir = path.join(root, "dist", "prerender-ssr");
@@ -56,14 +89,17 @@ async function main() {
     if (!seo) throw new Error(`${route}: page did not call useSEO`);
 
     const canonical = canonicalFor(route);
-    if (seo.canonical && seo.canonical !== canonical) {
+    // Compare the normalised value, so a legacy host is corrected silently
+    // while a genuinely wrong PATH still fails the build.
+    const declaredCanonical = seo.canonical ? toSiteOrigin(seo.canonical) : null;
+    if (declaredCanonical && declaredCanonical !== canonical) {
       problems.push(`${route}: useSEO canonical ${seo.canonical} is not ${canonical}`);
     }
 
     const title = escapeHtml(seo.title);
     const description = escapeHtml(seo.description);
     const schema = seo.schema
-      ? `\n    <script type="application/ld+json" data-page-schema="true">${JSON.stringify(seo.schema).replace(/</g, "\\u003c")}</script>`
+      ? `\n    <script type="application/ld+json" data-page-schema="true">${JSON.stringify(normalizeSchemaUrls(seo.schema)).replace(/</g, "\\u003c")}</script>`
       : "";
 
     let page = template
@@ -87,6 +123,11 @@ async function main() {
       problems.push(`${route}: canonical tags ${JSON.stringify(canonicals)}`);
     }
     if (page.includes("sbpropertyclearance.com")) problems.push(`${route}: still references sbpropertyclearance.com`);
+    // "https://www.propertyclearancesb.com" does not contain this string, so this
+    // catches only the non-www origin reaching emitted markup.
+    if (page.includes("https://propertyclearancesb.com")) {
+      problems.push(`${route}: emits the non-www origin https://propertyclearancesb.com`);
+    }
 
     const file = route === "/" ? "index.html" : `${route.slice(1)}.html`;
     fs.mkdirSync(path.dirname(path.join(outDir, file)), { recursive: true });
