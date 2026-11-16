@@ -57,6 +57,9 @@ export default function Header() {
             <Link href="/" className="text-gray-700 hover:text-brand-green font-medium transition-colors">
               Home
             </Link>
+            <Link href="/guides" className="text-gray-700 hover:text-brand-green font-medium transition-colors">
+              Guides
+            </Link>
             
             {/* Services Dropdown */}
             <div className="relative">
@@ -202,6 +205,9 @@ export default function Header() {
             <nav className="flex flex-col space-y-4">
               <Link href="/" className="text-gray-700 hover:text-brand-green font-medium transition-colors">
                 Home
+              </Link>
+              <Link href="/guides" onClick={() => setIsMenuOpen(false)} className="text-gray-700 hover:text-brand-green font-medium transition-colors">
+                Guides
               </Link>
               
               {/* Mobile Services Links */}

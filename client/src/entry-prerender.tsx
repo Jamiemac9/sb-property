@@ -16,11 +16,15 @@ import WasteRemoval from "@/pages/services/waste-removal";
 import CommercialWork from "@/pages/services/commercial-work";
 import CleaningServices from "@/pages/services/cleaning-services";
 import HomeRemovals from "@/pages/services/home-removals";
+import Guides from "@/pages/guides";
+import LicensedClearanceGuide from "@/pages/guides/check-clearance-company-licensed";
 
 // Keep in step with the <Route> list in App.tsx. Area pages are rendered by
 // server/location-seo.ts instead.
 export const routes: Record<string, ComponentType> = {
   "/": Home,
+  "/guides": Guides,
+  "/guides/check-clearance-company-licensed": LicensedClearanceGuide,
   "/quotes": Quotes,
   "/privacy": Privacy,
   "/services/house-clearance": HouseClearance,

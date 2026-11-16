@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { Link } from "wouter";
 
 const faqs = [
   {
@@ -71,6 +72,14 @@ export default function HomeFAQ() {
             </div>
           ))}
         </div>
+        <p className="mt-8 text-center">
+          <Link
+            href="/guides/check-clearance-company-licensed"
+            className="font-medium text-brand-green underline underline-offset-4 hover:text-brand-green-light"
+          >
+            Checking a house clearance company is licensed: what to look for now, and what changes in 2027
+          </Link>
+        </p>
       </div>
     </section>
   );

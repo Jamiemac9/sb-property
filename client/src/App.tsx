@@ -14,6 +14,8 @@ const CleaningServices = lazy(() => import("@/pages/services/cleaning-services")
 const HomeRemovals = lazy(() => import("@/pages/services/home-removals"));
 const AreaPage = lazy(() => import("@/pages/area"));
 const Privacy = lazy(() => import("@/pages/privacy"));
+const Guides = lazy(() => import("@/pages/guides"));
+const LicensedClearanceGuide = lazy(() => import("@/pages/guides/check-clearance-company-licensed"));
 
 const queryClient = new QueryClient();
 
@@ -30,7 +32,7 @@ function AppContent() {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }, 100);
-    } else if (location.startsWith('/services/') || location.startsWith('/areas/') || location === '/quotes') {
+    } else if (location.startsWith('/services/') || location.startsWith('/areas/') || location.startsWith('/guides') || location === '/quotes') {
       // Route changes should always begin at the top, including footer area links.
       window.scrollTo({ top: 0, behavior: 'auto' });
     }
@@ -40,6 +42,8 @@ function AppContent() {
     <Suspense fallback={<div className="min-h-screen bg-white" aria-label="Loading page" />}>
       <Switch>
         <Route path="/" component={Home} />
+        <Route path="/guides" component={Guides} />
+        <Route path="/guides/check-clearance-company-licensed" component={LicensedClearanceGuide} />
         <Route path="/quotes" component={Quotes} />
         <Route path="/privacy" component={Privacy} />
         {/* Service pages */}

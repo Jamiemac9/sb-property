@@ -72,9 +72,11 @@ async function main() {
       .replace(/<meta property="og:url"[^>]*>/i, `<meta property="og:url" content="${canonical}">`)
       .replace(/<meta property="og:title"[^>]*>/i, `<meta property="og:title" content="${title}">`)
       .replace(/<meta property="og:description"[^>]*>/i, `<meta property="og:description" content="${description}">`)
+      .replace(/<meta property="og:image"[^>]*>/i, `<meta property="og:image" content="${escapeHtml(seo.image || "https://propertyclearancesb.com/logo.png")}">`)
       .replace(/<meta property="twitter:url"[^>]*>/i, `<meta property="twitter:url" content="${canonical}">`)
       .replace(/<meta property="twitter:title"[^>]*>/i, `<meta property="twitter:title" content="${title}">`)
       .replace(/<meta property="twitter:description"[^>]*>/i, `<meta property="twitter:description" content="${description}">`)
+      .replace(/<meta property="twitter:image"[^>]*>/i, `<meta property="twitter:image" content="${escapeHtml(seo.image || "https://propertyclearancesb.com/logo.png")}">`)
       .replace("</head>", `    <link rel="canonical" href="${canonical}">${schema}\n  </head>`);
 
     if (!page.includes('<div id="root"></div>')) throw new Error("index.html has no empty #root to fill");

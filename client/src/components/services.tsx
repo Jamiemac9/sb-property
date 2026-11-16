@@ -116,6 +116,14 @@ export default function Services() {
             </div>
           ))}
         </div>
+        <p className="mt-10 text-center text-gray-600">
+          <Link
+            href="/guides/check-clearance-company-licensed"
+            className="font-medium text-brand-green underline underline-offset-4 hover:text-brand-green-light"
+          >
+            Checking a house clearance company is licensed: what to look for now, and what changes in 2027
+          </Link>
+        </p>
       </div>
     </section>
   );
