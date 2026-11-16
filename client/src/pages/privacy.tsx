@@ -6,7 +6,7 @@ export default function Privacy() {
   useSEO({
     title: "Privacy Policy | SB Property Clearance",
     description: "How SB Property Clearance collects, uses and protects your personal information, and how cookies and analytics are used on this website.",
-    canonical: "https://sbpropertyclearance.com/privacy",
+    canonical: "https://propertyclearancesb.com/privacy",
   });
 
   return (

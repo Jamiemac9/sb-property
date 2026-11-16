@@ -17,7 +17,7 @@ const wasteRemovalSchema = {
         "@type": "LocalBusiness",
         "name": "SB Property Clearance",
         "telephone": "+447708152348",
-        "url": "https://sbpropertyclearance.com"
+        "url": "https://propertyclearancesb.com"
       },
       "description": "Professional waste removal and rubbish collection services across Staffordshire and the Midlands. Single items to full van loads, same-day service available.",
       "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire", "Midlands"],
@@ -70,7 +70,7 @@ export default function WasteRemoval() {
   useSEO({
     title: "Waste Removal Staffordshire & Midlands | SB Property Clearance",
     description: "Professional waste removal and rubbish collection across Staffordshire and the Midlands. Single items or full van loads. Same-day service available. Free quotes. Serving Stafford, Cannock, Lichfield.",
-    canonical: "https://sbpropertyclearance.com/services/waste-removal",
+    canonical: "https://propertyclearancesb.com/services/waste-removal",
     schema: wasteRemovalSchema,
   });
   const services = [

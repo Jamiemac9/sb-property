@@ -81,6 +81,29 @@ export function serveStatic(app: Express) {
     );
   }
 
+  // Prerendered public pages (built by scripts/prerender.mjs). Each route is
+  // served from a flat .html file with its own title, canonical, H1 and copy,
+  // so crawlers do not get the empty SPA shell. Registered before
+  // express.static so "/" gets the prerendered homepage, not the bare shell.
+  const prerenderedPath = path.resolve(import.meta.dirname, "prerendered");
+  const prerenderedManifest = path.join(prerenderedPath, "routes.json");
+  if (fs.existsSync(prerenderedManifest)) {
+    const prerenderedRoutes: Record<string, string> = JSON.parse(
+      fs.readFileSync(prerenderedManifest, "utf-8"),
+    );
+    for (const [route, file] of Object.entries(prerenderedRoutes)) {
+      const filePath = path.join(prerenderedPath, file);
+      app.get(route, (_req, res) => {
+        res.set({
+          "Content-Type": "text/html; charset=utf-8",
+          "Cache-Control": "no-cache",
+        }).sendFile(filePath);
+      });
+    }
+  } else {
+    console.warn("No prerendered pages found; serving the SPA shell for all routes");
+  }
+
   app.use(express.static(distPath, {
     setHeaders(res, filePath) {
       if (filePath.endsWith(".html")) {

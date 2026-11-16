@@ -11,7 +11,7 @@ export default function Quotes() {
   useSEO({
     title: "Free Property Clearance Quote Staffordshire | SB Property Clearance",
     description: "Get a free, no-obligation quote for house clearance, waste removal, garden clearance or home removals across Staffordshire and the Midlands. Call, WhatsApp or fill in our form.",
-    canonical: "https://sbpropertyclearance.com/quotes",
+    canonical: "https://propertyclearancesb.com/quotes",
   });
 
   const handleCallDirect = () => {

@@ -18,7 +18,7 @@ export function renderLocationSeoHtml(template: string, pathname: string) {
 
   const title = `Property Clearance ${area.name} | Waste Removal & House Clearance`;
   const description = `Licensed property clearance in ${area.name}, ${area.county}. House, garden and commercial waste removal with free quotes. Call +44 7708 152348.`;
-  const canonical = `https://sbpropertyclearance.com/areas/${area.slug}`;
+  const canonical = `https://propertyclearancesb.com/areas/${area.slug}`;
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -29,7 +29,7 @@ export function renderLocationSeoHtml(template: string, pathname: string) {
       "@type": "LocalBusiness",
       name: "SB Property Clearance",
       telephone: "+447708152348",
-      url: "https://sbpropertyclearance.com",
+      url: "https://propertyclearancesb.com",
     },
     areaServed: {
       "@type": "City",
@@ -63,6 +63,8 @@ export function renderLocationSeoHtml(template: string, pathname: string) {
   return template
     .replace(/<title>[\s\S]*?<\/title>/i, "")
     .replace(/<meta name="description"[^>]*>/i, "")
+    .replace(/<meta property="og:(?:url|title|description)"[^>]*>/gi, "")
+    .replace(/<meta property="twitter:url"[^>]*>/i, `<meta property="twitter:url" content="${canonical}">`)
     .replace("</head>", `${seoHead}\n  </head>`)
     .replace('<div id="root"></div>', `<div id="root">${crawlableBody}</div>`);
 }

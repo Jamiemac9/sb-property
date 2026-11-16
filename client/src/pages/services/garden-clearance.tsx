@@ -17,7 +17,7 @@ const gardenSchema = {
         "@type": "LocalBusiness",
         "name": "SB Property Clearance",
         "telephone": "+447708152348",
-        "url": "https://sbpropertyclearance.com"
+        "url": "https://propertyclearancesb.com"
       },
       "description": "Professional garden clearance and green waste removal across Staffordshire and the Midlands. Small gardens to large estates.",
       "areaServed": ["Stafford", "Cannock", "Lichfield", "Stone", "Rugeley", "Staffordshire"],
@@ -70,7 +70,7 @@ export default function GardenClearance() {
   useSEO({
     title: "Garden Clearance Staffordshire & Midlands | SB Property Clearance",
     description: "Professional garden clearance and green waste removal across Staffordshire. Small gardens to large estates. Serving Stafford, Cannock, Lichfield, Stone, Rugeley. Free quotes.",
-    canonical: "https://sbpropertyclearance.com/services/garden-clearance",
+    canonical: "https://propertyclearancesb.com/services/garden-clearance",
     schema: gardenSchema,
   });
   const services = [
