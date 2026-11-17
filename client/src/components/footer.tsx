@@ -48,6 +48,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/guides" className="text-gray-300 hover:text-brand-green-light transition-colors flex items-center group">
+                  <span className="w-2 h-2 bg-brand-green rounded-full mr-3 group-hover:bg-brand-green-light transition-colors"></span>
+                  Guides
+                </Link>
+              </li>
+              <li>
                 <button 
                   onClick={() => {
                     if (window.location.pathname !== '/') {

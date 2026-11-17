@@ -43,14 +43,26 @@ function normalizeSchemaUrls(input: unknown): unknown {
   return input;
 }
 
-interface SEOProps {
+export interface SEOProps {
   title: string;
   description: string;
   canonical?: string;
   schema?: object;
+  image?: string;
 }
 
-export function useSEO({ title, description, canonical, schema }: SEOProps) {
+// Build-time prerendering (scripts/prerender.mjs) registers a collector so the
+// static HTML for each route gets the same title, description, canonical and
+// schema that the page sets in the browser. It is never set in the browser.
+let seoCollector: ((props: SEOProps) => void) | null = null;
+
+export function setSEOCollector(collector: ((props: SEOProps) => void) | null) {
+  seoCollector = collector;
+}
+
+export function useSEO({ title, description, canonical, schema, image }: SEOProps) {
+  if (seoCollector) seoCollector({ title, description, canonical, schema, image });
+
   useEffect(() => {
     document.title = title;
 
@@ -77,6 +89,13 @@ export function useSEO({ title, description, canonical, schema }: SEOProps) {
       document.head.appendChild(metaOgDesc);
     }
     metaOgDesc.content = description;
+
+    if (image) {
+      for (const property of ["og:image", "twitter:image"]) {
+        const imageTag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
+        if (imageTag) imageTag.content = toSiteOrigin(image);
+      }
+    }
 
     let metaTwitterTitle = document.querySelector('meta[property="twitter:title"]') as HTMLMetaElement | null;
     if (!metaTwitterTitle) {
@@ -129,5 +148,5 @@ export function useSEO({ title, description, canonical, schema }: SEOProps) {
       const pageSchema = document.querySelector('script[data-page-schema="true"]');
       if (pageSchema) pageSchema.remove();
     };
-  }, [title, description, canonical, schema]);
+  }, [title, description, canonical, schema, image]);
 }
