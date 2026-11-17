@@ -1,5 +1,48 @@
 import { useEffect } from "react";
 
+const SITE_ORIGIN = "https://www.propertyclearancesb.com";
+
+// Hostnames that have ever served this site and must never appear in emitted
+// markup. Matched on hostname only, so email addresses (sbpropertyclearance@
+// gmail.com, info@sbpropertyclearance.co.uk) and third-party profile URLs
+// (checkatrade.com/trades/sbpropertyclearance) are left alone.
+const LEGACY_HOSTS = new Set([
+  "propertyclearancesb.com",
+  "sbpropertyclearance.com",
+  "www.sbpropertyclearance.com",
+]);
+
+// Rewrites an absolute URL on a legacy host onto SITE_ORIGIN, keeping path,
+// query and fragment. Anything that is not a parseable absolute http(s) URL,
+// or is on any other host, is returned untouched.
+function toSiteOrigin(value: string): string {
+  if (!/^https?:\/\//i.test(value)) return value;
+  try {
+    const url = new URL(value);
+    if (!LEGACY_HOSTS.has(url.hostname.toLowerCase())) return value;
+    return SITE_ORIGIN + url.pathname + url.search + url.hash;
+  } catch {
+    return value;
+  }
+}
+
+// Walks a schema object and normalises every URL string inside it. This is the
+// schema equivalent of the canonical rule below: a page can pass a legacy
+// domain and the emitted JSON-LD still comes out on one origin, so no page -
+// including one copied from an existing template - can reintroduce the split.
+function normalizeSchemaUrls(input: unknown): unknown {
+  if (typeof input === "string") return toSiteOrigin(input);
+  if (Array.isArray(input)) return input.map(normalizeSchemaUrls);
+  if (input && typeof input === "object") {
+    const out: Record<string, unknown> = {};
+    for (const [key, val] of Object.entries(input as Record<string, unknown>)) {
+      out[key] = normalizeSchemaUrls(val);
+    }
+    return out;
+  }
+  return input;
+}
+
 export interface SEOProps {
   title: string;
   description: string;
@@ -50,7 +93,7 @@ export function useSEO({ title, description, canonical, schema, image }: SEOProp
     if (image) {
       for (const property of ["og:image", "twitter:image"]) {
         const imageTag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
-        if (imageTag) imageTag.content = image;
+        if (imageTag) imageTag.content = toSiteOrigin(image);
       }
     }
 
@@ -70,7 +113,19 @@ export function useSEO({ title, description, canonical, schema, image }: SEOProp
     }
     metaTwitterDesc.content = description;
 
-    const canonicalHref = canonical || window.location.href.split("?")[0];
+    // Canonical always resolves to the live, indexed origin. Search Console shows
+    // www.propertyclearancesb.com is the domain Google indexes; pages may still pass a
+    // legacy sbpropertyclearance.com URL, so only the path from it is used.
+    let canonicalPath = window.location.pathname;
+    if (canonical) {
+      try {
+        canonicalPath = new URL(canonical, SITE_ORIGIN).pathname;
+      } catch {
+        canonicalPath = window.location.pathname;
+      }
+    }
+    const canonicalHref =
+      SITE_ORIGIN + (canonicalPath === "/" ? "/" : canonicalPath.replace(/\/$/, ""));
     let canonicalTag = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
     if (!canonicalTag) {
       canonicalTag = document.createElement("link");
@@ -79,18 +134,13 @@ export function useSEO({ title, description, canonical, schema, image }: SEOProp
     }
     canonicalTag.href = canonicalHref;
 
-    for (const property of ["og:url", "twitter:url"]) {
-      const urlTag = document.querySelector(`meta[property="${property}"]`) as HTMLMetaElement | null;
-      if (urlTag) urlTag.content = canonicalHref;
-    }
-
     if (schema) {
       const existingScript = document.querySelector('script[data-page-schema="true"]');
       if (existingScript) existingScript.remove();
       const scriptTag = document.createElement("script");
       scriptTag.type = "application/ld+json";
       scriptTag.setAttribute("data-page-schema", "true");
-      scriptTag.textContent = JSON.stringify(schema);
+      scriptTag.textContent = JSON.stringify(normalizeSchemaUrls(schema)).replace(/</g, "\\u003c");
       document.head.appendChild(scriptTag);
     }
 

@@ -10,7 +10,7 @@ export default function Guides() {
   useSEO({
     title: "House clearance guides | SB Property Clearance",
     description: "House clearance guides from SB Property Clearance.",
-    canonical: "https://propertyclearancesb.com/guides",
+    canonical: "https://www.propertyclearancesb.com/guides",
   });
 
   return (

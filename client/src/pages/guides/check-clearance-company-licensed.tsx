@@ -8,8 +8,8 @@ const title =
 const description =
   "Waste carrier registration in England is being replaced by permits in 2027, with identity, criminal record and competence checks. How to check a clearance company now, and what changes.";
 const imageUrl =
-  "https://propertyclearancesb.com/clearance-guide-living-room.jpg";
-const canonical = "https://propertyclearancesb.com/guides/check-clearance-company-licensed";
+  "https://www.propertyclearancesb.com/clearance-guide-living-room.jpg";
+const canonical = "https://www.propertyclearancesb.com/guides/check-clearance-company-licensed";
 
 const articleSchema = {
   "@context": "https://schema.org",
